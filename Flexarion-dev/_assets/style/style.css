@@ -46,7 +46,6 @@ header {
   position: relative;
   display: inline-block;
   padding: 0.2rem 0;
-  /* Animation fluide pour toutes les transformations */
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
@@ -66,7 +65,7 @@ header {
   height: 2px;
   background-color: #38bdf8;
   border-radius: 2px;
-  transition: width 0.3s ease; /* Animation d'étirement de la barre */
+  transition: width 0.3s ease;
 }
 
 /* Déroulement de la barre au survol */
@@ -223,28 +222,67 @@ form {
   color: #f8fafc;
 }
 
-/* Container de l'image vitrine */
+/* Container transparent */
 .zone-image {
-  background: #1e293b;
-  border-radius: 16px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
   padding: 1rem;
-  border: 1px solid #334155;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   max-width: 650px;
   width: 100%;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Style de l'image */
+/* Logo rond avec Glow circulaire */
 .imgVitrine {
-  width: 100%;
-  height: auto;
-  max-height: 400px;
+  width: 320px;
+  height: 320px;
   object-fit: cover;
-  border-radius: 12px;
   display: block;
-  transition: transform 0.3s ease;
+  
+  /* Transformation du carré en cercle parfait */
+  border-radius: 50%;
+  
+  /* Halo lumineux (Glow) circulaire autour du cercle */
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.5),
+              0 0 60px rgba(56, 189, 248, 0.3);
+              
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Intensification du Glow au survol */
+.imgVitrine:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 40px rgba(56, 189, 248, 0.8),
+              0 0 80px rgba(56, 189, 248, 0.5);
+}
+
+/* Footer */
+.footer {
+  background: #1e293b;
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  border: 1px solid #334155;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 650px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Style des liens dans le footer */
+.footer a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.footer a:hover {
+  color: #818cf8;
+  text-decoration: underline;
 }
