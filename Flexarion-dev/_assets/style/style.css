@@ -222,3 +222,29 @@ form {
   background: #334155;
   color: #f8fafc;
 }
+
+/* Container de l'image vitrine */
+.zone-image {
+  background: #1e293b;
+  border-radius: 16px;
+  padding: 1rem;
+  border: 1px solid #334155;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  max-width: 650px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style de l'image */
+.imgVitrine {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  transition: transform 0.3s ease;
+}
