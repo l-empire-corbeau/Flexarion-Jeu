@@ -347,3 +347,79 @@ header h1 {
     grid-template-columns: 1fr;
   }
 }
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 900px; /* Élargi pour accueillir les captures d'écran */
+}
+
+@media (min-width: 768px) {
+  .game-layout {
+    grid-template-columns: 1.3fr 1fr;
+  }
+}
+
+.media-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.media-sidebar h3 {
+  color: var(--primary);
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Slot de capture d'écran */
+.screenshot-slot {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-main);
+  border: 1px dashed var(--border-card);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.screenshot-slot:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.screenshot-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Apparence automatique si l'image n'est pas encore présente */
+.screenshot-slot.placeholder::before {
+  content: '📷 Capture à venir';
+  color: var(--text-subtle);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.slot-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  text-align: center;
+  border-top: 1px solid var(--border-card);
+}
