@@ -85,9 +85,25 @@ header h1 {
   -webkit-text-fill-color: transparent;
 }
 
-.zone-intro {
+.zone-intro, .zone-form, .about-content {
   width: 100%;
   max-width: 650px;
+  background: #1e293b;
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid #334155;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.about-content h2, .zone-form h2 {
+  color: #38bdf8;
+  margin-bottom: 1rem;
+}
+
+.about-content p {
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 .zone-image {
@@ -116,6 +132,70 @@ header h1 {
   transform: scale(1.03);
   box-shadow: 0 0 40px rgba(56, 189, 248, 0.8),
               0 0 80px rgba(56, 189, 248, 0.5);
+}
+
+/* Formulaires */
+.form-group {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #f8fafc;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  border-color: #38bdf8;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.btn-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  color: #0f172a;
+}
+
+.btn-secondary {
+  background: #334155;
+  color: #f8fafc;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .footer {
