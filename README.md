@@ -30,12 +30,13 @@ Ce projet est un site vitrine moderne et fluide conçu pour présenter le studio
 
 ```text
 ├── _assets/
-│   ├── images/       # Logos, visuels du jeu et favicons
+│   ├── images/                       # Logos, visuels du jeu et favicons
 │   └── style/
-│       └── style.css # Feuille de style globale
-├── index.html        # Page d'accueil
-├── about.html        # À propos du studio
-├── hololive-xarion.html # Présentation du jeu
-├── contact.html      # Page de contact
-├── 404.html          # Page d'erreur personnalisée
-└── README.md         # Documentation du projet
+│       └── style.css                 # Feuille de style globale
+├── index.html                        # Page d'accueil
+├── about.html                        # À propos du studio
+├── hololive-xarion.html              # Présentation du jeu
+├── contact.html                      # Page de contact
+├── 404.html                          # Page d'erreur personnalisée
+├── google93955eaf2f39f2bd.html       # Indexation Google
+└── README.md                         # Documentation du projet
