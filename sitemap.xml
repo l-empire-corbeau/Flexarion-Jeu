@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://l-empire-corbeau.github.io/Flexarion-Jeu/</loc>
+    <loc>https://flexarion-jeu.fr/</loc>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://l-empire-corbeau.github.io/Flexarion-Jeu/about.html</loc>
+    <loc>https://flexarion-jeu.fr/about.html</loc>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://l-empire-corbeau.github.io/Flexarion-Jeu/crowMaster.html</loc>
+    <loc>https://flexarion-jeu.fr/crowMaster.html</loc>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://l-empire-corbeau.github.io/Flexarion-Jeu/contact.html</loc>
+    <loc>https://flexarion-jeu.fr/contact.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://flexarion-jeu.fr/betaSignup.html</loc>
     <priority>0.80</priority>
   </url>
 </urlset>
