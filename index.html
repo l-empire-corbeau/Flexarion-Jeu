@@ -2,9 +2,12 @@
 <html lang="fr">
 <head>
     <script>
-      if (window.location.pathname.endsWith('/index.html')) {
-        window.location.replace('https://flexarion-jeu.fr/');
-      }
+        if (window.location.pathname.endsWith('/index.html')) {
+            window.location.replace('https://flexarion-jeu.fr/');
+        }
+        if (window.location.hostname.includes('github.io') || window.location.pathname.endsWith('/index.html')) {
+            window.location.replace('https://flexarion-jeu.fr/');
+        }
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
