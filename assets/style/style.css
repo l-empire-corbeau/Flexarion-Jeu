@@ -1,22 +1,17 @@
-/* ==========================================================================
-   FLEXARION GAMES - DESIGN SYSTEM UNIFIÉ
-   ========================================================================== */
 :root {
   --bg-main: #0b0f17;
-  --bg-card: rgba(22, 31, 48, 0.7);
-  --border-card: rgba(56, 189, 248, 0.15);
+  --bg-card: rgba(22, 31, 48, 0.75);
+  --border-card: rgba(56, 189, 248, 0.2);
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --text-subtle: #64748b;
   --primary: #38bdf8;
   --primary-hover: #818cf8;
   --gradient-accent: linear-gradient(135deg, #38bdf8, #818cf8);
-  --gradient-card: linear-gradient(180deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
   --radius-lg: 20px;
   --radius-md: 12px;
   --radius-sm: 8px;
-  --shadow-glow: 0 0 30px rgba(56, 189, 248, 0.15);
-  --shadow-card: 0 15px 35px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -33,29 +28,29 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem 1rem;
-  gap: 2rem;
+  margin: 0;
+  gap: 2.5rem;
   line-height: 1.6;
+  padding-bottom: 3rem;
 }
 
 /* ==========================================================================
-   HEADER HÉROÏQUE CINÉMATIQUE (PLEINE LARGEUR)
+   HEADER CINÉMATIQUE PLEINE LARGEUR
    ========================================================================== */
 .hero-header {
   text-align: center;
-  padding: 5rem 2rem 4rem;
+  padding: 4.5rem 2rem 3.5rem;
   width: 100%;
   position: relative;
   overflow: hidden;
-  background: var(--bg-card);
+  background: rgba(22, 31, 48, 0.9);
   border-bottom: 1px solid var(--border-card);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Header immersif avec image de fond bien visible et majestueuse */
 .hero-header.with-bg {
-  background: linear-gradient(180deg, rgba(11, 15, 23, 0.5) 0%, rgba(11, 15, 23, 0.85) 100%), 
+  background: linear-gradient(180deg, rgba(11, 15, 23, 0.4) 0%, rgba(11, 15, 23, 0.9) 100%), 
               url('../images/crow-bg.png') no-repeat center center/cover !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .navbar {
@@ -78,7 +73,7 @@ body {
   font-weight: 600;
   font-size: 0.95rem;
   position: relative;
-  padding: 0.4rem 0.8rem;
+  padding: 0.4rem 0.9rem;
   border-radius: var(--radius-sm);
   transition: color 0.3s ease, background 0.3s ease;
 }
@@ -123,11 +118,12 @@ body {
 }
 
 /* ==========================================================================
-   LAYOUTS & SECTIONS
+   CONTENEUR PRINCIPAL & PANNEAUX
    ========================================================================== */
 .main-container {
   width: 100%;
-  max-width: 950px;
+  max-width: 1000px;
+  padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -145,7 +141,7 @@ body {
 .card-panel h2 {
   color: var(--primary);
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }
 
 .card-panel p {
@@ -153,11 +149,13 @@ body {
   margin-bottom: 1.25rem;
 }
 
-/* Carte Projet Phare (Accueil) */
+/* ==========================================================================
+   PROJET PHARE (ACCUEIL)
+   ========================================================================== */
 .project-card {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: center;
 }
 
@@ -168,36 +166,40 @@ body {
 }
 
 .imgVitrine {
-  width: 220px;
-  height: 220px;
+  width: 240px;
+  height: 240px;
   max-width: 100%;
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 0 35px rgba(56, 189, 248, 0.25);
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.3);
   border: 2px solid var(--border-card);
+  display: block;
+  margin: 0 auto;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .imgVitrine:hover {
   transform: scale(1.04);
-  box-shadow: 0 0 50px rgba(56, 189, 248, 0.45);
+  box-shadow: 0 0 50px rgba(56, 189, 248, 0.5);
 }
 
 .badge {
   background: rgba(56, 189, 248, 0.12);
   color: var(--primary);
   border: 1px solid rgba(56, 189, 248, 0.3);
-  padding: 0.3rem 0.8rem;
+  padding: 0.35rem 0.9rem;
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   display: inline-block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
-/* Layout Page crowMaster */
+/* ==========================================================================
+   LAYOUT JEU (CROWMASTER)
+   ========================================================================== */
 .game-layout {
   display: grid;
   grid-template-columns: 1fr;
@@ -289,137 +291,4 @@ body {
 .input:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-}
-
-.textarea {
-  resize: vertical;
-  min-height: 130px;
-}
-
-.btn-group {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.btn {
-  padding: 0.8rem 1.6rem;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 0.95rem;
-}
-
-.btn-primary {
-  background: var(--gradient-accent);
-  color: #0b0f17;
-  box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
-}
-
-.btn-secondary {
-  background: rgba(51, 65, 85, 0.6);
-  color: var(--text-main);
-  border: 1px solid var(--border-card);
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  opacity: 0.95;
-}
-
-.btn-primary:hover {
-  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
-}
-
-/* ==========================================================================
-   FOOTER
-   ========================================================================== */
-.footer {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: 2.5rem;
-  border: 1px solid var(--border-card);
-  box-shadow: var(--shadow-card);
-  width: 100%;
-  max-width: 950px;
-  color: var(--text-muted);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.footer-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-}
-
-.footer-section h3 {
-  color: var(--text-main);
-  font-size: 1.15rem;
-  margin-bottom: 0.5rem;
-}
-
-.footer-section h4 {
-  color: var(--text-main);
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.footer-section p {
-  font-size: 0.85rem;
-  line-height: 1.6;
-}
-
-.footer-section a {
-  color: var(--primary);
-  text-decoration: none;
-}
-
-.footer-section a:hover {
-  text-decoration: underline;
-}
-
-.footer-note {
-  font-size: 0.8rem;
-  color: var(--text-subtle);
-}
-
-.footer-bottom {
-  border-top: 1px solid var(--border-card);
-  padding-top: 1.25rem;
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--text-subtle);
-}
-
-/* ==========================================================================
-   RESPONSIVE
-   ========================================================================== */
-@media (max-width: 640px) {
-  body {
-    padding: 1rem 0.5rem;
-  }
-  .hero-header {
-    padding: 2.5rem 1rem 2rem;
-  }
-  .hero-header h1 {
-    font-size: 2.2rem;
-  }
-  .card-panel {
-    padding: 1.5rem;
-  }
-  .project-card {
-    text-align: center;
-  }
-  .imgVitrine {
-    margin: 0 auto;
-  }
 }
