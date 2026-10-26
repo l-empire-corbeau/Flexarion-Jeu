@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/style/style.css">
+    <link rel="stylesheet" href="assets/style/style.css">
     <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
     <link rel="canonical" href="https://flexarion-jeu.fr/crowMaster.html">
 
@@ -22,7 +22,7 @@
     <title>crowMaster - Flexarion</title>
 </head>
 <body>
-    <header>
+    <header class="hero-header">
         <nav class="navbar">
             <ul>
                 <li><a href="/">Accueil</a></li>
@@ -31,46 +31,67 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-        <h1>crowMaster</h1>
+        <div class="hero-content">
+            <p>Projet Phare</p>
+            <h1>crowMaster</h1>
+        </div>
     </header>
-    <main class="zone-intro game-layout">
-        <!-- Colonne Gauche : Présentation et Gameplay -->
-        <section class="about-content">
-            <h2>L'Aventure du Corbeau</h2>
-            <p>
-                Dans <span class="solid">crowMaster</span>, prenez l'envol dans la peau d'un corbeau mystique éveillé par des forces anciennes. Traversez des contrées oubliées, maîtrisez les vents et utilisez des capacités magiques dévastatrices pour triompher des ténèbres qui menacent le royaume.
-            </p>
 
-            <h2>Gameplay & Pouvoirs</h2>
-            <p>
-                <strong>Vol & Exploration :</strong> Fendez les cieux et explorez des environnements verticaux riches en secrets et énigmes.<br>
-                <strong>Magie du Corbeau :</strong> Débloquez un arcanum de pouvoirs uniques : ombres tranchantes, invocation de volées et manipulation du temps.<br>
-                <strong>Combats Dynamiques :</strong> Combinez l'agilité aérienne et des attaques tactiques au sol contre des boss imposants.
-            </p>
+    <main class="main-container">
+        <div class="game-layout">
+            <section class="card-panel">
+                <h2>L'Aventure du Corbeau</h2>
+                <p>
+                    Dans <strong>crowMaster</strong>, prenez l'envol dans la peau d'un corbeau mystique éveillé par des forces anciennes. Traversez des contrées oubliées, maîtrisez les vents et utilisez des capacités magiques dévastatrices pour triompher des ténèbres qui menacent le royaume.
+                </p>
 
-            <h2>Statut du Développement</h2>
-            <p>
-                Le jeu est en phase de développement actif par l'équipe Flexarion. Des sessions de test fermées approchent à grands pas !
-            </p>
+                <h2>Gameplay & Pouvoirs</h2>
+                <p>
+                    <strong>Vol & Exploration :</strong> Fendez les cieux et explorez des environnements verticaux riches en secrets et énigmes.<br><br>
+                    <strong>Magie du Corbeau :</strong> Débloquez un arcanum de pouvoirs uniques : ombres tranchantes, invocation de volées et manipulation du temps.<br><br>
+                    <strong>Combats Dynamiques :</strong> Combinez l'agilité aérienne et des attaques tactiques au sol contre des boss imposants.
+                </p>
 
-            <div class="btn-group">
-                <a href="betaSignup.html" class="btn btn-primary">Rejoindre la bêta</a>
-            </div>
-        </section>
+                <h2>Statut du Développement</h2>
+                <p>
+                    Le jeu est en phase de développement actif par l'équipe Flexarion. Des sessions de test fermées approchent à grands pas !
+                </p>
 
-        <aside class="media-sidebar">
-            <h3>Aperçus du Gameplay</h3>
+                <div class="btn-group">
+                    <a href="betaSignup.html" class="btn btn-primary">Rejoindre la bêta</a>
+                </div>
+            </section>
 
-            <div class="screenshot-slot">
-                <img src="assets/images/Screenshot-1.png" alt="Combat Corbeau contre Troll Low-Poly">
-                <span class="slot-label">Combats Aériens & Lasers Magiques</span>
-            </div>
-        
-            <div class="screenshot-slot">
-                <img src="assets/images/Screenshot-2.png" alt="Attaque Ultime Tempête de Corbeaux">
-                <span class="slot-label">Sort Ultime : Pluie de Météores & Invocations</span>
-            </div>
-        </aside>
+            <aside class="media-sidebar">
+                <h3>Aperçus du Gameplay</h3>
+
+                <div class="screenshot-slot">
+                    <img src="assets/images/Screenshot-1.png" alt="Combat Corbeau contre Troll Low-Poly">
+                    <span class="slot-label">Combats Aériens & Lasers Magiques</span>
+                </div>
+
+                <div class="screenshot-slot">
+                    <img src="assets/images/Screenshot-2.png" alt="Attaque Ultime Tempête de Corbeaux">
+                    <span class="slot-label">Sort Ultime : Pluie de Météores</span>
+                </div>
+            </aside>
+        </div>
     </main>
-    </body>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Flexarion</h3>
+                <p>Studio indépendant créateur de <strong>crowMaster</strong>.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Informations légales</h4>
+                <p><span class="footer-note">Hébergé par GitHub Pages • Domaine IONOS</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Flexarion. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
 </html>
