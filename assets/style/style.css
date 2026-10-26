@@ -39,7 +39,7 @@ body {
 }
 
 /* ==========================================================================
-   HEADER & NAVBAR
+   HEADER & NAVBAR (AVEC IMAGE DE FOND DU CORBEAU)
    ========================================================================== */
 .hero-header {
   text-align: center;
@@ -55,10 +55,10 @@ body {
   backdrop-filter: blur(10px);
 }
 
-/* Header immersif avec image de fond */
+/* Application directe de l'image du corbeau en arrière-plan */
 .hero-header.with-bg {
-  background: linear-gradient(180deg, rgba(11, 15, 23, 0.7) 0%, rgba(11, 15, 23, 0.95) 100%), 
-              url('../images/crow-bg.png') no-repeat center center/cover;
+  background: linear-gradient(180deg, rgba(11, 15, 23, 0.75) 0%, rgba(11, 15, 23, 0.92) 100%), 
+              url('../images/crow-bg.png') no-repeat center center/cover !important;
 }
 
 .navbar {
