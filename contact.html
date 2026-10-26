@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/style/style.css">
+    <link rel="stylesheet" href="assets/style/style.css">
     <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
     <link rel="canonical" href="https://flexarion-jeu.fr/contact.html">
 
@@ -22,7 +22,7 @@
     <title>Contact - Flexarion</title>
 </head>
 <body>
-    <header>
+    <header class="hero-header">
         <nav class="navbar">
             <ul>
                 <li><a href="/">Accueil</a></li>
@@ -31,38 +31,57 @@
                 <li><a href="contact.html" class="active">Contact</a></li>
             </ul>
         </nav>
-        <h1>Contactez Flexarion</h1>
+        <div class="hero-content">
+            <p>Écrivez-nous</p>
+            <h1>Contactez Flexarion</h1>
+        </div>
     </header>
-        
-        <main class="zone-intro">
-            <section class="zone-form">
-                <form>
-                    <div class="form-group">
-                        <label for="prenom">Votre prénom :</label>
-                        <input type="text" id="prenom" name="prenom" placeholder="Prénom" class="input" required>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="nom">Votre nom :</label>
-                        <input type="text" id="nom" name="nom" placeholder="Nom" class="input" required>
-                    </div>
+    <main class="main-container">
+        <section class="card-panel">
+            <form>
+                <div class="form-group">
+                    <label for="prenom">Votre prénom :</label>
+                    <input type="text" id="prenom" name="prenom" placeholder="Prénom" class="input" required>
+                </div>
 
-                    <div class="form-group">
-                        <label for="email">Votre adresse email :</label>
-                        <input type="email" id="email" name="email" placeholder="exemple@domaine.fr" class="input" required>
-                    </div>
+                <div class="form-group">
+                    <label for="nom">Votre nom :</label>
+                    <input type="text" id="nom" name="nom" placeholder="Nom" class="input" required>
+                </div>
 
-                    <div class="form-group">
-                        <label for="message">Votre message :</label>
-                        <textarea id="message" name="message" placeholder="Votre message..." class="input textarea" rows="5" required></textarea>
-                    </div>
+                <div class="form-group">
+                    <label for="email">Votre adresse email :</label>
+                    <input type="email" id="email" name="email" placeholder="exemple@domaine.fr" class="input" required>
+                </div>
 
-                    <div class="btn-group">
-                        <button type="submit" name="action" value="logUser" class="btn btn-primary">Envoyer</button>
-                        <button type="reset" class="btn btn-secondary">Réinitialiser</button>
-                    </div>
-                </form>
-            </section>
-        </main>
-    </body>
+                <div class="form-group">
+                    <label for="message">Votre message :</label>
+                    <textarea id="message" name="message" placeholder="Votre message..." class="input textarea" rows="5" required></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Flexarion</h3>
+                <p>Studio indépendant créateur de <strong>crowMaster</strong>.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Informations légales</h4>
+                <p><span class="footer-note">Hébergé par GitHub Pages • Domaine IONOS</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Flexarion. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
 </html>
