@@ -4,84 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/style/style.css">
+    <script src="/assets/js/main.js" defer></script>
     <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
     <link rel="canonical" href="https://flexarion-jeu.fr/contact.html">
-
-    <!-- SEO & Méta -->
     <meta name="description" content="Contactez l'équipe du studio Flexarion pour toute question, partenariat ou pour rejoindre la bêta de crowMaster.">
-    <meta name="keywords" content="Contact Flexarion, recrutement jeu vidéo, rejoindre bêta crowMaster, partenariat jeux vidéo, studio Flexarion contact">
-
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Contactez-nous - Flexarion">
-    <meta property="og:description" content="Une question, un projet ou envie de rejoindre l'aventure crowMaster ? Écrivez-nous !">
+    <meta property="og:title" content="Contact - Flexarion">
+    <meta property="og:description" content="Contactez l'équipe du studio Flexarion pour toute question, partenariat ou pour rejoindre la bêta de crowMaster.">
     <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/logo.png">
     <meta property="og:url" content="https://flexarion-jeu.fr/contact.html">
     <meta name="twitter:card" content="summary_large_image">
-
     <title>Contact - Flexarion</title>
 </head>
 <body>
-    <header class="hero-header">
-        <nav class="navbar">
-            <ul>
-                <li><a href="/">Accueil</a></li>
-                <li><a href="about.html">À propos</a></li>
-                <li><a href="crowMaster.html">crowMaster</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="hero-content">
-            <p>Écrivez-nous</p>
+    <header class="site-header"><div class="bar">
+        <a class="brand" href="/"><img src="/assets/images/logo.png" alt="Logo Flexarion">FLEXAR<span>ION</span></a>
+        <nav class="nav"><ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="about.html">À propos</a></li>
+            <li><a href="crowMaster.html">crowMaster <i class="dot"></i></a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul></nav>
+        <a href="betaSignup.html" class="btn btn-primary">Rejoindre la Bêta</a>
+    </div></header>
+    <main><div class="wrap">
+        <section class="card form-card reveal">
             <h1>Contactez Flexarion</h1>
-        </div>
-    </header>
-
-    <main class="main-container">
-        <section class="card-panel">
+            <p class="sub">Une question, un partenariat ou un retour ? Écrivez-nous directement.</p>
             <form>
-                <div class="form-group">
-                    <label for="prenom">Votre prénom :</label>
-                    <input type="text" id="prenom" name="prenom" placeholder="Prénom" class="input" required>
+                <div class="row">
+                    <div class="form-group"><label for="prenom">Votre prénom</label><input type="text" id="prenom" name="prenom" placeholder="Jean" class="input" required></div>
+                    <div class="form-group"><label for="nom">Votre nom</label><input type="text" id="nom" name="nom" placeholder="Dupont" class="input" required></div>
                 </div>
-
-                <div class="form-group">
-                    <label for="nom">Votre nom :</label>
-                    <input type="text" id="nom" name="nom" placeholder="Nom" class="input" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Votre adresse email :</label>
-                    <input type="email" id="email" name="email" placeholder="exemple@domaine.fr" class="input" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Votre message :</label>
-                    <textarea id="message" name="message" placeholder="Votre message..." class="input textarea" rows="5" required></textarea>
-                </div>
-
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
-                    <button type="reset" class="btn btn-secondary">Réinitialiser</button>
-                </div>
+                <div class="form-group"><label for="email">Adresse e-mail</label><input type="email" id="email" name="email" placeholder="nom@exemple.fr" class="input" required></div>
+                <div class="form-group"><label for="message">Votre message</label><textarea id="message" name="message" placeholder="Votre message..." class="input" rows="5" required></textarea></div>
+                <div class="btn-group"><button type="submit" class="btn btn-primary">Envoyer</button><button type="reset" class="btn btn-secondary">Réinitialiser</button></div>
             </form>
         </section>
-    </main>
-
+    </div></main>
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section">
-                <h3>Flexarion</h3>
-                <p>Studio indépendant créateur de <strong>crowMaster</strong>.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Informations légales</h4>
-                <p><span class="footer-note">Hébergé par GitHub Pages • Domaine IONOS</span></p>
-            </div>
+            <div class="footer-section"><h3>Flexarion</h3><p>Studio indépendant créateur de <strong>crowMaster</strong>.</p></div>
+            <div class="footer-section"><h4>Informations légales</h4><p><span class="footer-note">Hébergé par GitHub Pages • Domaine IONOS</span></p></div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Flexarion. Tous droits réservés.</p>
-        </div>
+        <div class="footer-bottom"><p>&copy; 2026 Flexarion. Tous droits réservés.</p></div>
     </footer>
 </body>
 </html>
