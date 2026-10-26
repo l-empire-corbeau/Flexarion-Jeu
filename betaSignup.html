@@ -1,52 +1,73 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/assets/style/style.css">
-        <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
-        <link rel="canonical" href="https://flexarion-jeu.fr/betaSignup.html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
+    <link rel="canonical" href="https://flexarion-jeu.fr/betaSignup.html">
 
-        <!-- Méta-description (très importante pour le clic sur Google) -->
-        <meta name="description" content="Inscrivez-vous pour rejoindre la bêta fermée de crowMaster, le jeu développé par le studio indépendant Flexarion.">
+    <!-- SEO & Méta -->
+    <meta name="description" content="Inscrivez-vous pour rejoindre la bêta fermée de crowMaster, le jeu développé par le studio indépendant Flexarion.">
+    <meta name="keywords" content="Flexarion, crowMaster, studio de jeux vidéo, jeux vidéo indépendant, bêta test jeu vidéo, gaming indé">
 
-        <!-- Keywords pour la recherche internet -->
-        <meta name="keywords" content="Flexarion, crowMaster, studio de jeux vidéo, jeux vidéo indépendant, studio indé français, développement de jeux vidéo, jeu RPG, jeu action stratégie, bêta test jeu vidéo, jeu vidéo PC, gaming indé">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rejoindre la Bêta - Flexarion">
+    <meta property="og:description" content="Inscrivez votre email pour tester crowMaster avant tout le monde.">
+    <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/logo.png">
+    <meta property="og:url" content="https://flexarion-jeu.fr/betaSignup.html">
 
-        <!-- Balises Open Graph (pour l'affichage sur Discord, Twitter, etc.) -->
-        <meta property="og:title" content="Flexarion - Studio de Jeux Vidéo Indépendant">
-        <meta property="og:description" content="Créateurs de crowMaster. Découvrez notre histoire et nos projets.">
-        <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/logo.png">
-        <meta property="og:url" content="https://flexarion-jeu.fr/betaSignup.html">
-        <title>Flexarion - Studio de Jeux Vidéo - beta</title>
-    </head>
-    <body>
-        <header>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="/">Accueil</a></li>
-                    <li><a href="about.html">À propos</a></li>
-                    <li><a href="crowMaster.html">crowMaster</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-            <p>Indiquez votre mail pour rejoindre la beta !</p>
-            <h1>Préinscription</h1>
-        </header>
-        
-        <main class="zone-intro">
-            <section class="zone-form">
-                <form>
-                    <div class="form-group">
-                        <label for="email">Votre adresse email :</label>
-                        <input type="email" id="email" name="email" placeholder="exemple@domaine.fr" class="input" required>
-                    </div>
-                    <div class="btn-group">
-                        <button type="submit" name="action" value="logUser" class="btn btn-primary">Envoyer</button>
-                        <button type="reset" class="btn btn-secondary">Réinitialiser</button>
-                    </div>
-                </form>
-            </section>
-        </main>
-    </body>
+    <title>Bêta Test - Flexarion</title>
+</head>
+<body>
+    <header class="hero-header">
+        <nav class="navbar">
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="about.html">À propos</a></li>
+                <li><a href="crowMaster.html">crowMaster</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hero-content">
+            <p>Rejoignez l'aventure</p>
+            <h1>Préinscription Bêta</h1>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="card-panel">
+            <p style="text-align: center; font-size: 1.05rem; margin-bottom: 2rem;">
+                Renseignez votre adresse email pour recevoir votre invitation aux prochaines sessions de test fermées de <strong>crowMaster</strong> !
+            </p>
+            <form>
+                <div class="form-group">
+                    <label for="email">Votre adresse email :</label>
+                    <input type="email" id="email" name="email" placeholder="exemple@domaine.fr" class="input" required>
+                </div>
+
+                <div class="btn-group" style="justify-content: center;">
+                    <button type="submit" class="btn btn-primary">Rejoindre la Bêta</button>
+                    <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Flexarion</h3>
+                <p>Studio indépendant créateur de <strong>crowMaster</strong>.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Informations légales</h4>
+                <p><span class="footer-note">Hébergé par GitHub Pages • Domaine IONOS</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Flexarion. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
 </html>
