@@ -27,7 +27,7 @@
     <title>Flexarion - Studio de Jeux Vidéo</title>
 </head>
 <body>
-    <header>
+    <header class="hero-header" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/images/crow-bg.png') no-repeat center center/cover;">
         <nav class="navbar">
             <ul>
                 <li><a href="/" class="active">Accueil</a></li>
@@ -36,14 +36,30 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-        <p>Bienvenu sur</p>
-        <h1>Flexarion</h1>
+        <div class="hero-content">
+            <p>Bienvenue sur</p>
+            <h1>Flexarion</h1>
+            <p class="hero-subtitle">Studio de développement indépendant</p>
+        </div>
     </header>
 
-    <main class="zone-intro">
-        <div class="zone-image">
-            <img src="assets/images/logo.png" alt="Illustration Flexarion" class="imgVitrine">
-        </div>
+    <main class="main-container">
+        <!-- Zone Projet Phare à gauche -->
+        <section class="featured-project">
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="assets/images/logo.png" alt="Logo crowMaster Flexarion" class="imgVitrine">
+                </div>
+                <div class="project-info">
+                    <span class="badge">Projet Phare</span>
+                    <h2>crowMaster</h2>
+                    <p class="synopsis">
+                        Plongez dans l'univers sombre et stratégique de <strong>crowMaster</strong>. Incarnez le maître des corbeaux dans un jeu indépendant alliant exploration, tactique et combats épiques. 
+                    </p>
+                    <a href="crowMaster.html" class="btn-primary">Découvrir le projet</a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -56,13 +72,13 @@
             <div class="footer-section">
                 <h4>Informations légales</h4>
                 <p>
-                    <span class="footer-note">Le site web a été crée par Ewan Francois, Hébergé par GitHub Pages • Domaine IONOS</span>
+                    <span class="footer-note">Le site web a été créé par Ewan Francois, Hébergé par GitHub Pages • Domaine IONOS</span>
                 </p>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p> 2026 Flexarion. Tous droits réservés.</p>
+            <p>&copy; 2026 Flexarion. Tous droits réservés.</p>
         </div>
     </footer>
 </body>
