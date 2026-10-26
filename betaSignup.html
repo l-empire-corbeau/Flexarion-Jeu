@@ -4,70 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/style/style.css">
+    <script src="/assets/js/main.js" defer></script>
     <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
     <link rel="canonical" href="https://flexarion-jeu.fr/betaSignup.html">
-
-    <!-- SEO & Méta -->
     <meta name="description" content="Inscrivez-vous pour rejoindre la bêta fermée de crowMaster, le jeu développé par le studio indépendant Flexarion.">
-    <meta name="keywords" content="Flexarion, crowMaster, studio de jeux vidéo, jeux vidéo indépendant, bêta test jeu vidéo, gaming indé">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Rejoindre la Bêta - Flexarion">
-    <meta property="og:description" content="Inscrivez votre email pour tester crowMaster avant tout le monde.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bêta Test - Flexarion">
+    <meta property="og:description" content="Inscrivez-vous pour rejoindre la bêta fermée de crowMaster, le jeu développé par le studio indépendant Flexarion.">
     <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/logo.png">
     <meta property="og:url" content="https://flexarion-jeu.fr/betaSignup.html">
-
+    <meta name="twitter:card" content="summary_large_image">
     <title>Bêta Test - Flexarion</title>
 </head>
 <body>
-    <header class="hero-header">
-        <nav class="navbar">
-            <ul>
-                <li><a href="/">Accueil</a></li>
-                <li><a href="about.html">À propos</a></li>
-                <li><a href="crowMaster.html">crowMaster</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="hero-content">
-            <p>Rejoignez l'aventure</p>
-            <h1>Préinscription Bêta</h1>
-        </div>
-    </header>
-
-    <main class="main-container">
-        <section class="card-panel">
-            <p style="text-align: center; font-size: 1.05rem; margin-bottom: 2rem;">
-                Renseignez votre adresse email pour recevoir votre invitation aux prochaines sessions de test fermées de <strong>crowMaster</strong> !
-            </p>
+    <header class="site-header"><div class="bar">
+        <a class="brand" href="/"><img src="/assets/images/logo.png" alt="Logo Flexarion">FLEXAR<span>ION</span></a>
+        <nav class="nav"><ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="about.html">À propos</a></li>
+            <li><a href="crowMaster.html" class="active">crowMaster <i class="dot"></i></a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul></nav>
+        <a href="betaSignup.html" class="btn btn-primary">Rejoindre la Bêta</a>
+    </div></header>
+    <main><div class="wrap">
+        <section class="card form-card reveal">
+            <h1>Préinscription bêta</h1>
+            <p class="sub">Renseignez votre adresse e-mail pour recevoir votre invitation aux prochaines sessions de test fermées de <strong>crowMaster</strong> !</p>
             <form>
-                <div class="form-group">
-                    <label for="email">Votre adresse email :</label>
-                    <input type="email" id="email" name="email" placeholder="exemple@domaine.fr" class="input" required>
-                </div>
-
-                <div class="btn-group" style="justify-content: center;">
-                    <button type="submit" class="btn btn-primary">Rejoindre la Bêta</button>
-                    <button type="reset" class="btn btn-secondary">Réinitialiser</button>
-                </div>
+                <div class="form-group"><label for="email">Adresse e-mail</label><input type="email" id="email" name="email" placeholder="exemple@domaine.fr" class="input" required></div>
+                <div class="btn-group"><button type="submit" class="btn btn-primary">Rejoindre la Bêta</button><button type="reset" class="btn btn-secondary">Réinitialiser</button></div>
             </form>
         </section>
-    </main>
-
+    </div></main>
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section">
-                <h3>Flexarion</h3>
-                <p>Studio indépendant créateur de <strong>crowMaster</strong>.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Informations légales</h4>
-                <p><span class="footer-note">Hébergé par GitHub Pages • Domaine IONOS</span></p>
-            </div>
+            <div class="footer-section"><h3>Flexarion</h3><p>Studio indépendant créateur de <strong>crowMaster</strong>.</p></div>
+            <div class="footer-section"><h4>Informations légales</h4><p><span class="footer-note">Hébergé par GitHub Pages • Domaine IONOS</span></p></div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Flexarion. Tous droits réservés.</p>
-        </div>
+        <div class="footer-bottom"><p>&copy; 2026 Flexarion. Tous droits réservés.</p></div>
     </footer>
 </body>
 </html>
