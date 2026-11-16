@@ -3,91 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevLog – Journal de développement de crowMaster | Flexarion</title>
+    <meta name="description" content="Suivez l'évolution pas à pas du jeu crowMaster : ajouts de gameplay, multijoueur, boss divins et conception du nid. Par le studio Flexarion.">
+    <link rel="canonical" href="https://flexarion-jeu.fr/devLog/">
+    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="/assets/style/style.css">
     <script src="/assets/js/main.js" defer></script>
     <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
-    <link rel="canonical" href="https://flexarion-jeu.fr/devlog.html">
-    <meta name="description" content="DevLog de crowMaster : suivez toutes les mises à jour du jeu, nouveaux boss, boss divins, multijoueur et guildes.">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="DevLog - Flexarion">
-    <meta property="og:description" content="Suivez toutes les mises à jour de crowMaster : boss, boss divins, multijoueur, guildes et plus encore.">
-    <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/logo.png">
-    <meta property="og:url" content="https://flexarion-jeu.fr/devlog.html">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="keywords" content="DevLog crowMaster, mises à jour crowMaster, nouveautés crowMaster, ajout boss, boss divin, multijoueur, Flexarion, aix, Aix-enProvence, aix en provence, Aix, Aix en Provence">
-    <title>DevLog - Flexarion</title>
 </head>
 <body>
-    <header class="site-header"><div class="bar">
-        <a class="brand" href="/"><img src="/assets/images/logo.png" alt="Logo Flexarion">FLEXAR<span>ION</span></a>
-        <nav class="nav">
-            <ul>
-                <li><a href="/" class="active">Accueil</a></li>
-                <li><a href="/about/">À propos</a></li>
-                <li><a href="/crowMaster/">crowMaster <i class="dot"></i></a></li>
-                <li><a href="/devLog/">DevLog</a></li>
-                <li><a href="/contact/">Contact</a></li>
-            </ul>
-        </nav>
-        <a href="betaSignup.html" class="btn btn-primary">Rejoindre la Bêta</a>
-    </div></header>
-    <main>
-        <section class="hero small"><i class="orb a"></i><i class="orb b"></i>
+    <a href="#contenu" style="position:absolute;left:-9999px">Aller au contenu</a>
+    <header class="site-header">
+        <div class="bar">
+            <a class="brand" href="/" aria-label="Flexarion, retour à l'accueil">
+                <img src="/assets/images/logo.png" alt="Logo du studio Flexarion" width="44" height="44">FLEXAR<span>ION</span>
+            </a>
+            <nav class="nav" aria-label="Navigation principale">
+                <ul>
+                    <li><a href="/">Accueil</a></li>
+                    <li><a href="/about/">À propos</a></li>
+                    <li><a href="/crowMaster/">crowMaster</a></li>
+                    <li><a href="/devLog/" class="active" aria-current="page">DevLog</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="/betaSignup.html" class="btn btn-primary">Rejoindre la Bêta</a>
+        </div>
+    </header>
+    <main id="contenu">
+        <section class="hero">
             <span class="pill">Journal de développement</span>
-            <h1>Dev<span class="grad">Log</span></h1>
-            <p class="lead">Toutes les mises à jour de crowMaster, de la plus récente à la plus ancienne.</p>
+            <h1>Les DevLogs de crowMaster</h1>
+            <p class="lead">Découvrez les coulisses de notre studio indépendant à Aix-en-Provence : choix techniques, nouveautés multijoueur et conception des boss.</p>
         </section>
-        <br>
-        <div class="wrap">
-            <section class="card reveal">
-                <div class="cardtop"><span class="pill green">Multijoueur</span><span>09/11</span></div>
-                <h2>Version 1.5 Ajout du mode PVP</h2>
-                <p>Le corbeau peut désormais se mettre à rude épreuve et tester ses compétences ou même son niveau de jeu face à des vrais joueurs !</p>
-                <div class="cardfoot"><span>Coop · PVP · Guildes</span></div>
-            </section>
-            <br>
-            <section class="card reveal">
-                <div class="cardtop"><span class="pill">Boss</span><span>03/11</span></div>
-                <h2>Version 1.4 Ajout des boss divins</h2>
-                <p>Des créatures colossales qui nécessitent plusieurs joueurs pour être vaincues. Elles sont réservées aux guildes.</p>
-                <ul class="checks">
-                    <li>Combats pensés pour le jeu en groupe.</li>
-                    <li>Des récompenses à la hauteur de la difficulté.</li>
-                </ul>
-                <div class="cardfoot"><span>Boss divins · Guildes</span></div>
-            </section>
-            <br>
-            <section class="card reveal">
-                <div class="cardtop"><span class="pill green">Multijoueur</span><span>28/10</span></div>
-                <h2>Version 1.3 Ajout du multijoueur</h2>
-                <p>Le corbeau n'est plus seul : plusieurs modes de jeu permettent de partager l'aventure ou de s'affronter.</p>
-                <ul class="checks">
-                    <li><strong>Mode coop :</strong> affrontez des boss et explorez le monde ensemble.</li>
-                    <li><strong>Guildes :</strong> créez la vôtre ou rejoignez-en une.</li>
-                </ul>
-                <div class="cardfoot"><span>Coop · Guildes</span></div>
-            </section>
-            <br>
-            <section class="card reveal">
-                <div class="cardtop"><span class="pill">Boss</span><span>10/10</span></div>
-                <h2>Version 1.2 Ajout de boss</h2>
-                <p>De nouvelles créatures mythiques viennent défier le corbeau, avec des combats variés.</p>
-                <div class="cardfoot"><span>Créatures mythiques · Combats</span></div>
-            </section>
-
-            <section class="card reveal">
-                <div class="cardtop"><span class="pill green">Fonctionnalité</span><span>17/09</span></div>
-                <h2>Version 1.1 Ajout du nid</h2>
-                <p>Le joueur peut désormais se construire sa « maison » et y exposer ses succès, ses armes et ses armures favorites.</p>
-                <div class="cardfoot"><span>Nid · Personnalisation</span></div>
-            </section>
-
+        <div class="wrap" style="padding: 2rem 0;">
+            <div class="bento">
+                <article class="card">
+                    <div class="cardtop"><span class="pill new">Nouveau</span><span>Multijoueur</span></div>
+                    <h2><a href="/devLog/multijoueur/">Ajout du multijoueur : coop et sessions partagées</a></h2>
+                    <p>Comment nous avons implémenté le mode multijoueur pour permettre aux joueurs d'explorer le monde de crowMaster ensemble et de fonder des guildes.</p>
+                    <div class="cardfoot"><span>Mise à jour majeure</span><a href="/devLog/multijoueur/">Lire l'article <i>→</i></a></div>
+                </article>
+                <article class="card">
+                    <div class="cardtop"><span class="pill green">Boss</span><span>Affrontements</span></div>
+                    <h2><a href="/devLog/boss-divins/">Les boss divins : concevoir des défis titanesques</a></h2>
+                    <p>Plongez dans la conception des entités divines que les guildes devront terrasser au cœur des terres corrompues.</p>
+                    <div class="cardfoot"><span>Design &amp; Gameplay</span><a href="/devLog/boss-divins/">Lire l'article <i>→</i></a></div>
+                </article>
+            </div>
+            <div class="bento rev" style="margin-top: 2rem;">
+                <article class="card">
+                    <div class="cardtop"><span class="pill green">Bestiaire</span><span>Créatures</span></div>
+                    <h2><a href="/devLog/creatures-mythiques/">Créatures mythiques et faune du royaume</a></h2>
+                    <p>Entre science-fiction et heroic fantasy, découvrez les inspirations derrière les monstres et alliés ailés que vous croiserez.</p>
+                    <div class="cardfoot"><span>Lore &amp; Univers</span><a href="/devLog/creatures-mythiques/">Lire l'article <i>→</i></a></div>
+                </article>
+                <article class="card">
+                    <div class="cardtop"><span class="pill">Fonctionnalité</span><span>Abri</span></div>
+                    <h2><a href="/devLog/nid-corbeau/">Le nid du corbeau : votre quartier général</a></h2>
+                    <p>Personnalisation, amélioration de l'artisanat et stockage des ressources récoltées : tout sur la mécanique centrale du nid.</p>
+                    <div class="cardfoot"><span>Mécaniques</span><a href="/devLog/nid-corbeau/">Lire l'article <i>→</i></a></div>
+                </article>
+            </div>
         </div>
     </main>
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section"><h3>Flexarion</h3><p>Studio indépendant créateur de <strong>crowMaster</strong>.</p></div>
-            <div class="footer-section"><h4>Informations légales</h4><p><span class="footer-note">Hébergé par GitHub Pages • Domaine IONOS</span></p></div>
+            <div class="footer-section">
+                <h3>Flexarion</h3>
+                <p>Studio de jeux vidéo indépendant créateur de <strong>crowMaster</strong>.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <p><a href="/about/">À propos</a> · <a href="/crowMaster/">crowMaster</a> · <a href="/devLog/">DevLog</a> · <a href="/contact/">Contact</a></p>
+            </div>
         </div>
         <div class="footer-bottom"><p>&copy; 2026 Flexarion. Tous droits réservés.</p></div>
     </footer>
