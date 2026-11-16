@@ -3,24 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flexarion – Studio de jeux vidéo à Aix-en-Provence | crowMaster</title>
+    <title>Flexarion – Studio de jeux vidéo indépendant à Aix-en-Provence | crowMaster</title>
     <meta name="description" content="Flexarion est un studio de jeux vidéo indépendant basé à Aix-en-Provence, créateur de crowMaster, un jeu RPG d'action où l'on incarne un corbeau. Rejoignez la bêta !">
     <link rel="canonical" href="https://flexarion-jeu.fr/">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Flexarion">
     <meta name="theme-color" content="#090d16">
+    
+    <!-- Open Graph -->
     <meta property="og:site_name" content="Flexarion">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Flexarion – Studio de jeux vidéo indépendant à Aix-en-Provence">
-    <meta property="og:description" content="Studio indépendant créateur de crowMaster. Incarnez un corbeau mystique, bâtissez votre nid et affrontez des boss divins en guilde.">
+    <meta property="og:title" content="Flexarion – Studio de jeux vidéo indépendant à Aix-en-Provence | crowMaster">
+    <meta property="og:description" content="Studio indépendant à Aix-en-Provence créateur de crowMaster. Incarnez un corbeau mystique, bâtissez votre nid et affrontez des boss divins en guilde.">
     <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
+    <meta property="og:image:alt" content="Bannière officielle du studio Flexarion et du jeu crowMaster">
     <meta property="og:url" content="https://flexarion-jeu.fr/">
+    
+    <!-- Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Flexarion – Studio de jeux vidéo indépendant à Aix-en-Provence">
+    <meta name="twitter:description" content="Studio indépendant créateur de crowMaster. Incarnez un corbeau mystique, bâtissez votre nid et affrontez des boss divins.">
+    <meta name="twitter:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
+    <meta name="twitter:image:alt" content="Bannière officielle du studio Flexarion et du jeu crowMaster">
+
+    <!-- Préchargement de l'image principale (Améliore le score LCP Google) -->
+    <link rel="preload" as="image" href="/assets/images/Flexarion-jeu.fr.png" fetchpriority="high">
+    
     <link rel="stylesheet" href="/assets/style/style.css">
     <script src="/assets/js/main.js" defer></script>
     <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
-<script type="application/ld+json">
+
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
@@ -33,7 +47,9 @@
           "mainEntityOfPage": "https://flexarion-jeu.fr/",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://flexarion-jeu.fr/assets/images/logo.png"
+            "url": "https://flexarion-jeu.fr/assets/images/logo.png",
+            "width": 512,
+            "height": 512
           },
           "description": "Flexarion (flexarion-jeu.fr) est un studio de jeux vidéo indépendant basé à Aix-en-Provence, créateur officiel du jeu d'action-aventure et RPG crowMaster.",
           "foundingLocation": {
@@ -46,10 +62,38 @@
             "addressRegion": "Provence-Alpes-Côte d'Azur",
             "addressCountry": "FR"
           },
+          "founder": [
+            { "@type": "Person", "name": "Ewan Francois" },
+            { "@type": "Person", "name": "Nina Matic Charbit" },
+            { "@type": "Person", "name": "Nicolas Zoppi" },
+            { "@type": "Person", "name": "Lezina Khadissova" }
+          ],
           "brand": {
             "@type": "Brand",
             "name": "crowMaster"
-          }
+          },
+          "sameAs": [
+            "https://github.com/EwanFRANCOIS/Flexarion-Jeu",
+            "https://l-empire-corbeau.github.io/"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://flexarion-jeu.fr/#website",
+          "url": "https://flexarion-jeu.fr/",
+          "name": "Flexarion",
+          "inLanguage": "fr-FR",
+          "publisher": { "@id": "https://flexarion-jeu.fr/#organisation" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://flexarion-jeu.fr/#webpage",
+          "url": "https://flexarion-jeu.fr/",
+          "name": "Flexarion – Studio de jeux vidéo indépendant à Aix-en-Provence | crowMaster",
+          "description": "Flexarion est un studio de jeux vidéo indépendant basé à Aix-en-Provence, créateur de crowMaster, un jeu RPG d'action où l'on incarne un corbeau.",
+          "isPartOf": { "@id": "https://flexarion-jeu.fr/#website" },
+          "about": { "@id": "https://flexarion-jeu.fr/#organisation" },
+          "inLanguage": "fr-FR"
         },
         {
           "@type": "VideoGame",
@@ -59,7 +103,7 @@
           "description": "Jeu vidéo indépendant mêlant science-fiction et heroic fantasy où le joueur incarne un corbeau mystique, bâtit son nid et affronte des boss divins en guilde.",
           "genre": ["Action", "Aventure", "RPG"],
           "gamePlatform": "PC",
-          "inLanguage": "fr",
+          "inLanguage": "fr-FR",
           "author": {"@id": "https://flexarion-jeu.fr/#organisation"},
           "publisher": {"@id": "https://flexarion-jeu.fr/#organisation"},
           "creator": {"@id": "https://flexarion-jeu.fr/#organisation"}
@@ -154,7 +198,7 @@
                     <h2 class="big">crowMaster : un corbeau mystique pour défier les ténèbres du royaume.</h2>
                     <p>Plongez dans l'univers sombre et stratégique de <strong>crowMaster</strong>. Explorez des terres corrompues, bâtissez et protégez votre nid, et maîtrisez des pouvoirs anciens pour survivre face aux créatures mythiques qui peuplent le monde.</p>
                     <div class="visual">
-                        <img src="/assets/images/Flexarion-jeu.fr.png" alt="Bannière du studio Flexarion, créateur du jeu vidéo crowMaster" width="800" height="450" loading="lazy">
+                        <img src="/assets/images/Flexarion-jeu.fr.png" alt="Bannière du studio Flexarion, créateur du jeu vidéo crowMaster" width="800" height="450" fetchpriority="high" decoding="async">
                     </div>
                     <div class="cardfoot"><span>Action · Aventure · Tactique</span><a href="/crowMaster/">Univers, mécaniques et bêta de crowMaster <i>→</i></a></div>
                 </section>
@@ -211,7 +255,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Flexarion</h3>
-                <p>Studio de jeux vidéo indépendant créateur de <strong>crowMaster</strong>.<br>Aix-en-Provence, France</p>
+                <p>Studio de jeux vidéo indépendant créateur de <strong>crowMaster</strong>.<br>Aix-en-Provence, Provence-Alpes-Côte d'Azur, France (43.5297° N, 5.4474° E)</p>
                 <p style="margin-top:.5rem">Découvrez aussi le projet partenaire <a href="https://flexarion.fr/" target="_blank" rel="noopener">Backlog</a></p>
             </div>
             <div class="footer-section">
