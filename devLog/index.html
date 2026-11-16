@@ -3,13 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevLog – Journal de développement de crowMaster | Flexarion</title>
-    <meta name="description" content="Suivez l'évolution pas à pas du jeu crowMaster : ajouts de gameplay, multijoueur, boss divins et conception du nid. Par le studio Flexarion.">
+    <title>DevLog Flexarion – Actualités du développement de crowMaster</title>
+    <meta name="description" content="Suivez pas à pas le développement de crowMaster par le studio Flexarion : architecture multijoueur, boss divins, créatures mythiques et construction du nid.">
     <link rel="canonical" href="https://flexarion-jeu.fr/devLog/">
     <meta name="robots" content="index, follow">
+    <meta name="author" content="Flexarion">
+    <meta name="theme-color" content="#090d16">
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Flexarion">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DevLog Flexarion – Actualités du développement de crowMaster">
+    <meta property="og:description" content="Coulisses techniques et artistiques de crowMaster : multijoueur, boss divins, créatures mythiques et nid du corbeau.">
+    <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
+    <meta property="og:url" content="https://flexarion-jeu.fr/devLog/">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DevLog Flexarion – Journal de bord de crowMaster">
+    <meta name="twitter:description" content="Toutes les mises à jour de développement du jeu crowMaster par le studio Flexarion.">
+    <meta name="twitter:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
+
     <link rel="stylesheet" href="/assets/style/style.css">
     <script src="/assets/js/main.js" defer></script>
     <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Blog",
+          "@id": "https://flexarion-jeu.fr/devLog/#blog",
+          "url": "https://flexarion-jeu.fr/devLog/",
+          "name": "DevLog Flexarion – crowMaster",
+          "description": "Journal de développement officiel du jeu vidéo indépendant crowMaster par le studio Flexarion.",
+          "publisher": { "@id": "https://flexarion-jeu.fr/#organisation" },
+          "inLanguage": "fr-FR",
+          "blogPost": [
+            {
+              "@type": "BlogPosting",
+              "headline": "Ajout du multijoueur dans crowMaster",
+              "url": "https://flexarion-jeu.fr/devLog/multijoueur/"
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Les boss divins de crowMaster",
+              "url": "https://flexarion-jeu.fr/devLog/boss-divins/"
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Les créatures mythiques",
+              "url": "https://flexarion-jeu.fr/devLog/creatures-mythiques/"
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Le nid du corbeau",
+              "url": "https://flexarion-jeu.fr/devLog/nid-corbeau/"
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Accueil",
+              "item": "https://flexarion-jeu.fr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "DevLog",
+              "item": "https://flexarion-jeu.fr/devLog/"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <a href="#contenu" style="position:absolute;left:-9999px">Aller au contenu</a>
