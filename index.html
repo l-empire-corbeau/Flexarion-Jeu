@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/assets/style/style.css">
     <script src="/assets/js/main.js" defer></script>
     <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
-    <script type="application/ld+json">
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
@@ -28,25 +28,41 @@
           "@type": "Organization",
           "@id": "https://flexarion-jeu.fr/#organisation",
           "name": "Flexarion",
-          "alternateName": "Flexarion Jeu",
+          "alternateName": "Studio Flexarion",
           "url": "https://flexarion-jeu.fr/",
-          "logo": "https://flexarion-jeu.fr/assets/images/logo.png",
-          "description": "Studio de jeux vidéo indépendant basé à Aix-en-Provence, créateur de crowMaster.",
+          "mainEntityOfPage": "https://flexarion-jeu.fr/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://flexarion-jeu.fr/assets/images/logo.png"
+          },
+          "description": "Flexarion (flexarion-jeu.fr) est un studio de jeux vidéo indépendant basé à Aix-en-Provence, créateur officiel du jeu d'action-aventure et RPG crowMaster.",
+          "foundingLocation": {
+            "@type": "Place",
+            "name": "Aix-en-Provence, France"
+          },
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "Aix-en-Provence",
             "addressRegion": "Provence-Alpes-Côte d'Azur",
             "addressCountry": "FR"
           },
-          "sameAs": ["https://flexarion.fr/"]
+          "brand": {
+            "@type": "Brand",
+            "name": "crowMaster"
+          }
         },
         {
           "@type": "VideoGame",
+          "@id": "https://flexarion-jeu.fr/crowMaster/#game",
           "name": "crowMaster",
           "url": "https://flexarion-jeu.fr/crowMaster/",
+          "description": "Jeu vidéo indépendant mêlant science-fiction et heroic fantasy où le joueur incarne un corbeau mystique, bâtit son nid et affronte des boss divins en guilde.",
           "genre": ["Action", "Aventure", "RPG"],
           "gamePlatform": "PC",
-          "publisher": {"@id": "https://flexarion-jeu.fr/#organisation"}
+          "inLanguage": "fr",
+          "author": {"@id": "https://flexarion-jeu.fr/#organisation"},
+          "publisher": {"@id": "https://flexarion-jeu.fr/#organisation"},
+          "creator": {"@id": "https://flexarion-jeu.fr/#organisation"}
         },
         {
           "@type": "FAQPage",
@@ -56,7 +72,7 @@
               "name": "Qu'est-ce que crowMaster ?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "crowMaster est un jeu vidéo indépendant mêlant science-fiction et heroic fantasy où le joueur incarne un corbeau qui évolue, explore, fabrique son équipement et affronte des créatures mythiques, seul ou en guilde."
+                "text": "crowMaster est un jeu vidéo indépendant développé par le studio Flexarion (flexarion-jeu.fr), mêlant science-fiction et heroic fantasy où le joueur incarne un corbeau qui évolue, explore, fabrique son équipement et affronte des créatures mythiques, seul ou en guilde."
               }
             },
             {
@@ -64,7 +80,7 @@
               "name": "Où se trouve le studio Flexarion ?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Flexarion est un studio de jeux vidéo indépendant basé à Aix-en-Provence, en région Provence-Alpes-Côte d'Azur."
+                "text": "Flexarion (flexarion-jeu.fr) est un studio de jeux vidéo indépendant basé à Aix-en-Provence, en région Provence-Alpes-Côte d'Azur."
               }
             },
             {
@@ -72,7 +88,7 @@
               "name": "Comment rejoindre la bêta de crowMaster ?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Il suffit de renseigner votre adresse e-mail sur la page de préinscription pour recevoir une invitation aux sessions de test fermées."
+                "text": "Il suffit de renseigner votre adresse e-mail sur la page de préinscription de flexarion-jeu.fr pour recevoir une invitation aux sessions de test fermées."
               }
             }
           ]
