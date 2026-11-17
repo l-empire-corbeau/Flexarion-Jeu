@@ -29,7 +29,7 @@ Flexarion-Jeu/
 ├── CNAME                       # Configuration du domaine personnalisé
 ├── contact.html                # Formulaire et page de contact
 ├── crowMaster.html             # Page de présentation du jeu crowMaster
-├── error.html                  # Page d'erreur personnalisée (404)
+├── 404.html                    # Page d'erreur personnalisée (404)
 ├── google93955eaf2f39f2bd.html # Fichier de vérification Google Search Console
 ├── index.html                  # Page d'accueil officielle
 ├── README.md                   # Documentation du projet
