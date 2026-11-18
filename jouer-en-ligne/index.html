@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini-jeux gratuits en ligne : L'Arcade de crowMaster – Flexarion</title>
-    <meta name="description" content="Jouez gratuitement aux 3 mini-jeux de l'univers crowMaster : Le Vol du Corbeau, Le Nid d'Obsidienne (jeu Idle complet avec prestige et quêtes) et L'Ascension du Nid. Gacha de skins, accessoires et classement !">
+    <meta name="description" content="Jouez gratuitement aux 3 mini-jeux de l'univers crowMaster : Le Vol du Corbeau, Le Nid d'Obsidienne (jeu Idle complet avec prestige et quêtes) et L'Ascension du Nid. Gacha exclusif de skins et accessoires !">
     <link rel="canonical" href="https://flexarion-jeu.fr/jouer-en-ligne/">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Flexarion">
@@ -14,7 +14,7 @@
     <meta property="og:locale" content="fr_FR">
     <meta property="og:type" content="website">
     <meta property="og:title" content="L'Arcade de crowMaster – 3 mini-jeux gratuits">
-    <meta property="og:description" content="Jeu Idle complet avec prestige, quêtes, gacha de skins et accessoires dans l'univers de crowMaster !">
+    <meta property="og:description" content="Jeu Idle complet avec prestige, quêtes, gacha exclusif de skins et accessoires dans l'univers de crowMaster !">
     <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
     <meta property="og:url" content="https://flexarion-jeu.fr/jouer-en-ligne/">
     <meta name="twitter:card" content="summary_large_image">
@@ -71,13 +71,14 @@
 
         /* Marché, Accessoires & Gacha */
         #view-shop{display:none}
-        .shop-section-title{font-size:1.05rem;margin:1.4rem 0 .7rem;color:#7dd3fc;display:flex;align-items:center;gap:.5rem}
+        .shop-section-title{font-size:1.05rem;margin:1.4rem 0 .7rem;color:#7dd3fc;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
         .shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:.9rem}
         .shop-item{background:rgba(11,16,32,.85);border:1px solid var(--line);border-radius:16px;padding:1rem;display:flex;flex-direction:column;justify-content:space-between}
         .shop-item.equipped{border-color:#38bdf8;background:rgba(56,189,248,.08)}
+        .shop-item.locked{opacity:.68}
         .shop-item h4{margin:.2rem 0 .3rem;font-size:.98rem}
         .shop-item p{font-size:.8rem;color:var(--mut);margin:0 0 .8rem;line-height:1.35}
-        .shop-price{font-weight:700;color:#d9c2ff;font-size:.88rem;margin-bottom:.6rem}
+        .shop-price{font-weight:700;color:#d9c2ff;font-size:.85rem;margin-bottom:.6rem}
 
         /* Boîte Gacha */
         .gacha-container{background:linear-gradient(135deg,rgba(139,77,255,.18),rgba(56,189,248,.12));border:1px solid rgba(139,77,255,.45);border-radius:20px;padding:1.4rem;text-align:center;margin-bottom:1.2rem}
@@ -99,10 +100,6 @@
         .rank-table th,.rank-table td{padding:.75rem 1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,.06);font-size:.92rem}
         .rank-table th{color:var(--mut);font-weight:600;background:rgba(255,255,255,.03)}
         .rank-me{background:rgba(56,189,248,.12);font-weight:700;color:#7dd3fc}
-
-        .howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1rem}
-        .howto div{background:rgba(9,13,22,.5);border:1px solid var(--line);border-radius:16px;padding:1rem}
-        .howto strong{display:block;margin-bottom:.3rem}
     </style>
 </head>
 <body>
@@ -127,7 +124,7 @@
         <section class="hero small"><i class="orb a"></i><i class="orb b"></i>
             <span class="pill">L'Arcade de crowMaster</span>
             <h1>Mini-jeux <span class="grad">en ligne</span></h1>
-            <p class="lead">Développez votre Nid d'Obsidienne, débloquez des skins et accessoires via le Gacha et grimpez dans le classement.</p>
+            <p class="lead">Développez votre Nid d'Obsidienne, invoquez des skins et accessoires exclusifs au Gacha et grimpez dans le classement.</p>
         </section>
 
         <div class="wrap">
@@ -146,7 +143,7 @@
                     <!-- Onglets principaux -->
                     <div class="tabs" id="main-tabs">
                         <button type="button" class="tab-btn active" data-tab="menu">🎮 Choisir un jeu</button>
-                        <button type="button" class="tab-btn" data-tab="shop">🛒 Gacha, Skins & Accessoires</button>
+                        <button type="button" class="tab-btn" data-tab="shop">🔮 Gacha & Collection</button>
                         <button type="button" class="tab-btn" data-tab="rank">🏆 Classement</button>
                     </div>
 
@@ -253,11 +250,11 @@
                         </div>
                     </div>
 
-                    <!-- VUE 3 : MARCHÉ, ACCESSOIRES & GACHA -->
+                    <!-- VUE 3 : GACHA EXCLUSIF & COLLECTION -->
                     <div id="view-shop">
                         <div class="gacha-container">
                             <h3>🔮 Portail Gacha d'Obsidienne</h3>
-                            <p style="font-size:0.88rem;color:var(--mut);margin-bottom:0.4rem">Invoquez des <strong>Skins</strong> et des <strong>Accessoires</strong> exclusifs pour personnaliser votre corbeau !</p>
+                            <p style="font-size:0.88rem;color:var(--mut);margin-bottom:0.4rem">Tous les <strong>Skins</strong> et <strong>Accessoires</strong> s'obtiennent uniquement par invocation dans ce portail !</p>
                             <div class="gacha-rates">Taux : Commun 55% · Rare 30% · Épique 12% · Légendaire 3%</div>
                             <div class="gacha-btns">
                                 <button type="button" class="btn btn-primary" onclick="window.__pullGacha(1)">🎟️ 1 Ticket (50 plumes)</button>
@@ -269,10 +266,16 @@
                             </div>
                         </div>
 
-                        <h3 class="shop-section-title">👑 Accessoires du Corbeau (Cumulables avec tous les skins)</h3>
+                        <h3 class="shop-section-title">
+                            <span>👑 Garde-robe : Accessoires (Gacha uniquement)</span>
+                            <span id="acc-progress" style="font-size:.82rem;color:var(--mut)"></span>
+                        </h3>
                         <div class="shop-grid" id="shop-accessories"></div>
 
-                        <h3 class="shop-section-title">🦅 Apparences du Corbeau (Skins)</h3>
+                        <h3 class="shop-section-title">
+                            <span>🦅 Garde-robe : Apparences / Skins (Gacha uniquement)</span>
+                            <span id="skin-progress" style="font-size:.82rem;color:var(--mut)"></span>
+                        </h3>
                         <div class="shop-grid" id="shop-skins"></div>
 
                         <h3 class="shop-section-title">⚡ Améliorations permanentes</h3>
@@ -319,31 +322,31 @@ const $=id=>document.getElementById(id);
 function fit(){const r=Math.min(window.devicePixelRatio||1,2);cv.width=W*r;cv.height=H*r;ctx.setTransform(r,0,0,r,0,0)}
 fit();window.addEventListener('resize',fit);
 
-// ---- CATALOGUES (12 SKINS + 8 ACCESSOIRES) ----
+// ---- CATALOGUES (12 SKINS + 8 ACCESSOIRES : EXCLUSIFS GACHA) ----
 const SKINS=[
-    {id:'classic',name:'Corbeau d\'Obsidienne',desc:'Le plumage nocturne originel.',rarity:'common',price:0,body:'#1b2440',wing:'#0f1528',glow:'rgba(120,170,255,.45)',beak:'#f2b240'},
-    {id:'ash',name:'Corbeau des Cendres',desc:'Plumes gris ardoise des terres brûlées.',rarity:'common',price:15,body:'#334155',wing:'#1e293b',glow:'rgba(148,163,184,.5)',beak:'#cbd5e1'},
-    {id:'moss',name:'Gardien Sylvestre',desc:'Camouflage de mousse et d\'émeraude.',rarity:'common',price:20,body:'#14532d',wing:'#052e16',glow:'rgba(52,211,153,.55)',beak:'#a7f3d0'},
-    {id:'spectral',name:'Spectre Éthéré',desc:'Corbeau fantomatique aux reflets cyan.',rarity:'rare',price:35,body:'#164e63',wing:'#083344',glow:'rgba(56,189,248,.85)',beak:'#7dd3fc'},
-    {id:'amethyst',name:'Oracle d\'Améthyste',desc:'Imprégné de magie cristalline violette.',rarity:'rare',price:45,body:'#581c87',wing:'#3b0764',glow:'rgba(192,132,252,.85)',beak:'#f0abfc'},
-    {id:'sakura',name:'Corbeau Printanier',desc:'Plumage rosé des cerisiers sacrés.',rarity:'rare',price:50,body:'#831843',wing:'#500724',glow:'rgba(244,114,182,.85)',beak:'#fbcfe8'},
-    {id:'royal',name:'Corbeau Solaire',desc:'Plumage doré des anciens gardiens divins.',rarity:'epic',price:80,body:'#78350f',wing:'#451a03',glow:'rgba(251,191,36,.9)',beak:'#fef08a'},
-    {id:'crimson',name:'Phénix d\'Obsidienne',desc:'Forgé dans la braise des météores.',rarity:'epic',price:95,body:'#7f1d1d',wing:'#450a0a',glow:'rgba(248,113,113,.9)',beak:'#fdba74'},
-    {id:'cyber',name:'Corbeau Néon 2099',desc:'Armure cybernétique à circuit lumineux.',rarity:'epic',price:110,body:'#0f172a',wing:'#020617',glow:'rgba(34,211,238,.95)',beak:'#22d3ee'},
-    {id:'shadow_lord',name:'Seigneur du Néant',desc:'Exclusif Gacha. Absorbe la lumière stellaire.',rarity:'legendary',price:9999,body:'#1e1b4b',wing:'#090d16',glow:'rgba(168,85,247,1)',beak:'#e879f9'},
-    {id:'frost_crow',name:'Souverain Glaciaire',desc:'Exclusif Gacha. Né au sommet de l’Arbre-Monde.',rarity:'legendary',price:9999,body:'#0369a1',wing:'#0c4a6e',glow:'rgba(125,211,252,1)',beak:'#ffffff'},
-    {id:'celestial',name:'Avatar Cosmique',desc:'Exclusif Gacha. Composé de poussière d\'étoiles.',rarity:'legendary',price:9999,body:'#312e81',wing:'#1e1b4b',glow:'rgba(250,204,21,1)',beak:'#fde047'}
+    {id:'classic',name:'Corbeau d\'Obsidienne',desc:'Le plumage nocturne originel.',rarity:'common',body:'#1b2440',wing:'#0f1528',glow:'rgba(120,170,255,.45)',beak:'#f2b240'},
+    {id:'ash',name:'Corbeau des Cendres',desc:'Plumes gris ardoise des terres brûlées.',rarity:'common',body:'#334155',wing:'#1e293b',glow:'rgba(148,163,184,.5)',beak:'#cbd5e1'},
+    {id:'moss',name:'Gardien Sylvestre',desc:'Camouflage de mousse et d\'émeraude.',rarity:'common',body:'#14532d',wing:'#052e16',glow:'rgba(52,211,153,.55)',beak:'#a7f3d0'},
+    {id:'spectral',name:'Spectre Éthéré',desc:'Corbeau fantomatique aux reflets cyan.',rarity:'rare',body:'#164e63',wing:'#083344',glow:'rgba(56,189,248,.85)',beak:'#7dd3fc'},
+    {id:'amethyst',name:'Oracle d\'Améthyste',desc:'Imprégné de magie cristalline violette.',rarity:'rare',body:'#581c87',wing:'#3b0764',glow:'rgba(192,132,252,.85)',beak:'#f0abfc'},
+    {id:'sakura',name:'Corbeau Printanier',desc:'Plumage rosé des cerisiers sacrés.',rarity:'rare',body:'#831843',wing:'#500724',glow:'rgba(244,114,182,.85)',beak:'#fbcfe8'},
+    {id:'royal',name:'Corbeau Solaire',desc:'Plumage doré des anciens gardiens divins.',rarity:'epic',body:'#78350f',wing:'#451a03',glow:'rgba(251,191,36,.9)',beak:'#fef08a'},
+    {id:'crimson',name:'Phénix d\'Obsidienne',desc:'Forgé dans la braise des météores.',rarity:'epic',body:'#7f1d1d',wing:'#450a0a',glow:'rgba(248,113,113,.9)',beak:'#fdba74'},
+    {id:'cyber',name:'Corbeau Néon 2099',desc:'Armure cybernétique à circuit lumineux.',rarity:'epic',body:'#0f172a',wing:'#020617',glow:'rgba(34,211,238,.95)',beak:'#22d3ee'},
+    {id:'shadow_lord',name:'Seigneur du Néant',desc:'Absorbe la lumière stellaire.',rarity:'legendary',body:'#1e1b4b',wing:'#090d16',glow:'rgba(168,85,247,1)',beak:'#e879f9'},
+    {id:'frost_crow',name:'Souverain Glaciaire',desc:'Né au sommet de l’Arbre-Monde.',rarity:'legendary',body:'#0369a1',wing:'#0c4a6e',glow:'rgba(125,211,252,1)',beak:'#ffffff'},
+    {id:'celestial',name:'Avatar Cosmique',desc:'Composé de poussière d\'étoiles.',rarity:'legendary',body:'#312e81',wing:'#1e1b4b',glow:'rgba(250,204,21,1)',beak:'#fde047'}
 ];
 
 const ACCESSORIES=[
-    {id:'none',name:'Aucun accessoire',desc:'Tête nue et aérodynamique.',rarity:'common',price:0},
-    {id:'scarf',name:'Écharpe du Voyageur',desc:'Une écharpe rouge flottant au vent.',rarity:'common',price:20},
-    {id:'monocle',name:'Monocle d\'Alchimiste',desc:'Un monocle doré pour scruter l\'essence.',rarity:'rare',price:40},
-    {id:'wizard_hat',name:'Chapeau d\'Archimage',desc:'Chapeau pointu étoilé des mages corbeaux.',rarity:'rare',price:55},
-    {id:'crown',name:'Couronne d\'Or',desc:'La couronne des rois du Nid d\'Obsidienne.',rarity:'epic',price:90},
-    {id:'halo',name:'Auréole Céleste',desc:'Un anneau de lumière divine flottant.',rarity:'epic',price:110},
-    {id:'devil_horns',name:'Cornes d\'Obsidienne',desc:'Cornes enflammées des profondeurs.',rarity:'legendary',price:9999},
-    {id:'spirit_orb',name:'Esprit Gardien',desc:'Un feu follet bleu qui orbite autour de vous.',rarity:'legendary',price:9999}
+    {id:'none',name:'Aucun accessoire',desc:'Tête nue et aérodynamique.',rarity:'common'},
+    {id:'scarf',name:'Écharpe du Voyageur',desc:'Une écharpe rouge flottant au vent.',rarity:'common'},
+    {id:'monocle',name:'Monocle d\'Alchimiste',desc:'Un monocle doré pour scruter l\'essence.',rarity:'rare'},
+    {id:'wizard_hat',name:'Chapeau d\'Archimage',desc:'Chapeau pointu étoilé des mages corbeaux.',rarity:'rare'},
+    {id:'crown',name:'Couronne d\'Or',desc:'La couronne des rois du Nid d\'Obsidienne.',rarity:'epic'},
+    {id:'halo',name:'Auréole Céleste',desc:'Un anneau de lumière divine flottant.',rarity:'epic'},
+    {id:'devil_horns',name:'Cornes d\'Obsidienne',desc:'Cornes enflammées des profondeurs.',rarity:'legendary'},
+    {id:'spirit_orb',name:'Esprit Gardien',desc:'Un feu follet bleu qui orbite autour de vous.',rarity:'legendary'}
 ];
 
 const UPGRADES=[
@@ -380,7 +383,7 @@ const DEFAULT_SAVE={
 };
 let save=JSON.parse(JSON.stringify(DEFAULT_SAVE));
 try{
-    const raw=localStorage.getItem('crowmaster_arcade_v5');
+    const raw=localStorage.getItem('crowmaster_arcade_v6');
     if(raw){
         const p=JSON.parse(raw);
         save={
@@ -392,7 +395,7 @@ try{
         };
     }
 }catch(e){}
-function persist(){try{localStorage.setItem('crowmaster_arcade_v5',JSON.stringify(save))}catch(e){}}
+function persist(){try{localStorage.setItem('crowmaster_arcade_v6',JSON.stringify(save))}catch(e){}}
 
 const getSkin=()=>SKINS.find(s=>s.id===save.equippedSkin)||SKINS[0];
 const getAcc=()=>save.equippedAcc||'none';
@@ -424,21 +427,24 @@ function refreshUI(){
     if(activeGame==='idle')renderIdlePanel();
 }
 
-// ---- BOUTIQUE, ACCESSOIRES & GACHA ----
+// ---- COLLECTION (EXCLUSIF GACHA) & AMÉLIORATIONS ----
 function renderShop(){
+    $('acc-progress').textContent=`${save.unlockedAcc.length} / ${ACCESSORIES.length} débloqués`;
+    $('skin-progress').textContent=`${save.unlockedSkins.length} / ${SKINS.length} débloqués`;
+
     $('shop-accessories').innerHTML=ACCESSORIES.map(ac=>{
         const owned=save.unlockedAcc.includes(ac.id);
         const eq=save.equippedAcc===ac.id;
-        return `<div class="shop-item ${eq?'equipped':''}">
+        return `<div class="shop-item ${eq?'equipped':''} ${!owned?'locked':''}">
             <div>
                 <span class="rarity-${ac.rarity}" style="font-size:0.72rem;font-weight:800;text-transform:uppercase">${ac.rarity}</span>
                 <h4>${ac.name}</h4>
                 <p>${ac.desc}</p>
             </div>
             <div>
-                <div class="shop-price">${owned?(eq?'✔ Équipé':'Débloqué'):(ac.price>1000?'Exclusif Gacha':`🪶 ${ac.price} plumes`)}</div>
-                <button type="button" class="btn ${eq?'btn-secondary':'btn-primary'}" style="width:100%;padding:.45rem;font-size:.82rem" ${eq||(!owned&&ac.price>1000)?'disabled':''} onclick="window.__buyAcc('${ac.id}')">
-                    ${eq?'Équipé':(owned?'Équiper':(ac.price>1000?'Via Gacha':'Acheter'))}
+                <div class="shop-price">${owned?(eq?'✔ Équipé':'✔ Débloqué'):'🔒 Gacha uniquement'}</div>
+                <button type="button" class="btn ${eq?'btn-secondary':'btn-primary'}" style="width:100%;padding:.45rem;font-size:.82rem" ${eq||!owned?'disabled':''} onclick="window.__equipAcc('${ac.id}')">
+                    ${eq?'Équipé':(owned?'Équiper':'Verrouillé')}
                 </button>
             </div>
         </div>`;
@@ -447,16 +453,16 @@ function renderShop(){
     $('shop-skins').innerHTML=SKINS.map(sk=>{
         const owned=save.unlockedSkins.includes(sk.id);
         const eq=save.equippedSkin===sk.id;
-        return `<div class="shop-item ${eq?'equipped':''}">
+        return `<div class="shop-item ${eq?'equipped':''} ${!owned?'locked':''}">
             <div>
                 <span class="rarity-${sk.rarity}" style="font-size:0.72rem;font-weight:800;text-transform:uppercase">${sk.rarity}</span>
                 <h4>${sk.name}</h4>
                 <p>${sk.desc}</p>
             </div>
             <div>
-                <div class="shop-price">${owned?(eq?'✔ Équipé':'Débloqué'):(sk.price>1000?'Exclusif Gacha':`🪶 ${sk.price} plumes`)}</div>
-                <button type="button" class="btn ${eq?'btn-secondary':'btn-primary'}" style="width:100%;padding:.45rem;font-size:.82rem" ${eq||(!owned&&sk.price>1000)?'disabled':''} onclick="window.__buySkin('${sk.id}')">
-                    ${eq?'Équipé':(owned?'Équiper':(sk.price>1000?'Via Gacha':'Acheter'))}
+                <div class="shop-price">${owned?(eq?'✔ Équipé':'✔ Débloqué'):'🔒 Gacha uniquement'}</div>
+                <button type="button" class="btn ${eq?'btn-secondary':'btn-primary'}" style="width:100%;padding:.45rem;font-size:.82rem" ${eq||!owned?'disabled':''} onclick="window.__equipSkin('${sk.id}')">
+                    ${eq?'Équipé':(owned?'Équiper':'Verrouillé')}
                 </button>
             </div>
         </div>`;
@@ -476,19 +482,11 @@ function renderShop(){
     }).join('');
 }
 
-window.__buySkin=id=>{
-    const sk=SKINS.find(s=>s.id===id);if(!sk)return;
-    if(save.unlockedSkins.includes(id)){save.equippedSkin=id;persist();refreshUI();beep(700,.08,'sine',.06);return}
-    if(sk.price>1000)return;
-    if(save.feathers>=sk.price){save.feathers-=sk.price;save.unlockedSkins.push(id);save.equippedSkin=id;persist();refreshUI();beep(900,.12,'sine',.08)}
-    else alert("Pas assez de plumes d'obsidienne !");
+window.__equipSkin=id=>{
+    if(save.unlockedSkins.includes(id)){save.equippedSkin=id;persist();refreshUI();beep(700,.08,'sine',.06)}
 };
-window.__buyAcc=id=>{
-    const ac=ACCESSORIES.find(a=>a.id===id);if(!ac)return;
-    if(save.unlockedAcc.includes(id)){save.equippedAcc=id;persist();refreshUI();beep(750,.08,'sine',.06);return}
-    if(ac.price>1000)return;
-    if(save.feathers>=ac.price){save.feathers-=ac.price;save.unlockedAcc.push(id);save.equippedAcc=id;persist();refreshUI();beep(900,.12,'sine',.08)}
-    else alert("Pas assez de plumes d'obsidienne !");
+window.__equipAcc=id=>{
+    if(save.unlockedAcc.includes(id)){save.equippedAcc=id;persist();refreshUI();beep(750,.08,'sine',.06)}
 };
 window.__buyUpgrade=id=>{
     const up=UPGRADES.find(u=>u.id===id);if(!up||save.upgrades[id])return;
@@ -520,7 +518,6 @@ window.__pullGacha=count=>{
             if(!save.unlockedAcc.includes(drop.id)){save.unlockedAcc.push(drop.id);isNew=true}
         }
         if(!isNew){
-            // Remboursement partiel en plumes en cas de doublon
             const refund=rarity==='legendary'?40:(rarity==='epic'?20:(rarity==='rare'?10:5));
             save.feathers+=refund;
             results.push({drop,isNew:false,refund});
@@ -1000,7 +997,6 @@ function update(k){
         const cps=getIdleCPS();
         if(cps>0)gainIdleEssence(cps*dtSec,false,0,0);
 
-        // Apparition d'orbes bonus cliquables
         if(!goldenOrb){
             orbSpawnTimer-=k;
             if(orbSpawnTimer<=0){
