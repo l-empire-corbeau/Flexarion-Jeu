@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini-jeux gratuits en ligne : L'Arcade de crowMaster – Flexarion</title>
-    <meta name="description" content="Jouez gratuitement aux 3 mini-jeux de l'univers crowMaster : Le Vol du Corbeau, Le Duel des Runes (jeu de cartes) et L'Ascension du Nid. Débloquez des skins au marché et grimpez dans le classement !">
+    <meta name="description" content="Jouez gratuitement aux 3 mini-jeux de l'univers crowMaster : Le Vol du Corbeau, Le Nid d'Obsidienne (jeu Idle) et L'Ascension du Nid. Débloquez des skins au marché et grimpez dans le classement !">
     <link rel="canonical" href="https://flexarion-jeu.fr/jouer-en-ligne/">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Flexarion">
     <meta name="theme-color" content="#090d16">
-    <meta name="keywords" content="mini-jeu crowMaster, jeu en ligne gratuit, jeu de cartes corbeau, jouer en ligne, Flexarion, crowMaster, jeu navigateur">
+    <meta name="keywords" content="mini-jeu crowMaster, jeu idle gratuit, jeu de corbeau, jouer en ligne, Flexarion, crowMaster, jeu navigateur">
     <meta property="og:site_name" content="Flexarion">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:type" content="website">
     <meta property="og:title" content="L'Arcade de crowMaster – 3 mini-jeux gratuits">
-    <meta property="og:description" content="3 mini-jeux dans l'univers de crowMaster avec jeu de cartes, boutique de skins et classement !">
+    <meta property="og:description" content="3 mini-jeux dans l'univers de crowMaster avec jeu Idle, boutique de skins et classement !">
     <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
     <meta property="og:url" content="https://flexarion-jeu.fr/jouer-en-ligne/">
     <meta name="twitter:card" content="summary_large_image">
@@ -26,9 +26,9 @@
       "@context": "https://schema.org",
       "@type": "VideoGame",
       "name": "L'Arcade de crowMaster",
-      "description": "Collection de 3 mini-jeux gratuits dans l'univers de crowMaster avec jeu de cartes tactique, marché de personnalisation et classement.",
+      "description": "Collection de 3 mini-jeux gratuits dans l'univers de crowMaster avec jeu Idle, marché de personnalisation et classement.",
       "url": "https://flexarion-jeu.fr/jouer-en-ligne/",
-      "genre": ["Arcade", "Card Game"],
+      "genre": ["Arcade", "Idle"],
       "gamePlatform": "Navigateur web",
       "playMode": "SinglePlayer",
       "inLanguage": "fr-FR",
@@ -153,13 +153,13 @@
 
                             <div class="game-card">
                                 <div>
-                                    <span class="badge">Jeu 2 · Cartes</span>
-                                    <h3>Le Duel des Runes</h3>
-                                    <p>Affrontez les esprits du ciel avec vos cartes élémentaires : Ombre, Plume et Météore.</p>
+                                    <span class="badge">Jeu 2 · Idle / Clicker</span>
+                                    <h3>Le Nid d'Obsidienne</h3>
+                                    <p>Accumulez de l'Essence d'Obsidienne, recrutez des alliés et automatisez votre nid.</p>
                                 </div>
                                 <div>
-                                    <div class="rec">Record : <span id="rec-cards">0</span> pts</div>
-                                    <button type="button" class="btn btn-primary" style="width:100%" data-launch="cards">Jouer</button>
+                                    <div class="rec">Record : <span id="rec-idle">0</span> pts</div>
+                                    <button type="button" class="btn btn-primary" style="width:100%" data-launch="idle">Jouer</button>
                                 </div>
                             </div>
 
@@ -217,7 +217,7 @@
                         </div>
                         <div class="rank-controls">
                             <button type="button" class="tab-btn active" data-rank-game="flappy">Le Vol du Corbeau</button>
-                            <button type="button" class="tab-btn" data-rank-game="cards">Le Duel des Runes</button>
+                            <button type="button" class="tab-btn" data-rank-game="idle">Le Nid d'Obsidienne</button>
                             <button type="button" class="tab-btn" data-rank-game="climb">L'Ascension du Nid</button>
                         </div>
                         <table class="rank-table">
@@ -235,7 +235,7 @@
                 <p>Tous ces mini-jeux sont gratuits, sans téléchargement et jouables sur ordinateur comme sur mobile. Ils ont été imaginés dans l'univers de <strong>crowMaster</strong>, actuellement en développement par le studio Flexarion.</p>
                 <div class="howto">
                     <div><strong>1. Le Vol du Corbeau</strong>Faufilez-vous entre les rochers et esquivez les météores. Touchez l'écran ou appuyez sur Espace.</div>
-                    <div><strong>2. Le Duel des Runes</strong>Choisissez une carte : Ombre bat Plume, Plume bat Météore, Météore bat Ombre.</div>
+                    <div><strong>2. Le Nid d'Obsidienne</strong>Cliquez sur le corbeau pour récolter de l'Essence et achetez des améliorations automatiques.</div>
                     <div><strong>3. L'Ascension du Nid</strong>Votre corbeau rebondit automatiquement. Dirigez-le à gauche ou à droite pour grimper toujours plus haut.</div>
                     <div><strong>4. Marché & Classement</strong>Cumulez vos plumes d'obsidienne pour débloquer des apparences exclusives et dominer le classement.</div>
                 </div>
@@ -276,21 +276,28 @@ const DEFAULT_SAVE={
     equippedSkin:'classic',
     unlockedSkins:['classic'],
     upgrades:{magnet:false,shield:false,doubleFeather:false},
-    bests:{flappy:0,cards:0,climb:0},
+    bests:{flappy:0,idle:0,climb:0},
+    idleState:{essence:0,totalEssence:0,levels:[0,0,0,0]},
     leaderboards:{
         flappy:[{name:'Gardien d\'Obsidienne',score:45},{name:'Ombre du Nid',score:28},{name:'Plume Noire',score:15},{name:'Novice du Ciel',score:8}],
-        cards:[{name:'Oracle des Runes',score:55},{name:'Archimage Corbeau',score:34},{name:'Scribe Astral',score:18},{name:'Apprenti',score:9}],
-        climb:[{name:'Seigneur de la Cime',score:85},{name:'Veilleur des Branches',score:50},{name:'Grimpeur',score:25},{name:'Oisillon',score:12}]
+        idle:[{name:'Seigneur du Nid',score:250},{name:'Alchimiste Astral',score:140},{name:'Bâtisseur',score:75},{name:'Oisillon',score:25}],
+        climb:[{name:'Seigneur de la Cime',score:85},{name:'Veilleur des Branches',score:50},{name:'Grimpeur',score:25},{name:'Apprenti',score:12}]
     }
 };
 let save=JSON.parse(JSON.stringify(DEFAULT_SAVE));
 try{
-    const raw=localStorage.getItem('crowmaster_arcade_v2');
+    const raw=localStorage.getItem('crowmaster_arcade_v3');
     if(raw){
         const parsed=JSON.parse(raw);
-        save={...save,...parsed,bests:{...save.bests,...(parsed.bests||{})},upgrades:{...save.upgrades,...(parsed.upgrades||{})},leaderboards:{...save.leaderboards,...(parsed.leaderboards||{})}};
+        save={
+            ...save,...parsed,
+            bests:{...save.bests,...(parsed.bests||{})},
+            upgrades:{...save.upgrades,...(parsed.upgrades||{})},
+            idleState:{...save.idleState,...(parsed.idleState||{})},
+            leaderboards:{...save.leaderboards,...(parsed.leaderboards||{})}
+        };
     }else{
-        const oldRaw=localStorage.getItem('crowmaster_arcade_v1');
+        const oldRaw=localStorage.getItem('crowmaster_arcade_v2')||localStorage.getItem('crowmaster_arcade_v1');
         if(oldRaw){
             const p=JSON.parse(oldRaw);
             save.feathers=p.feathers||0;save.pseudo=p.pseudo||save.pseudo;save.equippedSkin=p.equippedSkin||'classic';
@@ -299,7 +306,7 @@ try{
         }
     }
 }catch(e){}
-function persist(){try{localStorage.setItem('crowmaster_arcade_v2',JSON.stringify(save))}catch(e){}}
+function persist(){try{localStorage.setItem('crowmaster_arcade_v3',JSON.stringify(save))}catch(e){}}
 
 // Catalogue du marché
 const SKINS=[
@@ -309,8 +316,8 @@ const SKINS=[
     {id:'crimson',name:'Phénix d\'Obsidienne',desc:'Forgé dans la braise des météores.',price:60,body:'#7f1d1d',wing:'#450a0a',glow:'rgba(248,113,113,.85)',beak:'#fdba74'}
 ];
 const UPGRADES=[
-    {id:'magnet',name:'Aimant à Plumes',desc:'Attire les plumes et offre +1 plume bonus à chaque victoire de manche au Duel des Runes.',price:20},
-    {id:'shield',name:'Bouclier Astral',desc:'Protège d\'un impact en vol et octroie +1 Cœur de vie au Duel des Runes !',price:40},
+    {id:'magnet',name:'Aimant à Plumes',desc:'Attire les plumes en vol et offre +25% de production idle dans Le Nid d\'Obsidienne.',price:20},
+    {id:'shield',name:'Bouclier Astral',desc:'Protège d\'un impact en vol et double la puissance de clic dans Le Nid d\'Obsidienne.',price:40},
     {id:'doubleFeather',name:'Alchimie d\'Obsidienne',desc:'Double les plumes gagnées dans votre bourse sur tous les mini-jeux.',price:55}
 ];
 const getSkin=()=>SKINS.find(s=>s.id===save.equippedSkin)||SKINS[0];
@@ -319,12 +326,13 @@ const getSkin=()=>SKINS.find(s=>s.id===save.equippedSkin)||SKINS[0];
 let activeGame='flappy';
 let currentRankGame='flappy';
 function switchTab(tab){
+    if(activeGame==='idle')persist();
     document.querySelectorAll('#main-tabs .tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
     $('view-menu').style.display=tab==='menu'?'block':'none';
     $('view-shop').style.display=tab==='shop'?'block':'none';
     $('view-rank').style.display=tab==='rank'?'block':'none';
     $('view-play').style.display='none';
-    if(state==='playing')state='paused';
+    if(state==='playing'&&activeGame!=='idle')state='paused';
     refreshUI();
 }
 document.querySelectorAll('#main-tabs .tab-btn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
@@ -334,7 +342,7 @@ function refreshUI(){
     $('display-pseudo').textContent=save.pseudo;
     $('input-pseudo').value=save.pseudo==='Corbeau Anonyme'?'':save.pseudo;
     $('rec-flappy').textContent=save.bests.flappy;
-    $('rec-cards').textContent=save.bests.cards;
+    $('rec-idle').textContent=save.bests.idle;
     $('rec-climb').textContent=save.bests.climb;
     renderShop();
     renderRank();
@@ -410,7 +418,7 @@ $('btn-save-pseudo').addEventListener('click',()=>{
     if(val){
         const old=save.pseudo;
         save.pseudo=val;
-        ['flappy','cards','climb'].forEach(g=>save.leaderboards[g].forEach(r=>{if(r.isPlayer||r.name===old)r.name=val}));
+        ['flappy','idle','climb'].forEach(g=>save.leaderboards[g].forEach(r=>{if(r.isPlayer||r.name===old)r.name=val}));
         persist();refreshUI();
     }
 });
@@ -422,7 +430,7 @@ function beep(f,d,type,vol,slide){if(muted)return;try{AC=AC||new (window.AudioCo
 // ---- MOTEUR DES 3 MINI-JEUX ----
 let state='ready',score=0,feathersRun=0,t=0,shake=0,overAt=0,hasShield=false;
 const crow={x:118,y:H/2,vx:0,vy:0,rot:0,wing:0};
-let parts=[];
+let parts=[],floatTexts=[];
 const stars=Array.from({length:70},()=>({x:Math.random()*W,y:Math.random()*(GROUND-120),r:Math.random()*1.4+.3,p:Math.random()*6.28}));
 const keys={left:false,right:false};
 let pointerTargetX=null;
@@ -431,32 +439,38 @@ let pointerTargetX=null;
 let speed=2.6,nextMeteor=240,pillars=[],items=[],meteors=[]; // Flappy
 let platforms=[],camY=0; // Climb
 
-// Variables Jeu 2 : Le Duel des Runes (Jeu de cartes)
-const RUNE_TYPES=[
-    {id:'ombre',name:'OMBRE',beats:'plume',col:'#8b4dff',bg:'#1e1338',icon:'🌑',desc:'Bat Plume'},
-    {id:'plume',name:'PLUME',beats:'meteore',col:'#38bdf8',bg:'#0c2a3e',icon:'🪶',desc:'Bat Météore'},
-    {id:'meteore',name:'MÉTÉORE',beats:'ombre',col:'#f97316',bg:'#3a1708',icon:'☄️',desc:'Bat Ombre'}
+// Configuration Jeu 2 : Le Nid d'Obsidienne (Idle / Clicker)
+const IDLE_UPGRADES=[
+    {name:'Corbeau Éclaireur',desc:'+1 Essence / clic',baseCost:15,mult:1.45,clickBonus:1,cpsBonus:0,icon:'🦅'},
+    {name:'Oisillon Collecteur',desc:'+2 Essence / sec',baseCost:30,mult:1.4,clickBonus:0,cpsBonus:2,icon:'🪶'},
+    {name:'Autel Runique',desc:'+12 Essence / sec',baseCost:140,mult:1.45,clickBonus:0,cpsBonus:12,icon:'🔮'},
+    {name:'Gardien Mythique',desc:'+65 Essence / sec',baseCost:600,mult:1.5,clickBonus:0,cpsBonus:65,icon:'🐉'}
 ];
-const FOES=['Ombre Errante','Golem de Basalte','Spectre des Cimes','Dragon d\'Obsidienne','Archimage Corbeau'];
-let cardGame={
-    hp:3,maxHp:3,streak:0,round:1,
-    foeName:'Ombre Errante',
-    playerCard:null,foeCard:null,
-    phase:'choose', // 'choose' | 'reveal'
-    revealTimer:0,
-    resultText:'',resultCol:'#fff',
-    hoverIdx:-1
-};
-// Rectangles des 3 cartes du joueur en bas de l'écran
-const CARD_RECTS=[
-    {x:32,y:455,w:126,h:185,typeIdx:0},
-    {x:177,y:455,w:126,h:185,typeIdx:1},
-    {x:322,y:455,w:126,h:185,typeIdx:2}
+const IDLE_BUTTONS=[
+    {x:24,y:380,w:432,h:66,idx:0},
+    {x:24,y:456,w:432,h:66,idx:1},
+    {x:24,y:532,w:432,h:66,idx:2},
+    {x:24,y:608,w:432,h:66,idx:3}
 ];
+let idlePulse=0,idleSaveTimer=0,idleFeatherProgress=0;
+function getIdleCost(idx){
+    const u=IDLE_UPGRADES[idx];
+    return Math.floor(u.baseCost*Math.pow(u.mult,save.idleState.levels[idx]||0));
+}
+function getIdleClickPower(){
+    const base=1+(save.idleState.levels[0]||0)*IDLE_UPGRADES[0].clickBonus;
+    return save.upgrades.shield?base*2:base;
+}
+function getIdleCPS(){
+    let cps=0;
+    for(let i=1;i<IDLE_UPGRADES.length;i++)cps+=(save.idleState.levels[i]||0)*IDLE_UPGRADES[i].cpsBonus;
+    return save.upgrades.magnet?Math.round(cps*1.25*10)/10:cps;
+}
 
-const total=()=>score+feathersRun*3;
+const total=()=>activeGame==='idle'?Math.floor(save.idleState.totalEssence/25):score+feathersRun*3;
 function rankTitle(s){return s<15?'Corbeau novice':s<35?'Plume aguerrie':s<65?'Maître des ciels':'Légende de crowMaster'}
 function burst(x,y,col,n,sp){for(let i=0;i<n;i++){const a=Math.random()*6.28,s=(Math.random()*.7+.3)*sp;parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-1,life:1,c:col,s:Math.random()*3+1.5})}}
+function addFloatText(txt,x,y,col){floatTexts.push({txt,x,y,vy:-1.4,life:1,col})}
 function circleRect(cx,cy,r,rx,ry,rw,rh){const nx=Math.max(rx,Math.min(cx,rx+rw)),ny=Math.max(ry,Math.min(cy,ry+rh));return (cx-nx)**2+(cy-ny)**2<r*r}
 
 function collectFeather(x,y,bonusCount=1){
@@ -499,78 +513,98 @@ function launchGame(gameId){
     $('view-shop').style.display='none';
     $('view-rank').style.display='none';
     $('view-play').style.display='block';
-    const titles={flappy:'Le Vol du Corbeau',cards:'Le Duel des Runes',climb:'L\'Ascension du Nid'};
+    const titles={flappy:'Le Vol du Corbeau',idle:'Le Nid d\'Obsidienne',climb:'L\'Ascension du Nid'};
     const hints={
         flappy:'Record : <strong id="best">0</strong> pts · <strong>Espace</strong> ou <strong>Clic</strong> pour voler',
-        cards:'Record : <strong id="best">0</strong> pts · <strong>Cliquez sur une carte</strong> ou touches <strong>1, 2, 3</strong>',
+        idle:'Record : <strong id="best">0</strong> pts · <strong>Cliquez sur le corbeau</strong> pour récolter de l\'Essence',
         climb:'Record : <strong id="best">0</strong> pts · <strong>Flèches ← →</strong> ou <strong>Glisser</strong> pour diriger le saut'
     };
     $('current-game-title').textContent=titles[gameId];
     $('game-controls-hint').innerHTML=hints[gameId];
     $('best').textContent=save.bests[gameId];
-    state='ready';
-    resetGame();
+    if(gameId==='idle'){
+        resetGame();
+        state='playing';
+        $('btn-play').textContent='Réinitialiser le Nid';
+    }else{
+        state='ready';
+        resetGame();
+    }
     cv.focus({preventScroll:true});
 }
 document.querySelectorAll('[data-launch]').forEach(b=>b.addEventListener('click',()=>launchGame(b.dataset.launch)));
 $('btn-back-menu').addEventListener('click',()=>switchTab('menu'));
 
 function resetGame(){
-    score=0;feathersRun=0;parts=[];shake=0;hasShield=save.upgrades.shield;pointerTargetX=null;
-    $('cta').style.display='none';$('btn-play').textContent='Jouer';
+    score=0;feathersRun=0;parts=[];floatTexts=[];shake=0;hasShield=save.upgrades.shield;pointerTargetX=null;
+    $('cta').style.display='none';
     if(activeGame==='flappy'){
+        $('btn-play').textContent='Jouer';
         crow.x=118;crow.y=H/2;crow.vx=0;crow.vy=0;crow.rot=0;
         pillars=[];items=[];meteors=[];speed=2.6;nextMeteor=260;
         spawnPillar(W+80);
-    }else if(activeGame==='cards'){
-        const maxHearts=save.upgrades.shield?4:3;
-        cardGame={
-            hp:maxHearts,maxHp:maxHearts,streak:0,round:1,
-            foeName:FOES[0],playerCard:null,foeCard:null,
-            phase:'choose',revealTimer:0,resultText:'',resultCol:'#fff',hoverIdx:-1
-        };
+    }else if(activeGame==='idle'){
+        $('btn-play').textContent='Réinitialiser le Nid';
+        crow.x=W/2;crow.y=245;crow.vx=0;crow.vy=0;crow.rot=0;
+        idleFeatherProgress=save.idleState.totalEssence%100;
     }else if(activeGame==='climb'){
+        $('btn-play').textContent='Jouer';
         crow.x=W/2;crow.y=GROUND-40;crow.vx=0;crow.vy=-11;crow.rot=0;
         platforms=[];items=[];camY=0;
         platforms.push({x:W/2-55,y:GROUND-10,w:110,type:'normal'});
         for(let i=1;i<11;i++)spawnPlatform(GROUND-10-i*68);
     }
 }
-function start(){resetGame();state='playing';$('btn-play').textContent='Rejouer';if(activeGame==='flappy')flap()}
+function start(){
+    if(activeGame==='idle'){
+        if(confirm('Réinitialiser la progression de votre Nid d\'Obsidienne (vos plumes de bourse et skins sont conservés) ?')){
+            save.idleState={essence:0,totalEssence:0,levels:[0,0,0,0]};
+            persist();resetGame();
+        }
+        return;
+    }
+    resetGame();state='playing';$('btn-play').textContent='Rejouer';if(activeGame==='flappy')flap();
+}
 function flap(){crow.vy=-7.3;crow.wing=1;beep(520,.07,'triangle',.05,760)}
 
-// Logique d'un tour du Jeu de Cartes
-function playRuneCard(idx){
-    if(state!=='playing'||activeGame!=='cards'||cardGame.phase!=='choose')return;
-    const pRune=RUNE_TYPES[idx];
-    const fRune=RUNE_TYPES[Math.floor(Math.random()*3)];
-    cardGame.playerCard=pRune;
-    cardGame.foeCard=fRune;
-    cardGame.phase='reveal';
-    cardGame.revealTimer=75; // ~1.25 seconde d'affichage du duel
+// Actions du jeu Idle
+function gainIdleEssence(amount,showFloating,fx,fy){
+    save.idleState.essence+=amount;
+    save.idleState.totalEssence+=amount;
+    idleFeatherProgress+=amount;
+    while(idleFeatherProgress>=100){
+        idleFeatherProgress-=100;
+        collectFeather(W/2,210,1);
+    }
+    const pts=total();
+    if(pts>save.bests.idle){
+        save.bests.idle=pts;
+        $('best').textContent=pts;
+        recordScoreToLeaderboard('idle',pts);
+    }
+    if(showFloating)addFloatText(`+${Math.round(amount*10)/10}`,fx,fy,'#7dd3fc');
+}
 
-    if(pRune.id===fRune.id){
-        cardGame.resultText='ÉGALITÉ !';
-        cardGame.resultCol='#ffd36b';
-        beep(440,.12,'triangle',.06);
-        burst(W/2,310,'#ffd36b',14,3.5);
-    }else if(pRune.beats===fRune.id){
-        cardGame.streak++;
-        const ptsGain=4+cardGame.streak*2;
-        score+=ptsGain;
-        const fGain=save.upgrades.magnet?2:1;
-        collectFeather(W/2,280,fGain);
-        cardGame.resultText=`VICTOIRE ! +${ptsGain} pts`;
-        cardGame.resultCol='#4ade80';
-        burst(W/2,240,pRune.col,24,5);
+function clickIdleCrow(pt){
+    const power=getIdleClickPower();
+    crow.wing=1;idlePulse=1;
+    beep(580,.06,'triangle',.05,820);
+    const fx=pt?pt.x:W/2+(Math.random()-.5)*40;
+    const fy=pt?pt.y:230;
+    burst(fx,fy,getSkin().beak,8,3.2);
+    gainIdleEssence(power,true,fx,fy-15);
+}
+
+function buyIdleUpgrade(idx){
+    const cost=getIdleCost(idx);
+    if(save.idleState.essence>=cost){
+        save.idleState.essence-=cost;
+        save.idleState.levels[idx]=(save.idleState.levels[idx]||0)+1;
+        beep(760,.1,'sine',.07,1040);
+        burst(W/2,380+idx*76+33,'#38bdf8',16,4);
+        persist();
     }else{
-        cardGame.hp--;
-        cardGame.streak=0;
-        shake=12;
-        cardGame.resultText='DÉFAITE ! -1 ❤️';
-        cardGame.resultCol='#ff6b6b';
-        beep(160,.25,'sawtooth',.09,70);
-        burst(W/2,360,'#ff6b6b',22,5);
+        beep(180,.08,'sawtooth',.04);
     }
 }
 
@@ -587,8 +621,11 @@ function spawnPlatform(y){
 function update(k){
     t+=k;
     if(shake>0)shake=Math.max(0,shake-.6*k);
+    if(idlePulse>0)idlePulse=Math.max(0,idlePulse-.08*k);
     for(const p of parts){p.x+=p.vx*k;p.y+=p.vy*k;p.vy+=.12*k;p.life-=.02*k}
     parts=parts.filter(p=>p.life>0);
+    for(const f of floatTexts){f.y+=f.vy*k;f.life-=.025*k}
+    floatTexts=floatTexts.filter(f=>f.life>0);
     if(crow.wing>0)crow.wing=Math.max(0,crow.wing-.06*k);
 
     if(state==='ready'){
@@ -631,19 +668,17 @@ function update(k){
         meteors=meteors.filter(m=>m.y<H+40&&m.x>-60);
     }
 
-    // --- JEU 2 : LE DUEL DES RUNES (CARTES) ---
-    else if(activeGame==='cards'){
-        if(cardGame.phase==='reveal'){
-            cardGame.revealTimer-=k;
-            if(cardGame.revealTimer<=0){
-                if(cardGame.hp<=0){die();return}
-                cardGame.phase='choose';
-                cardGame.playerCard=null;
-                cardGame.foeCard=null;
-                cardGame.round++;
-                cardGame.foeName=FOES[Math.min(FOES.length-1,Math.floor((cardGame.round-1)/3))];
-            }
+    // --- JEU 2 : LE NID D'OBSIDIENNE (IDLE) ---
+    else if(activeGame==='idle'){
+        crow.y=245+Math.sin(t*.05)*6;
+        crow.rot=Math.sin(t*.04)*.05;
+        const cps=getIdleCPS();
+        if(cps>0){
+            const dtSec=(k*16.667)/1000;
+            gainIdleEssence(cps*dtSec,false,0,0);
         }
+        idleSaveTimer+=k;
+        if(idleSaveTimer>=180){idleSaveTimer=0;persist()}
     }
 
     // --- JEU 3 : L'ASCENSION DU NID ---
@@ -691,10 +726,10 @@ function rockPoly(x,y,w,dir,len){
 }
 function mountains(off,base,amp,col,sp){ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(0,H);for(let x=0;x<=W+20;x+=20){const xx=x+off*sp;ctx.lineTo(x,base-Math.abs(Math.sin(xx*.011)*amp+Math.sin(xx*.027)*amp*.45))}ctx.lineTo(W,H);ctx.closePath();ctx.fill()}
 
-function drawCrow(){
+function drawCrow(scale=1){
     const sk=getSkin();
-    ctx.save();ctx.translate(crow.x,crow.y);ctx.rotate(crow.rot);
-    if(hasShield){ctx.strokeStyle='rgba(56,189,248,.75)';ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(0,0,26,0,6.28);ctx.stroke()}
+    ctx.save();ctx.translate(crow.x,crow.y);ctx.scale(scale,scale);ctx.rotate(crow.rot);
+    if(hasShield&&activeGame!=='idle'){ctx.strokeStyle='rgba(56,189,248,.75)';ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(0,0,26,0,6.28);ctx.stroke()}
     ctx.fillStyle=sk.wing;ctx.beginPath();ctx.moveTo(-12,0);ctx.lineTo(-30,-5);ctx.lineTo(-28,6);ctx.closePath();ctx.fill();
     ctx.fillStyle=sk.body;ctx.beginPath();ctx.ellipse(0,0,18,12,0,0,6.28);ctx.fill();
     const w=Math.sin(t*.5+(crow.wing>0?1:0))*(state==='playing'?1:.2)*(.5+crow.wing);
@@ -716,68 +751,51 @@ function drawFeatherItem(x,y){
 }
 function text(s,x,y,size,col,al){ctx.font='800 '+size+'px Inter,system-ui,sans-serif';ctx.textAlign=al||'center';ctx.lineWidth=Math.max(4,size/6);ctx.strokeStyle='rgba(4,6,14,.9)';ctx.strokeText(s,x,y);ctx.fillStyle=col||'#fff';ctx.fillText(s,x,y)}
 
-// Dessin d'une carte du Duel des Runes
-function drawCard(x,y,w,h,rune,hovered,faceDown){
-    ctx.save();
-    const lift=hovered?-10:0;
-    ctx.translate(x,y+lift);
+// Dessin de l'interface du jeu Idle
+function drawIdleArena(){
+    // Aura & Nid sous le corbeau
     const sk=getSkin();
-    ctx.fillStyle=faceDown?sk.body:rune.bg;
-    ctx.beginPath();ctx.roundRect(0,0,w,h,16);ctx.fill();
-    ctx.lineWidth=hovered?3:2;
-    ctx.strokeStyle=faceDown?sk.glow:(hovered?'#fff':rune.col);
-    ctx.stroke();
+    const auraR=72+idlePulse*18+Math.sin(t*.05)*4;
+    const g=ctx.createRadialGradient(W/2,245,10,W/2,245,auraR);
+    g.addColorStop(0,sk.glow);g.addColorStop(1,'rgba(15,23,42,0)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(W/2,245,auraR,0,6.28);ctx.fill();
 
-    if(faceDown){
-        // Dos de carte aux couleurs du skin équipé
-        ctx.strokeStyle='rgba(255,255,255,.15)';ctx.lineWidth=1.5;
-        ctx.beginPath();ctx.roundRect(10,10,w-20,h-20,10);ctx.stroke();
-        ctx.font='38px serif';ctx.textAlign='center';ctx.fillStyle=sk.beak;
-        ctx.fillText('🪶',w/2,h/2+12);
-    }else{
-        // Face visible de la rune
-        ctx.fillStyle=rune.col;
-        ctx.beginPath();ctx.arc(w/2,h*0.36,30,0,6.28);ctx.fill();
-        ctx.font='32px serif';ctx.textAlign='center';
-        ctx.fillText(rune.icon,w/2,h*0.36+11);
-        text(rune.name,w/2,h*0.68,16,'#fff');
-        text(rune.desc,w/2,h*0.84,12,'#cbd5e1');
-    }
-    ctx.restore();
-}
+    // Nid d'obsidienne
+    ctx.fillStyle='#1e293b';ctx.beginPath();ctx.ellipse(W/2,282,66,18,0,0,6.28);ctx.fill();
+    ctx.strokeStyle='#8b4dff';ctx.lineWidth=2;ctx.stroke();
 
-function drawCardArena(){
-    // Zone Adversaire (Haut)
-    text(`Manche ${cardGame.round} · ${cardGame.foeName}`,W/2,118,17,'#94a3b8');
-    if(cardGame.streak>1)text(`🔥 Série x${cardGame.streak}`,W/2,142,15,'#fbbf24');
+    // Corbeau cliquable agrandi
+    drawCrow(2.1+idlePulse*.25);
 
-    // Carte de l'adversaire au centre-haut
-    const fW=120,fH=165,fX=W/2-fW/2,fY=158;
-    if(cardGame.phase==='reveal'&&cardGame.foeCard){
-        drawCard(fX,fY,fW,fH,cardGame.foeCard,false,false);
-    }else{
-        drawCard(fX,fY,fW,fH,null,false,true);
-    }
+    // Compteurs Essence & CPS
+    text(`${Math.floor(save.idleState.essence)} Essence`,W/2,126,28,'#7dd3fc');
+    text(`+${getIdleCPS()} / sec · +${getIdleClickPower()} / clic`,W/2,154,15,'#cbd5e1');
 
-    // Message central de résultat ou consigne
-    if(cardGame.phase==='reveal'){
-        text(cardGame.resultText,W/2,365,26,cardGame.resultCol);
-    }else{
-        text('Choisissez une carte ci-dessous',W/2,365,17,'#cfe0ff');
-        text('Ombre > Plume > Météore > Ombre',W/2,388,13,'#94a3b8');
-    }
+    // Barre de progression vers la prochaine plume d'obsidienne
+    const barW=260,barH=10,bx=W/2-barW/2,by=326;
+    ctx.fillStyle='rgba(15,23,42,.85)';ctx.beginPath();ctx.roundRect(bx,by,barW,barH,5);ctx.fill();
+    ctx.fillStyle='#8b4dff';ctx.beginPath();ctx.roundRect(bx,by,barW*(idleFeatherProgress/100),barH,5);ctx.fill();
+    text(`Prochaine plume : ${Math.floor(idleFeatherProgress)}%`,W/2,354,13,'#d9c2ff');
 
-    // Cœurs de vie du joueur
-    let heartsStr='';
-    for(let i=0;i<cardGame.maxHp;i++)heartsStr+=(i<cardGame.hp?'❤️ ':'🖤 ');
-    text(heartsStr.trim(),W/2,430,20,'#fff');
+    // Les 4 boutons d'amélioration
+    IDLE_BUTTONS.forEach(b=>{
+        const u=IDLE_UPGRADES[b.idx];
+        const lvl=save.idleState.levels[b.idx]||0;
+        const cost=getIdleCost(b.idx);
+        const canAfford=save.idleState.essence>=cost;
 
-    // Les 3 cartes jouables en bas
-    CARD_RECTS.forEach((r,idx)=>{
-        const rune=RUNE_TYPES[r.typeIdx];
-        const isSelected=cardGame.phase==='reveal'&&cardGame.playerCard&&cardGame.playerCard.id===rune.id;
-        const isHover=cardGame.phase==='choose'&&cardGame.hoverIdx===idx;
-        drawCard(r.x,r.y,r.w,r.h,rune,isHover||isSelected,false);
+        ctx.fillStyle=canAfford?'rgba(30,41,59,.92)':'rgba(15,23,42,.75)';
+        ctx.beginPath();ctx.roundRect(b.x,b.y,b.w,b.h,14);ctx.fill();
+        ctx.lineWidth=1.8;
+        ctx.strokeStyle=canAfford?'#38bdf8':'rgba(148,163,184,.22)';
+        ctx.stroke();
+
+        ctx.font='26px serif';ctx.textAlign='left';
+        ctx.fillText(u.icon,b.x+14,b.y+42);
+
+        text(`${u.name} (Niv. ${lvl})`,b.x+54,b.y+28,15,'#fff','left');
+        text(u.desc,b.x+54,b.y+50,13,'#94a3b8','left');
+        text(`${cost} ✨`,b.x+b.w-16,b.y+39,16,canAfford?'#4ade80':'#64748b','right');
     });
 }
 
@@ -799,8 +817,8 @@ function draw(){
         ctx.fillStyle='#0b1128';ctx.fillRect(-20,GROUND+10,W+40,H);ctx.fillStyle='#161f40';
         for(let x=-((t*speed)%40);x<W+40;x+=40){ctx.beginPath();ctx.moveTo(x,GROUND+10);ctx.lineTo(x+20,GROUND-6);ctx.lineTo(x+40,GROUND+10);ctx.closePath();ctx.fill()}
         drawCrow();
-    }else if(activeGame==='cards'){
-        if(state==='playing'||state==='paused')drawCardArena();
+    }else if(activeGame==='idle'){
+        drawIdleArena();
     }else if(activeGame==='climb'){
         for(const p of platforms){
             ctx.fillStyle=p.vx?'#38bdf8':'#334155';
@@ -811,7 +829,9 @@ function draw(){
         drawCrow();
     }
 
-    for(const p of parts){ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.c;ctx.fillRect(p.x,p.y,p.s,p.s)}ctx.globalAlpha=1;ctx.restore();
+    for(const p of parts){ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.c;ctx.fillRect(p.x,p.y,p.s,p.s)}ctx.globalAlpha=1;
+    for(const f of floatTexts){ctx.globalAlpha=Math.max(0,f.life);text(f.txt,f.x,f.y,20,f.col)}ctx.globalAlpha=1;
+    ctx.restore();
 
     if(state==='playing'||state==='paused'){
         text(String(total()),W/2,78,56);
@@ -819,10 +839,10 @@ function draw(){
         text('+'+feathersRun,48,48,22,'#d9c2ff','left');
     }
     if(state==='ready'){
-        const names={flappy:'LE VOL DU CORBEAU',cards:'LE DUEL DES RUNES',climb:'L’ASCENSION DU NID'};
+        const names={flappy:'LE VOL DU CORBEAU',idle:'LE NID D’OBSIDIENNE',climb:'L’ASCENSION DU NID'};
         const subs={
             flappy:'Touchez ou appuyez sur Espace',
-            cards:'Battez l’élément adverse avec vos cartes',
+            idle:'Cliquez sur le corbeau pour produire',
             climb:'Glissez ou utilisez ← →'
         };
         text(names[activeGame],W/2,240,32);
@@ -856,10 +876,12 @@ function press(pt){
     if(state==='paused'){state='playing';return}
     if(state==='playing'){
         if(activeGame==='flappy')flap();
-        else if(activeGame==='cards'&&pt){
-            CARD_RECTS.forEach((r,idx)=>{
-                if(pt.x>=r.x&&pt.x<=r.x+r.w&&pt.y>=r.y&&pt.y<=r.y+r.h)playRuneCard(idx);
-            });
+        else if(activeGame==='idle'){
+            if(pt){
+                const btn=IDLE_BUTTONS.find(b=>pt.x>=b.x&&pt.x<=b.x+b.w&&pt.y>=b.y&&pt.y<=b.y+b.h);
+                if(btn)buyIdleUpgrade(btn.idx);
+                else if(pt.y<365)clickIdleCrow(pt);
+            }else clickIdleCrow();
         }
         else if(activeGame==='climb'&&pt)pointerTargetX=pt.x;
     }
@@ -868,9 +890,6 @@ function press(pt){
 cv.addEventListener('pointerdown',e=>{e.preventDefault();cv.focus({preventScroll:true});press(getCanvasCoords(e))});
 cv.addEventListener('pointermove',e=>{
     const pt=getCanvasCoords(e);
-    if(state==='playing'&&activeGame==='cards'){
-        cardGame.hoverIdx=CARD_RECTS.findIndex(r=>pt.x>=r.x&&pt.x<=r.x+r.w&&pt.y>=r.y&&pt.y<=r.y+r.h);
-    }
     if(state==='playing'&&activeGame==='climb'&&e.buttons>0)pointerTargetX=pt.x;
 });
 cv.addEventListener('pointerup',()=>{pointerTargetX=null});
@@ -878,15 +897,16 @@ cv.addEventListener('pointerup',()=>{pointerTargetX=null});
 window.addEventListener('keydown',e=>{
     if(e.code==='ArrowLeft'||e.code==='KeyA')keys.left=true;
     if(e.code==='ArrowRight'||e.code==='KeyD')keys.right=true;
-    if($('view-play').style.display==='block'&&state==='playing'&&activeGame==='cards'){
-        if(e.code==='Digit1'||e.code==='Numpad1')playRuneCard(0);
-        if(e.code==='Digit2'||e.code==='Numpad2')playRuneCard(1);
-        if(e.code==='Digit3'||e.code==='Numpad3')playRuneCard(2);
+    if($('view-play').style.display==='block'&&state==='playing'&&activeGame==='idle'){
+        if(e.code==='Digit1'||e.code==='Numpad1')buyIdleUpgrade(0);
+        if(e.code==='Digit2'||e.code==='Numpad2')buyIdleUpgrade(1);
+        if(e.code==='Digit3'||e.code==='Numpad3')buyIdleUpgrade(2);
+        if(e.code==='Digit4'||e.code==='Numpad4')buyIdleUpgrade(3);
     }
     if(e.code==='Space'||e.code==='ArrowUp'||e.code==='KeyW'){
         if($('view-play').style.display==='block'&&(document.activeElement===cv||document.activeElement===document.body)){e.preventDefault();press()}
     }
-    if(e.code==='KeyP'&&$('view-play').style.display==='block')state=state==='playing'?'paused':(state==='paused'?'playing':state);
+    if(e.code==='KeyP'&&$('view-play').style.display==='block'&&activeGame!=='idle')state=state==='playing'?'paused':(state==='paused'?'playing':state);
 });
 window.addEventListener('keyup',e=>{
     if(e.code==='ArrowLeft'||e.code==='KeyA')keys.left=false;
