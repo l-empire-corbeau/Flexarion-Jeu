@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini-jeux gratuits en ligne : L'Arcade de crowMaster – Flexarion</title>
-    <meta name="description" content="Jouez gratuitement aux 3 mini-jeux de l'univers crowMaster : Le Vol du Corbeau, Le Nid d'Obsidienne (jeu Idle complet avec prestige et quêtes) et L'Ascension du Nid. Gacha exclusif de skins et accessoires !">
+    <meta name="description" content="Jouez gratuitement aux 3 mini-jeux de l'univers crowMaster : Le Vol du Corbeau, Le Nid d'Obsidienne (jeu Idle optimisé avec prestige) et L'Ascension du Nid. Gacha exclusif de skins et accessoires !">
     <link rel="canonical" href="https://flexarion-jeu.fr/jouer-en-ligne/">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Flexarion">
@@ -14,7 +14,7 @@
     <meta property="og:locale" content="fr_FR">
     <meta property="og:type" content="website">
     <meta property="og:title" content="L'Arcade de crowMaster – 3 mini-jeux gratuits">
-    <meta property="og:description" content="Jeu Idle complet avec prestige, quêtes, gacha exclusif de skins et accessoires dans l'univers de crowMaster !">
+    <meta property="og:description" content="Jeu Idle optimisé avec prestige, quêtes, gacha exclusif de skins et accessoires dans l'univers de crowMaster !">
     <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
     <meta property="og:url" content="https://flexarion-jeu.fr/jouer-en-ligne/">
     <meta name="twitter:card" content="summary_large_image">
@@ -124,7 +124,7 @@
         <section class="hero small"><i class="orb a"></i><i class="orb b"></i>
             <span class="pill">L'Arcade de crowMaster</span>
             <h1>Mini-jeux <span class="grad">en ligne</span></h1>
-            <p class="lead">Développez votre Nid d'Obsidienne, invoquez des skins et accessoires exclusifs au Gacha et grimpez dans le classement.</p>
+            <p class="lead">Développez votre Nid d'Obsidienne, gérez vos Renaissances stratégiques et invoquez des skins et accessoires au Gacha.</p>
         </section>
 
         <div class="wrap">
@@ -164,9 +164,9 @@
 
                             <div class="game-card" style="border-color:rgba(139,77,255,.5)">
                                 <div>
-                                    <span class="badge">Jeu 2 · Idle Complet</span>
+                                    <span class="badge">Jeu 2 · Idle Équilibré</span>
                                     <h3>Le Nid d'Obsidienne</h3>
-                                    <p>Bâtiments, recherches, compétences actives, quêtes et prestige pour farmer des plumes.</p>
+                                    <p>Bâtiments, recherches, sorts, quêtes et renaissances pour farmer des plumes.</p>
                                 </div>
                                 <div>
                                     <div class="rec">Record : <span id="rec-idle">0</span> pts</div>
@@ -317,12 +317,12 @@
 (()=>{
 "use strict";
 const W=480,H=720,GROUND=H-56;
+const MAX_PARTICLES=120; // Limite stricte anti-lag / anti-crash CPU
 const cv=document.getElementById('c'),ctx=cv.getContext('2d');
 const $=id=>document.getElementById(id);
 function fit(){const r=Math.min(window.devicePixelRatio||1,2);cv.width=W*r;cv.height=H*r;ctx.setTransform(r,0,0,r,0,0)}
 fit();window.addEventListener('resize',fit);
 
-// ---- CATALOGUES (12 SKINS + 8 ACCESSOIRES : EXCLUSIFS GACHA) ----
 const SKINS=[
     {id:'classic',name:'Corbeau d\'Obsidienne',desc:'Le plumage nocturne originel.',rarity:'common',body:'#1b2440',wing:'#0f1528',glow:'rgba(120,170,255,.45)',beak:'#f2b240'},
     {id:'ash',name:'Corbeau des Cendres',desc:'Plumes gris ardoise des terres brûlées.',rarity:'common',body:'#334155',wing:'#1e293b',glow:'rgba(148,163,184,.5)',beak:'#cbd5e1'},
@@ -355,7 +355,6 @@ const UPGRADES=[
     {id:'doubleFeather',name:'Alchimie d\'Obsidienne',desc:'Double toutes les plumes gagnées dans votre bourse.',price:75}
 ];
 
-// ---- SAUVEGARDE ----
 const DEFAULT_SAVE={
     feathers:100,
     pseudo:'Corbeau Anonyme',
@@ -383,7 +382,7 @@ const DEFAULT_SAVE={
 };
 let save=JSON.parse(JSON.stringify(DEFAULT_SAVE));
 try{
-    const raw=localStorage.getItem('crowmaster_arcade_v6');
+    const raw=localStorage.getItem('crowmaster_arcade_v7');
     if(raw){
         const p=JSON.parse(raw);
         save={
@@ -395,12 +394,11 @@ try{
         };
     }
 }catch(e){}
-function persist(){try{localStorage.setItem('crowmaster_arcade_v6',JSON.stringify(save))}catch(e){}}
+function persist(){try{localStorage.setItem('crowmaster_arcade_v7',JSON.stringify(save))}catch(e){}}
 
 const getSkin=()=>SKINS.find(s=>s.id===save.equippedSkin)||SKINS[0];
 const getAcc=()=>save.equippedAcc||'none';
 
-// ---- NAVIGATION ----
 let activeGame='flappy',currentRankGame='flappy',currentIdleTab='buildings',buyMultiplier=1;
 
 function switchTab(tab){
@@ -427,7 +425,6 @@ function refreshUI(){
     if(activeGame==='idle')renderIdlePanel();
 }
 
-// ---- COLLECTION (EXCLUSIF GACHA) & AMÉLIORATIONS ----
 function renderShop(){
     $('acc-progress').textContent=`${save.unlockedAcc.length} / ${ACCESSORIES.length} débloqués`;
     $('skin-progress').textContent=`${save.unlockedSkins.length} / ${SKINS.length} débloqués`;
@@ -482,12 +479,8 @@ function renderShop(){
     }).join('');
 }
 
-window.__equipSkin=id=>{
-    if(save.unlockedSkins.includes(id)){save.equippedSkin=id;persist();refreshUI();beep(700,.08,'sine',.06)}
-};
-window.__equipAcc=id=>{
-    if(save.unlockedAcc.includes(id)){save.equippedAcc=id;persist();refreshUI();beep(750,.08,'sine',.06)}
-};
+window.__equipSkin=id=>{if(save.unlockedSkins.includes(id)){save.equippedSkin=id;persist();refreshUI();beep(700,.08,'sine',.06)}};
+window.__equipAcc=id=>{if(save.unlockedAcc.includes(id)){save.equippedAcc=id;persist();refreshUI();beep(750,.08,'sine',.06)}};
 window.__buyUpgrade=id=>{
     const up=UPGRADES.find(u=>u.id===id);if(!up||save.upgrades[id])return;
     if(save.feathers>=up.price){save.feathers-=up.price;save.upgrades[id]=true;persist();refreshUI();beep(950,.15,'sine',.08)}
@@ -496,37 +489,28 @@ window.__buyUpgrade=id=>{
 
 window.__pullGacha=count=>{
     const cost=count===1?50:500;
-    if(save.feathers<cost){alert("Pas assez de plumes d'obsidienne ! Jouez au Nid d'Obsidienne pour en récolter davantage.");return}
+    if(save.feathers<cost){alert("Pas assez de plumes d'obsidienne !");return}
     save.feathers-=cost;
-
     const allPool=[
         ...SKINS.filter(s=>s.id!=='classic').map(s=>({...s,kind:'Skin'})),
         ...ACCESSORIES.filter(a=>a.id!=='none').map(a=>({...a,kind:'Accessoire'}))
     ];
-
     let results=[];
     for(let i=0;i<count;i++){
         const r=Math.random()*100;
         let rarity=r<3?'legendary':(r<15?'epic':(r<45?'rare':'common'));
         const candidates=allPool.filter(x=>x.rarity===rarity);
         const drop=candidates[Math.floor(Math.random()*candidates.length)];
-
         let isNew=false;
-        if(drop.kind==='Skin'){
-            if(!save.unlockedSkins.includes(drop.id)){save.unlockedSkins.push(drop.id);isNew=true}
-        }else{
-            if(!save.unlockedAcc.includes(drop.id)){save.unlockedAcc.push(drop.id);isNew=true}
-        }
+        if(drop.kind==='Skin'){if(!save.unlockedSkins.includes(drop.id)){save.unlockedSkins.push(drop.id);isNew=true}}
+        else{if(!save.unlockedAcc.includes(drop.id)){save.unlockedAcc.push(drop.id);isNew=true}}
         if(!isNew){
             const refund=rarity==='legendary'?40:(rarity==='epic'?20:(rarity==='rare'?10:5));
             save.feathers+=refund;
             results.push({drop,isNew:false,refund});
-        }else{
-            results.push({drop,isNew:true,refund:0});
-        }
+        }else{results.push({drop,isNew:true,refund:0})}
     }
     persist();refreshUI();
-
     $('gacha-modal').style.display='block';
     $('gacha-result-title').textContent=`✨ Résultat du Tirage (${count} ticket${count>1?'s':''})`;
     $('gacha-result-content').innerHTML=results.map(res=>`
@@ -537,7 +521,6 @@ window.__pullGacha=count=>{
     beep(1080,.22,'triangle',.1);
 };
 
-// ---- CLASSEMENT ----
 function recordScoreToLeaderboard(game,pts){
     if(pts<=0)return;
     const list=save.leaderboards[game];
@@ -570,11 +553,9 @@ $('btn-save-pseudo').addEventListener('click',()=>{
     }
 });
 
-// ---- AUDIO ----
 let muted=false,AC=null;
 function beep(f,d,type,vol,slide){if(muted)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=type||'triangle';o.frequency.setValueAtTime(f,AC.currentTime);if(slide)o.frequency.exponentialRampToValueAtTime(Math.max(30,slide),AC.currentTime+d);g.gain.setValueAtTime(vol||.07,AC.currentTime);g.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+d);o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}}
 
-// ---- CONFIGURATION COMPLÈTE DU JEU IDLE ----
 const IDLE_BUILDINGS=[
     {name:'Corbeau Éclaireur',desc:'+2 Essence / clic',baseCost:15,mult:1.38,clickBonus:2,cpsBonus:0,icon:'🦅'},
     {name:'Oisillon Collecteur',desc:'+3 Essence / sec',baseCost:25,mult:1.35,clickBonus:0,cpsBonus:3,icon:'🪶'},
@@ -636,10 +617,11 @@ function getIdleCPS(){
 }
 function getEssencePerFeather(){
     const reduction=Math.min(0.5,(save.idleState.techs[2]||0)*0.05);
-    return Math.floor(150*(1-reduction));
+    const baseReq=150*(1-reduction);
+    // Courbe d'équilibrage exponentielle : chaque plume demande de plus en plus d'essence
+    return Math.floor(baseReq*Math.pow(1.08,feathersRun));
 }
 
-// Gestion des onglets du panneau Idle
 document.querySelectorAll('.idle-tab-btn').forEach(btn=>btn.addEventListener('click',()=>{
     document.querySelectorAll('.idle-tab-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
@@ -797,7 +779,6 @@ function fmtNum(n){
     return Math.floor(n);
 }
 
-// ---- MOTEUR DES 3 MINI-JEUX ----
 let state='ready',score=0,feathersRun=0,t=0,shake=0,overAt=0,hasShield=false;
 const crow={x:118,y:H/2,vx:0,vy:0,rot:0,wing:0};
 let parts=[],floatTexts=[];
@@ -811,8 +792,17 @@ let idlePulse=0,idleSaveTimer=0,idleFeatherProgress=0,idleUiTick=0;
 
 const total=()=>activeGame==='idle'?Math.floor(save.idleState.totalEssence/50):score+feathersRun*3;
 function rankTitle(s){return s<15?'Corbeau novice':s<35?'Plume aguerrie':s<65?'Maître des ciels':'Légende de crowMaster'}
-function burst(x,y,col,n,sp){for(let i=0;i<n;i++){const a=Math.random()*6.28,s=(Math.random()*.7+.3)*sp;parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-1,life:1,c:col,s:Math.random()*3+1.5})}}
-function addFloatText(txt,x,y,col){floatTexts.push({txt,x,y,vy:-1.4,life:1,col})}
+function burst(x,y,col,n,sp){
+    for(let i=0;i<n;i++){
+        if(parts.length>=MAX_PARTICLES) parts.shift(); // Évite l'accumulation excessive et le crash CPU
+        const a=Math.random()*6.28,s=(Math.random()*.7+.3)*sp;
+        parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-1,life:1,c:col,s:Math.random()*3+1.5});
+    }
+}
+function addFloatText(txt,x,y,col){
+    if(floatTexts.length>20) floatTexts.shift();
+    floatTexts.push({txt,x,y,vy:-1.4,life:1,col});
+}
 function circleRect(cx,cy,r,rx,ry,rw,rh){const nx=Math.max(rx,Math.min(cx,rx+rw)),ny=Math.max(ry,Math.min(cy,ry+rh));return (cx-nx)**2+(cy-ny)**2<r*r}
 
 function collectFeather(x,y,bonusCount=1){
@@ -821,11 +811,11 @@ function collectFeather(x,y,bonusCount=1){
     save.feathers+=bonusCount*mult;
     $('wallet-count').textContent=save.feathers;
     beep(880,.09,'sine',.07);setTimeout(()=>beep(1320,.12,'sine',.06),70);
-    burst(x,y,'#b57bff',14,4);
+    burst(x,y,'#b57bff',10,4);
 }
 
 function triggerHit(){
-    if(hasShield){hasShield=false;shake=10;beep(300,.2,'sine',.1,600);burst(crow.x,crow.y,'#38bdf8',22,5);return false}
+    if(hasShield){hasShield=false;shake=10;beep(300,.2,'sine',.1,600);burst(crow.x,crow.y,'#38bdf8',15,5);return false}
     return true;
 }
 
@@ -833,7 +823,7 @@ function die(){
     if(state!=='playing')return;
     state='over';overAt=t;shake=14;
     beep(120,.35,'sawtooth',.1,40);
-    burst(W/2,H/2,getSkin().body,26,6);
+    burst(W/2,H/2,getSkin().body,20,6);
     const s=total();
     if(s>save.bests[activeGame])save.bests[activeGame]=s;
     recordScoreToLeaderboard(activeGame,s);
@@ -925,7 +915,7 @@ function clickIdleCrow(pt){
     beep(580,.06,'triangle',.05,820);
     const fx=pt?pt.x:W/2+(Math.random()-.5)*40;
     const fy=pt?pt.y:340;
-    burst(fx,fy,getSkin().beak,8,3.2);
+    burst(fx,fy,getSkin().beak,6,3);
     gainIdleEssence(power,true,fx,fy-15);
 }
 
@@ -937,14 +927,14 @@ function spawnPlatform(y){
     if(Math.random()<.28)items.push({x:x+w/2,y:y-24,ph:Math.random()*6,got:false});
 }
 
-// ---- UPDATE ----
 function update(k){
     t+=k;
     if(shake>0)shake=Math.max(0,shake-.6*k);
     if(idlePulse>0)idlePulse=Math.max(0,idlePulse-.08*k);
-    for(const p of parts){p.x+=p.vx*k;p.y+=p.vy*k;p.vy+=.12*k;p.life-=.02*k}
+    
+    for(const p of parts){p.x+=p.vx*k;p.y+=p.vy*k;p.vy+=.12*k;p.life-=.03*k}
     parts=parts.filter(p=>p.life>0);
-    for(const f of floatTexts){f.y+=f.vy*k;f.life-=.025*k}
+    for(const f of floatTexts){f.y+=f.vy*k;f.life-=.03*k}
     floatTexts=floatTexts.filter(f=>f.life>0);
     if(crow.wing>0)crow.wing=Math.max(0,crow.wing-.06*k);
 
@@ -1025,7 +1015,7 @@ function update(k){
             if(p.vx){p.x+=p.vx*k;if(p.x<10||p.x+p.w>W-10)p.vx*=-1}
             if(crow.vy>0&&crow.x+12>p.x&&crow.x-12<p.x+p.w&&crow.y+12>=p.y&&crow.y+12<=p.y+18){
                 crow.vy=-10.8;crow.wing=1;beep(460,.07,'triangle',.05,680);
-                burst(crow.x,p.y,'#7dd3fc',6,2.5);
+                burst(crow.x,p.y,'#7dd3fc',5,2);
             }
         }
         if(crow.y<H*0.42){
@@ -1049,7 +1039,6 @@ function update(k){
     }
 }
 
-// ---- DESSIN CORBEAU + ACCESSOIRES ----
 function drawAccessory(acc){
     if(acc==='scarf'){
         ctx.fillStyle='#ef4444';ctx.beginPath();ctx.roundRect(2,4,14,6,3);ctx.fill();
@@ -1115,14 +1104,11 @@ function drawIdleArena(){
     g.addColorStop(1,'rgba(15,23,42,0)');
     ctx.fillStyle=g;ctx.beginPath();ctx.arc(W/2,360,auraR,0,6.28);ctx.fill();
 
-    // Nid d'obsidienne
     ctx.fillStyle='#1e293b';ctx.beginPath();ctx.ellipse(W/2,415,105,28,0,0,6.28);ctx.fill();
     ctx.strokeStyle=frenzyTimer>0?'#facc15':'#8b4dff';ctx.lineWidth=3;ctx.stroke();
 
-    // Corbeau géant cliquable
     drawCrow(2.9+idlePulse*.3);
 
-    // Orbe dorée bonus si présente
     if(goldenOrb){
         const pulse=1+Math.sin(t*.2)*.15;
         ctx.save();ctx.translate(goldenOrb.x,goldenOrb.y);ctx.scale(pulse,pulse);
@@ -1133,18 +1119,16 @@ function drawIdleArena(){
         ctx.restore();
     }
 
-    // HUD Essence
     text(`${fmtNum(save.idleState.essence)} Essence`,W/2,145,36,'#7dd3fc');
     text(`+${fmtNum(getIdleCPS())} / sec · +${fmtNum(getIdleClickPower())} / clic`,W/2,178,17,'#cbd5e1');
     if(frenzyTimer>0)text(`🔥 FRÉNÉSIE x3 (${Math.ceil(frenzyTimer)}s) 🔥`,W/2,208,18,'#facc15');
 
-    // Jauge de progression vers la prochaine plume
     const req=getEssencePerFeather();
     const pct=Math.min(100,(idleFeatherProgress/req)*100);
     const barW=310,barH=14,bx=W/2-barW/2,by=500;
     ctx.fillStyle='rgba(15,23,42,.9)';ctx.beginPath();ctx.roundRect(bx,by,barW,barH,7);ctx.fill();
     ctx.fillStyle='#8b4dff';ctx.beginPath();ctx.roundRect(bx,by,barW*(pct/100),barH,7);ctx.fill();
-    text(`Prochaine plume d'obsidienne : ${Math.floor(pct)}%`,W/2,536,15,'#d9c2ff');
+    text(`Prochaine plume (${fmtNum(req)} ess.) : ${Math.floor(pct)}%`,W/2,536,15,'#d9c2ff');
     text(`Cliquez sur le corbeau ou utilisez les onglets ci-dessous !`,W/2,645,14,'#94a3b8');
 }
 
