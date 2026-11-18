@@ -3,15 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jouer en ligne à crowMaster | Flexarion</title>
-    <meta name="description" content="Jouez en ligne à crowMaster, le jeu d'action-aventure du studio Flexarion. Le jeu est en développement : inscrivez-vous à la bêta pour être informé de sa disponibilité.">
+    <title>Mini-jeux gratuits en ligne : L'Arcade de crowMaster – Flexarion</title>
+    <meta name="description" content="Jouez gratuitement aux 3 mini-jeux de l'univers crowMaster : Le Vol du Corbeau, Chasse aux Plumes et L'Ascension du Nid. Débloquez des skins au marché et grimpez dans le classement !">
     <link rel="canonical" href="https://flexarion-jeu.fr/jouer-en-ligne/">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Flexarion">
     <meta name="theme-color" content="#090d16">
+    <meta name="keywords" content="mini-jeu crowMaster, jeu en ligne gratuit, jeu de corbeau, jouer en ligne, Flexarion, crowMaster, jeu navigateur">
+    <meta property="og:site_name" content="Flexarion">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="L'Arcade de crowMaster – 3 mini-jeux gratuits">
+    <meta property="og:description" content="3 mini-jeux dans l'univers de crowMaster avec boutique de skins et classement !">
+    <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
+    <meta property="og:url" content="https://flexarion-jeu.fr/jouer-en-ligne/">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="/assets/style/style.css">
-    <script src="/main.js" defer></script>
+    <script src="/assets/js/main.js" defer></script>
     <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "L'Arcade de crowMaster",
+      "description": "Collection de 3 mini-jeux gratuits dans l'univers de crowMaster avec marché de personnalisation et classement.",
+      "url": "https://flexarion-jeu.fr/jouer-en-ligne/",
+      "genre": "Arcade",
+      "gamePlatform": "Navigateur web",
+      "playMode": "SinglePlayer",
+      "inLanguage": "fr-FR",
+      "isAccessibleForFree": true,
+      "publisher": {"@type": "Organization", "name": "Flexarion", "url": "https://flexarion-jeu.fr/"}
+    }
+    </script>
+    <style>
+        .arcade-wrap{max-width:680px;margin:0 auto}
+        .wallet-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;background:rgba(15,23,42,.8);border:1px solid rgba(139,77,255,.35);border-radius:16px;padding:.8rem 1.2rem;margin-bottom:1.2rem}
+        .wallet-feathers{display:flex;align-items:center;gap:.5rem;font-weight:700;color:#d9c2ff;font-size:1.05rem}
+        .tabs{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.2rem}
+        .tab-btn{background:rgba(15,23,42,.6);border:1px solid var(--line);color:var(--txt);padding:.6rem 1.1rem;border-radius:12px;cursor:pointer;font-weight:600;transition:.2s}
+        .tab-btn.active,.tab-btn:hover{background:rgba(56,189,248,.18);border-color:#38bdf8;color:#fff}
+        
+        /* Menu Jeux */
+        .games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem}
+        .game-card{background:rgba(11,16,32,.85);border:1px solid var(--line);border-radius:18px;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;transition:.25s;text-align:left}
+        .game-card:hover{transform:translateY(-3px);border-color:#38bdf8}
+        .game-card .badge{display:inline-block;font-size:.75rem;padding:.2rem .6rem;border-radius:99px;background:rgba(139,77,255,.2);color:#d9c2ff;margin-bottom:.6rem;width:fit-content}
+        .game-card h3{margin:0 0 .4rem;font-size:1.15rem}
+        .game-card p{font-size:.88rem;color:var(--mut);margin:0 0 1rem;line-height:1.4}
+        .game-card .rec{font-size:.82rem;color:#ffd36b;margin-bottom:.8rem;font-weight:600}
+
+        /* Zone Canvas */
+        #view-play{display:none}
+        .play-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;gap:.5rem}
+        .game-canvas-box{max-width:480px;margin:0 auto}
+        #c{display:block;width:100%;aspect-ratio:2/3;border-radius:20px;border:1px solid var(--line);background:#0b1020;touch-action:none;cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;user-select:none}
+        #c:focus-visible{box-shadow:0 0 0 3px rgba(56,189,248,.5)}
+        .game-bar{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-top:1rem}
+        .game-bar .btn{font-size:.88rem;padding:.6rem 1rem}
+        .game-stat{text-align:center;color:var(--mut);font-size:.9rem;margin-top:.7rem}
+        .game-stat strong{color:var(--txt)}
+        #cta{display:none;margin-top:1.1rem;text-align:center;border:1px solid rgba(56,189,248,.35);background:rgba(56,189,248,.08);border-radius:18px;padding:1.1rem}
+        #cta p{margin-bottom:.7rem}
+
+        /* Marché */
+        #view-shop{display:none}
+        .shop-section-title{font-size:1.05rem;margin:1rem 0 .6rem;color:#7dd3fc}
+        .shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:.9rem}
+        .shop-item{background:rgba(11,16,32,.85);border:1px solid var(--line);border-radius:16px;padding:1rem;display:flex;flex-direction:column;justify-content:space-between}
+        .shop-item.equipped{border-color:#38bdf8;background:rgba(56,189,248,.08)}
+        .shop-item h4{margin:0 0 .3rem;font-size:1rem}
+        .shop-item p{font-size:.82rem;color:var(--mut);margin:0 0 .8rem}
+        .shop-price{font-weight:700;color:#d9c2ff;font-size:.9rem;margin-bottom:.6rem}
+
+        /* Classement */
+        #view-rank{display:none}
+        .rank-controls{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+        .pseudo-box{display:flex;gap:.5rem;justify-content:center;margin-bottom:1.2rem;flex-wrap:wrap}
+        .pseudo-box input{background:rgba(9,13,22,.8);border:1px solid var(--line);color:#fff;padding:.55rem .9rem;border-radius:10px;font-size:.9rem}
+        .rank-table{width:100%;border-collapse:collapse;background:rgba(11,16,32,.7);border-radius:14px;overflow:hidden}
+        .rank-table th,.rank-table td{padding:.75rem 1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,.06);font-size:.92rem}
+        .rank-table th{color:var(--mut);font-weight:600;background:rgba(255,255,255,.03)}
+        .rank-me{background:rgba(56,189,248,.12);font-weight:700;color:#7dd3fc}
+
+        .howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1rem}
+        .howto div{background:rgba(9,13,22,.5);border:1px solid var(--line);border-radius:16px;padding:1rem}
+        .howto strong{display:block;margin-bottom:.3rem}
+    </style>
 </head>
 <body>
     <header class="site-header"><div class="bar">
@@ -30,18 +108,150 @@
         </nav>
         <a href="/betaSignup.html" class="btn btn-primary">Rejoindre la Bêta</a>
     </div></header>
+
     <main>
+        <section class="hero small"><i class="orb a"></i><i class="orb b"></i>
+            <span class="pill">L'Arcade de crowMaster</span>
+            <h1>Mini-jeux <span class="grad">en ligne</span></h1>
+            <p class="lead">Choisissez votre épreuve, récoltez des plumes d'obsidienne pour le marché et imposez votre nom dans le classement.</p>
+        </section>
+
         <div class="wrap">
-            <section class="card form-card reveal">
-                <h1>Jouer en ligne</h1>
-                <p class="sub">crowMaster est encore en développement et n'est pas disponible pour jouer en ligne pour le moment.</p>
-                <div class="btn-group center">
+            <section class="card reveal">
+                <div class="arcade-wrap">
+                    <!-- Barre de bourse commune -->
+                    <div class="wallet-bar">
+                        <div class="wallet-feathers">
+                            <span>🪶 Bourse : <strong id="wallet-count">0</strong> plume(s) d'obsidienne</span>
+                        </div>
+                        <div style="font-size:.88rem;color:var(--mut)">
+                            Joueur : <strong id="display-pseudo" style="color:#fff">Corbeau Anonyme</strong>
+                        </div>
+                    </div>
+
+                    <!-- Onglets principaux -->
+                    <div class="tabs" id="main-tabs">
+                        <button type="button" class="tab-btn active" data-tab="menu">🎮 Choisir un jeu</button>
+                        <button type="button" class="tab-btn" data-tab="shop">🛒 Marché d'Obsidienne</button>
+                        <button type="button" class="tab-btn" data-tab="rank">🏆 Classement</button>
+                    </div>
+
+                    <!-- VUE 1 : MENU DE SÉLECTION DES 3 JEUX -->
+                    <div id="view-menu">
+                        <div class="games-grid">
+                            <div class="game-card">
+                                <div>
+                                    <span class="badge">Jeu 1 · Classique</span>
+                                    <h3>Le Vol du Corbeau</h3>
+                                    <p>Volez entre les rochers escarpés, attrapez des plumes et esquivez les météores.</p>
+                                </div>
+                                <div>
+                                    <div class="rec">Record : <span id="rec-flappy">0</span> pts</div>
+                                    <button type="button" class="btn btn-primary" style="width:100%" data-launch="flappy">Jouer</button>
+                                </div>
+                            </div>
+
+                            <div class="game-card">
+                                <div>
+                                    <span class="badge">Jeu 2 · Réflexes</span>
+                                    <h3>Chasse aux Plumes</h3>
+                                    <p>Déplacez-vous de gauche à droite pour récolter les pluies de plumes tout en évitant les roches ardentes.</p>
+                                </div>
+                                <div>
+                                    <div class="rec">Record : <span id="rec-catch">0</span> pts</div>
+                                    <button type="button" class="btn btn-primary" style="width:100%" data-launch="catch">Jouer</button>
+                                </div>
+                            </div>
+
+                            <div class="game-card">
+                                <div>
+                                    <span class="badge">Jeu 3 · Ascension</span>
+                                    <h3>L'Ascension du Nid</h3>
+                                    <p>Bondissez de branche en branche vers la cime de l'Arbre-Monde sans tomber dans le vide.</p>
+                                </div>
+                                <div>
+                                    <div class="rec">Record : <span id="rec-climb">0</span> pts</div>
+                                    <button type="button" class="btn btn-primary" style="width:100%" data-launch="climb">Jouer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VUE 2 : ZONE DE JEU (CANVAS PARTAGÉ) -->
+                    <div id="view-play">
+                        <div class="play-header">
+                            <button type="button" class="btn btn-secondary" id="btn-back-menu" style="padding:.45rem .9rem;font-size:.85rem">← Menu des jeux</button>
+                            <strong id="current-game-title" style="color:#7dd3fc">Le Vol du Corbeau</strong>
+                        </div>
+                        <div class="game-canvas-box">
+                            <canvas id="c" width="480" height="720" tabindex="0" role="img" aria-label="Zone de mini-jeu crowMaster"></canvas>
+                            <div class="game-stat" id="game-controls-hint">Record : <strong id="best">0</strong> pts · <strong>Espace</strong> / <strong>Clic</strong></div>
+                            <div class="game-bar">
+                                <button class="btn btn-primary" id="btn-play" type="button">Jouer</button>
+                                <button class="btn btn-secondary" id="btn-sound" type="button">Son : activé</button>
+                                <button class="btn btn-secondary" id="btn-share" type="button">Partager mon score</button>
+                            </div>
+                            <div id="cta">
+                                <p><strong>Envie du vrai jeu ?</strong> crowMaster, avec ses boss divins, ses guildes et son nid, est en développement.</p>
+                                <a href="/betaSignup.html" class="btn btn-primary">Rejoindre la bêta de crowMaster</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VUE 3 : MARCHÉ D'OBSIDIENNE -->
+                    <div id="view-shop">
+                        <p style="font-size:.9rem;color:var(--mut);margin-top:0">Dépensez vos plumes d'obsidienne récoltées dans les mini-jeux. Vos achats s'appliquent aux <strong>3 jeux</strong> !</p>
+                        
+                        <h3 class="shop-section-title">✨ Apparences du Corbeau (Skins)</h3>
+                        <div class="shop-grid" id="shop-skins"></div>
+
+                        <h3 class="shop-section-title">⚡ Améliorations permanentes</h3>
+                        <div class="shop-grid" id="shop-upgrades"></div>
+                    </div>
+
+                    <!-- VUE 4 : CLASSEMENT -->
+                    <div id="view-rank">
+                        <div class="pseudo-box">
+                            <input type="text" id="input-pseudo" maxlength="18" placeholder="Votre pseudo de joueur...">
+                            <button type="button" class="btn btn-primary" id="btn-save-pseudo" style="padding:.55rem 1rem;font-size:.88rem">Enregistrer</button>
+                        </div>
+                        <div class="rank-controls">
+                            <button type="button" class="tab-btn active" data-rank-game="flappy">Le Vol du Corbeau</button>
+                            <button type="button" class="tab-btn" data-rank-game="catch">Chasse aux Plumes</button>
+                            <button type="button" class="tab-btn" data-rank-game="climb">L'Ascension du Nid</button>
+                        </div>
+                        <table class="rank-table">
+                            <thead>
+                                <tr><th>#</th><th>Joueur</th><th>Score</th><th>Rang</th></tr>
+                            </thead>
+                            <tbody id="rank-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card reveal">
+                <h2>Les 3 épreuves de l'univers crowMaster</h2>
+                <p>Tous ces mini-jeux sont gratuits, sans téléchargement et jouables sur ordinateur comme sur mobile. Ils ont été imaginés dans l'univers de <strong>crowMaster</strong>, actuellement en développement par le studio Flexarion.</p>
+                <div class="howto">
+                    <div><strong>1. Le Vol du Corbeau</strong>Faufilez-vous entre les rochers et esquivez les météores. Touchez l'écran ou appuyez sur Espace.</div>
+                    <div><strong>2. Chasse aux Plumes</strong>Glissez le doigt ou utilisez les flèches Gauche/Droite pour attraper les plumes et éviter les météores.</div>
+                    <div><strong>3. L'Ascension du Nid</strong>Votre corbeau rebondit automatiquement. Dirigez-le à gauche ou à droite pour grimper toujours plus haut.</div>
+                    <div><strong>4. Marché & Classement</strong>Cumulez vos plumes d'obsidienne pour débloquer des apparences exclusives et dominer le classement.</div>
+                </div>
+            </section>
+
+            <section class="card reveal">
+                <h2>Découvrir crowMaster</h2>
+                <p>Dans <strong>crowMaster</strong>, vous incarnez un corbeau mystique : combats contre des créatures mythiques, exploration, artisanat, nid personnalisable, multijoueur et guildes.</p>
+                <div class="btn-group">
+                    <a href="/crowMaster/" class="btn btn-secondary">Découvrir le jeu crowMaster</a>
                     <a href="/betaSignup.html" class="btn btn-primary">Rejoindre la bêta</a>
-                    <a href="/crowMaster/" class="btn btn-secondary">Découvrir crowMaster</a>
                 </div>
             </section>
         </div>
     </main>
+
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section"><h3>Flexarion</h3><p>Studio indépendant créateur de <strong>crowMaster</strong>.</p></div>
@@ -49,5 +259,517 @@
         </div>
         <div class="footer-bottom"><p>&copy; 2026 Flexarion. Tous droits réservés.</p></div>
     </footer>
+
+<script>
+(()=>{
+"use strict";
+const W=480,H=720,GROUND=H-56;
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+const $=id=>document.getElementById(id);
+function fit(){const r=Math.min(window.devicePixelRatio||1,2);cv.width=W*r;cv.height=H*r;ctx.setTransform(r,0,0,r,0,0)}
+fit();window.addEventListener('resize',fit);
+
+// ---- SAUVEGARDE & ÉTAT GLOBAL (BOURSE, MARCHÉ, CLASSEMENT) ----
+const DEFAULT_SAVE={
+    feathers:0,
+    pseudo:'Corbeau Anonyme',
+    equippedSkin:'classic',
+    unlockedSkins:['classic'],
+    upgrades:{magnet:false,shield:false,doubleFeather:false},
+    bests:{flappy:0,catch:0,climb:0},
+    leaderboards:{
+        flappy:[{name:'Gardien d\'Obsidienne',score:45},{name:'Ombre du Nid',score:28},{name:'Plume Noire',score:15},{name:'Novice du Ciel',score:8}],
+        catch:[{name:'Chasseur Céleste',score:60},{name:'Serre Agile',score:38},{name:'Éclaireur',score:20},{name:'Oisillon',score:10}],
+        climb:[{name:'Seigneur de la Cime',score:85},{name:'Veilleur des Branches',score:50},{name:'Grimpeur',score:25},{name:'Apprenti',score:12}]
+    }
+};
+let save=JSON.parse(JSON.stringify(DEFAULT_SAVE));
+try{
+    const raw=localStorage.getItem('crowmaster_arcade_v1');
+    if(raw){
+        const parsed=JSON.parse(raw);
+        save={...save,...parsed,bests:{...save.bests,...(parsed.bests||{})},upgrades:{...save.upgrades,...(parsed.upgrades||{})},leaderboards:{...save.leaderboards,...(parsed.leaderboards||{})}};
+    }else{
+        const oldBest=+localStorage.getItem('crowmaster_best')||0;
+        if(oldBest>0)save.bests.flappy=oldBest;
+    }
+}catch(e){}
+function persist(){try{localStorage.setItem('crowmaster_arcade_v1',JSON.stringify(save))}catch(e){}}
+
+// Catalogue du marché
+const SKINS=[
+    {id:'classic',name:'Corbeau d\'Obsidienne',desc:'Le plumage nocturne originel de crowMaster.',price:0,body:'#1b2440',wing:'#0f1528',glow:'rgba(120,170,255,.45)',beak:'#f2b240'},
+    {id:'spectral',name:'Spectre Éthéré',desc:'Un corbeau fantomatique aux reflets cyan.',price:15,body:'#164e63',wing:'#083344',glow:'rgba(56,189,248,.8)',beak:'#7dd3fc'},
+    {id:'royal',name:'Corbeau Solaire',desc:'Plumage doré des anciens gardiens divins.',price:35,body:'#78350f',wing:'#451a03',glow:'rgba(251,191,36,.85)',beak:'#fef08a'},
+    {id:'crimson',name:'Phénix d\'Obsidienne',desc:'Forgé dans la braise des météores.',price:60,body:'#7f1d1d',wing:'#450a0a',glow:'rgba(248,113,113,.85)',beak:'#fdba74'}
+];
+const UPGRADES=[
+    {id:'magnet',name:'Aimant à Plumes',desc:'Attire automatiquement les plumes proches vers votre corbeau.',price:20},
+    {id:'shield',name:'Bouclier Astral',desc:'Vous protège contre le premier impact de météore ou rocher par partie !',price:40},
+    {id:'doubleFeather',name:'Alchimie d\'Obsidienne',desc:'Chaque plume ramassée rapporte +2 plumes dans votre bourse au lieu de +1.',price:55}
+];
+const getSkin=()=>SKINS.find(s=>s.id===save.equippedSkin)||SKINS[0];
+
+// ---- NAVIGATION VUES & UI ----
+let activeGame='flappy';
+let currentRankGame='flappy';
+function switchTab(tab){
+    document.querySelectorAll('#main-tabs .tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+    $('view-menu').style.display=tab==='menu'?'block':'none';
+    $('view-shop').style.display=tab==='shop'?'block':'none';
+    $('view-rank').style.display=tab==='rank'?'block':'none';
+    $('view-play').style.display='none';
+    if(state==='playing')state='paused';
+    refreshUI();
+}
+document.querySelectorAll('#main-tabs .tab-btn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+
+function refreshUI(){
+    $('wallet-count').textContent=save.feathers;
+    $('display-pseudo').textContent=save.pseudo;
+    $('input-pseudo').value=save.pseudo==='Corbeau Anonyme'?'':save.pseudo;
+    $('rec-flappy').textContent=save.bests.flappy;
+    $('rec-catch').textContent=save.bests.catch;
+    $('rec-climb').textContent=save.bests.climb;
+    renderShop();
+    renderRank();
+}
+
+function renderShop(){
+    $('shop-skins').innerHTML=SKINS.map(sk=>{
+        const owned=save.unlockedSkins.includes(sk.id);
+        const eq=save.equippedSkin===sk.id;
+        return `<div class="shop-item ${eq?'equipped':''}">
+            <div><h4>${sk.name}</h4><p>${sk.desc}</p></div>
+            <div>
+                <div class="shop-price">${owned?(eq?'✔ Équipé':'Débloqué'):`🪶 ${sk.price} plumes`}</div>
+                <button type="button" class="btn ${eq?'btn-secondary':'btn-primary'}" style="width:100%;padding:.45rem;font-size:.82rem" ${eq?'disabled':''} onclick="window.__buySkin('${sk.id}')">
+                    ${eq?'Équipé':(owned?'Équiper':'Acheter')}
+                </button>
+            </div>
+        </div>`;
+    }).join('');
+
+    $('shop-upgrades').innerHTML=UPGRADES.map(up=>{
+        const owned=save.upgrades[up.id];
+        return `<div class="shop-item ${owned?'equipped':''}">
+            <div><h4>${up.name}</h4><p>${up.desc}</p></div>
+            <div>
+                <div class="shop-price">${owned?'✔ Actif':'🪶 '+up.price+' plumes'}</div>
+                <button type="button" class="btn ${owned?'btn-secondary':'btn-primary'}" style="width:100%;padding:.45rem;font-size:.82rem" ${owned?'disabled':''} onclick="window.__buyUpgrade('${up.id}')">
+                    ${owned?'Débloqué':'Acheter'}
+                </button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+window.__buySkin=id=>{
+    const sk=SKINS.find(s=>s.id===id);if(!sk)return;
+    if(save.unlockedSkins.includes(id)){save.equippedSkin=id;persist();refreshUI();beep(700,.08,'sine',.06);return}
+    if(save.feathers>=sk.price){save.feathers-=sk.price;save.unlockedSkins.push(id);save.equippedSkin=id;persist();refreshUI();beep(900,.12,'sine',.08)}
+    else alert("Pas assez de plumes d'obsidienne !");
+};
+window.__buyUpgrade=id=>{
+    const up=UPGRADES.find(u=>u.id===id);if(!up||save.upgrades[id])return;
+    if(save.feathers>=up.price){save.feathers-=up.price;save.upgrades[id]=true;persist();refreshUI();beep(950,.15,'sine',.08)}
+    else alert("Pas assez de plumes d'obsidienne !");
+};
+
+// Classement
+function recordScoreToLeaderboard(game,pts){
+    if(pts<=0)return;
+    const list=save.leaderboards[game];
+    const existing=list.find(e=>e.name===save.pseudo&&e.isPlayer);
+    if(existing){if(pts>existing.score)existing.score=pts}
+    else list.push({name:save.pseudo,score:pts,isPlayer:true});
+    list.sort((a,b)=>b.score-a.score);
+    save.leaderboards[game]=list.slice(0,6);
+}
+function renderRank(){
+    const list=save.leaderboards[currentRankGame]||[];
+    $('rank-tbody').innerHTML=list.map((row,i)=>`
+        <tr class="${row.isPlayer?'rank-me':''}">
+            <td><strong>#${i+1}</strong></td>
+            <td>${row.name} ${row.isPlayer?'(Vous)':''}</td>
+            <td><strong>${row.score} pts</strong></td>
+            <td>${rankTitle(row.score)}</td>
+        </tr>`).join('');
+}
+document.querySelectorAll('[data-rank-game]').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-rank-game]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');currentRankGame=b.dataset.rankGame;renderRank();
+}));
+$('btn-save-pseudo').addEventListener('click',()=>{
+    const val=$('input-pseudo').value.trim();
+    if(val){
+        const old=save.pseudo;
+        save.pseudo=val;
+        ['flappy','catch','climb'].forEach(g=>save.leaderboards[g].forEach(r=>{if(r.isPlayer||r.name===old)r.name=val}));
+        persist();refreshUI();
+    }
+});
+
+// ---- AUDIO ----
+let muted=false,AC=null;
+function beep(f,d,type,vol,slide){if(muted)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=type||'triangle';o.frequency.setValueAtTime(f,AC.currentTime);if(slide)o.frequency.exponentialRampToValueAtTime(Math.max(30,slide),AC.currentTime+d);g.gain.setValueAtTime(vol||.07,AC.currentTime);g.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+d);o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}}
+
+// ---- MOTEUR DES 3 MINI-JEUX ----
+let state='ready',score=0,feathersRun=0,t=0,shake=0,overAt=0,hasShield=false;
+const crow={x:118,y:H/2,vx:0,vy:0,rot:0,wing:0};
+let parts=[];
+const stars=Array.from({length:70},()=>({x:Math.random()*W,y:Math.random()*(GROUND-120),r:Math.random()*1.4+.3,p:Math.random()*6.28}));
+const keys={left:false,right:false};
+let pointerTargetX=null;
+
+// Variables spécifiques aux jeux
+let speed=2.6,nextMeteor=240,pillars=[],items=[],meteors=[]; // Flappy & Catch
+let platforms=[],camY=0,maxClimb=0; // Climb
+
+const total=()=>score+feathersRun*3;
+function rankTitle(s){return s<15?'Corbeau novice':s<35?'Plume aguerrie':s<65?'Maître des ciels':'Légende de crowMaster'}
+function burst(x,y,col,n,sp){for(let i=0;i<n;i++){const a=Math.random()*6.28,s=(Math.random()*.7+.3)*sp;parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-1,life:1,c:col,s:Math.random()*3+1.5})}}
+function circleRect(cx,cy,r,rx,ry,rw,rh){const nx=Math.max(rx,Math.min(cx,rx+rw)),ny=Math.max(ry,Math.min(cy,ry+rh));return (cx-nx)**2+(cy-ny)**2<r*r}
+
+function collectFeather(x,y){
+    feathersRun++;
+    const gain=save.upgrades.doubleFeather?2:1;
+    save.feathers+=gain;
+    $('wallet-count').textContent=save.feathers;
+    beep(880,.09,'sine',.07);setTimeout(()=>beep(1320,.12,'sine',.06),70);
+    burst(x,y,'#b57bff',14,4);
+}
+
+function triggerHit(){
+    if(hasShield){
+        hasShield=false;shake=10;
+        beep(300,.2,'sine',.1,600);
+        burst(crow.x,crow.y,'#38bdf8',22,5);
+        return false; // Survit grâce au bouclier
+    }
+    return true; // Meurt
+}
+
+function die(){
+    if(state!=='playing')return;
+    state='over';overAt=t;shake=14;
+    beep(120,.35,'sawtooth',.1,40);
+    burst(crow.x,crow.y,getSkin().body,26,6);
+    burst(crow.x,crow.y,'#6d8bff',10,4);
+    const s=total();
+    if(s>save.bests[activeGame])save.bests[activeGame]=s;
+    recordScoreToLeaderboard(activeGame,s);
+    persist();
+    $('best').textContent=save.bests[activeGame];
+    $('cta').style.display='block';
+}
+
+// Lancement d'un jeu depuis le menu
+function launchGame(gameId){
+    activeGame=gameId;
+    $('view-menu').style.display='none';
+    $('view-shop').style.display='none';
+    $('view-rank').style.display='none';
+    $('view-play').style.display='block';
+    const titles={flappy:'Le Vol du Corbeau',catch:'Chasse aux Plumes',climb:'L\'Ascension du Nid'};
+    const hints={
+        flappy:'Record : <strong id="best">0</strong> pts · <strong>Espace</strong> ou <strong>Clic</strong> pour voler',
+        catch:'Record : <strong id="best">0</strong> pts · <strong>Flèches ← →</strong> ou <strong>Glisser</strong> pour bouger',
+        climb:'Record : <strong id="best">0</strong> pts · <strong>Flèches ← →</strong> ou <strong>Glisser</strong> pour diriger le saut'
+    };
+    $('current-game-title').textContent=titles[gameId];
+    $('game-controls-hint').innerHTML=hints[gameId];
+    $('best').textContent=save.bests[gameId];
+    state='ready';
+    resetGame();
+    cv.focus({preventScroll:true});
+}
+document.querySelectorAll('[data-launch]').forEach(b=>b.addEventListener('click',()=>launchGame(b.dataset.launch)));
+$('btn-back-menu').addEventListener('click',()=>switchTab('menu'));
+
+function resetGame(){
+    score=0;feathersRun=0;parts=[];shake=0;hasShield=save.upgrades.shield;pointerTargetX=null;
+    $('cta').style.display='none';$('btn-play').textContent='Jouer';
+    if(activeGame==='flappy'){
+        crow.x=118;crow.y=H/2;crow.vx=0;crow.vy=0;crow.rot=0;
+        pillars=[];items=[];meteors=[];speed=2.6;nextMeteor=260;
+        spawnPillar(W+80);
+    }else if(activeGame==='catch'){
+        crow.x=W/2;crow.y=GROUND-26;crow.vx=0;crow.vy=0;crow.rot=0;
+        items=[];meteors=[];speed=3.5;nextMeteor=60;
+    }else if(activeGame==='climb'){
+        crow.x=W/2;crow.y=GROUND-40;crow.vx=0;crow.vy=-11;crow.rot=0;
+        platforms=[];items=[];camY=0;maxClimb=0;
+        platforms.push({x:W/2-55,y:GROUND-10,w:110,type:'normal'});
+        for(let i=1;i<11;i++)spawnPlatform(GROUND-10-i*68);
+    }
+}
+function start(){resetGame();state='playing';$('btn-play').textContent='Rejouer';if(activeGame==='flappy')flap()}
+function flap(){crow.vy=-7.3;crow.wing=1;beep(520,.07,'triangle',.05,760)}
+
+// Spawners
+function spawnPillar(x){const gap=Math.max(142,208-score*1.6),gy=gap/2+95+Math.random()*(GROUND-gap-190);pillars.push({x,w:66,gy,gap,passed:false});if(Math.random()<.55)items.push({x:x+33,y:gy,ph:Math.random()*6,got:false})}
+function spawnPlatform(y){
+    const w=86,x=20+Math.random()*(W-w-40);
+    const moving=score>12&&Math.random()<.35;
+    platforms.push({x,y,w,vx:moving?(Math.random()<.5?2:-2):0});
+    if(Math.random()<.28)items.push({x:x+w/2,y:y-24,ph:Math.random()*6,got:false});
+}
+
+// ---- UPDATE ----
+function update(k){
+    t+=k;
+    if(shake>0)shake=Math.max(0,shake-.6*k);
+    for(const p of parts){p.x+=p.vx*k;p.y+=p.vy*k;p.vy+=.12*k;p.life-=.02*k}
+    parts=parts.filter(p=>p.life>0);
+    if(crow.wing>0)crow.wing=Math.max(0,crow.wing-.06*k);
+
+    if(state==='ready'){
+        crow.y=(activeGame==='flappy'?H/2:GROUND-40)+Math.sin(t*.06)*8;
+        crow.rot=Math.sin(t*.06)*.08;
+        return;
+    }
+    if(state==='over'){
+        if(activeGame!=='climb'){crow.vy+=0.42*k;crow.y=Math.min(GROUND-10,crow.y+crow.vy*k)}
+        return;
+    }
+
+    // --- LOGIQUE JEU 1 : FLAPPY BIRD ---
+    if(activeGame==='flappy'){
+        crow.vy=Math.min(10,crow.vy+0.42*k);crow.y+=crow.vy*k;crow.rot=Math.max(-.5,Math.min(.9,crow.vy*.07));
+        if(crow.y<12){crow.y=12;crow.vy=0}
+        if(crow.y>GROUND-12){die();return}
+        for(const p of pillars){
+            p.x-=speed*k;
+            if(!p.hit&&(circleRect(crow.x,crow.y,12,p.x,0,p.w,p.gy-p.gap/2)||circleRect(crow.x,crow.y,12,p.x,p.gy+p.gap/2,p.w,H))){
+                p.hit=true;if(triggerHit()){die();return}
+            }
+            if(!p.passed&&p.x+p.w<crow.x){p.passed=true;score++;speed=Math.min(5.2,2.6+score*.055);beep(660,.08,'square',.04)}
+        }
+        pillars=pillars.filter(p=>p.x>-90);
+        const last=pillars[pillars.length-1];if(!last||last.x<W-250)spawnPillar(W+70);
+        for(const it of items){
+            it.x-=speed*k;
+            if(save.upgrades.magnet&&Math.hypot(it.x-crow.x,it.y-crow.y)<130){it.x+=(crow.x-it.x)*.12*k;it.y+=(crow.y-it.y)*.12*k}
+            const y=it.y+Math.sin(t*.08+it.ph)*8;
+            if(!it.got&&(it.x-crow.x)**2+(y-crow.y)**2<30*30){it.got=true;collectFeather(it.x,y)}
+        }
+        items=items.filter(i=>i.x>-40&&!i.got);
+        if(score>=6){nextMeteor-=k;if(nextMeteor<=0){nextMeteor=140+Math.random()*180;meteors.push({x:W*.45+Math.random()*W*.6,y:-30,vx:-(2.6+Math.random()*1.8),vy:4.2+Math.random()*1.8,delay:42})}}
+        for(const m of meteors){
+            if(m.delay>0){m.delay-=k;continue}
+            m.x+=m.vx*k;m.y+=m.vy*k;
+            if(!m.hit&&(m.x-crow.x)**2+(m.y-crow.y)**2<(10+12)**2){m.hit=true;if(triggerHit()){die();return}}
+        }
+        meteors=meteors.filter(m=>m.y<H+40&&m.x>-60);
+    }
+
+    // --- LOGIQUE JEU 2 : CHASSE AUX PLUMES ---
+    else if(activeGame==='catch'){
+        let move=0;
+        if(keys.left)move=-1;if(keys.right)move=1;
+        if(pointerTargetX!==null){const diff=pointerTargetX-crow.x;if(Math.abs(diff)>6)move=Math.sign(diff)}
+        crow.vx=move*6.2;crow.x=Math.max(24,Math.min(W-24,crow.x+crow.vx*k));
+        crow.rot=crow.vx*.04;crow.wing=Math.abs(move)*.6;
+
+        nextMeteor-=k;
+        if(nextMeteor<=0){
+            nextMeteor=Math.max(22,55-score*.4);
+            if(Math.random()<.58){
+                items.push({x:25+Math.random()*(W-50),y:-20,vy:3.2+Math.random()*2+score*.03,ph:Math.random()*6,got:false});
+            }else{
+                meteors.push({x:25+Math.random()*(W-50),y:-20,vx:(Math.random()-.5)*1.2,vy:4.2+Math.random()*2.5+score*.04,delay:20});
+            }
+        }
+        for(const it of items){
+            it.y+=it.vy*k;
+            if(save.upgrades.magnet&&Math.hypot(it.x-crow.x,it.y-crow.y)<140){it.x+=(crow.x-it.x)*.12*k;it.y+=(crow.y-it.y)*.12*k}
+            if(!it.got&&(it.x-crow.x)**2+(it.y-crow.y)**2<32*32){it.got=true;score++;collectFeather(it.x,it.y)}
+            else if(!it.got&&it.y>GROUND){it.got=true}
+        }
+        items=items.filter(i=>!i.got);
+        for(const m of meteors){
+            if(m.delay>0){m.delay-=k;continue}
+            m.x+=m.vx*k;m.y+=m.vy*k;
+            if(!m.hit&&(m.x-crow.x)**2+(m.y-crow.y)**2<24*24){m.hit=true;if(triggerHit()){die();return}}
+            if(m.y>GROUND&&!m.scored){m.scored=true;score++}
+        }
+        meteors=meteors.filter(m=>m.y<GROUND+20);
+    }
+
+    // --- LOGIQUE JEU 3 : L'ASCENSION DU NID ---
+    else if(activeGame==='climb'){
+        let move=0;
+        if(keys.left)move=-1;if(keys.right)move=1;
+        if(pointerTargetX!==null){const diff=pointerTargetX-crow.x;if(Math.abs(diff)>8)move=Math.sign(diff)}
+        crow.vx=move*5.8;crow.x+=crow.vx*k;
+        if(crow.x<-15)crow.x=W+15;if(crow.x>W+15)crow.x=-15;
+        crow.vy+=0.36*k;crow.y+=crow.vy*k;crow.rot=crow.vx*.04;
+
+        for(const p of platforms){
+            if(p.vx){p.x+=p.vx*k;if(p.x<10||p.x+p.w>W-10)p.vx*=-1}
+            if(crow.vy>0&&crow.x+12>p.x&&crow.x-12<p.x+p.w&&crow.y+12>=p.y&&crow.y+12<=p.y+18){
+                crow.vy=-10.8;crow.wing=1;beep(460,.07,'triangle',.05,680);
+                burst(crow.x,p.y,'#7dd3fc',6,2.5);
+            }
+        }
+        if(crow.y<H*0.42){
+            const diff=H*0.42-crow.y;
+            crow.y=H*0.42;camY+=diff;
+            const newScore=Math.floor(camY/35);
+            if(newScore>score)score=newScore;
+            for(const p of platforms)p.y+=diff;
+            for(const it of items)it.y+=diff;
+        }
+        while(platforms.length&&platforms[0].y>H+30){
+            platforms.shift();
+            const topY=platforms[platforms.length-1].y;
+            spawnPlatform(topY-68);
+        }
+        for(const it of items){
+            if(save.upgrades.magnet&&Math.hypot(it.x-crow.x,it.y-crow.y)<130){it.x+=(crow.x-it.x)*.12*k;it.y+=(crow.y-it.y)*.12*k}
+            if(!it.got&&(it.x-crow.x)**2+(it.y-crow.y)**2<30*30){it.got=true;collectFeather(it.x,it.y)}
+        }
+        items=items.filter(i=>!i.got&&i.y<H+30);
+        if(crow.y>H+25){die();return}
+    }
+}
+
+// ---- DESSIN ----
+function rockPoly(x,y,w,dir,len){
+    ctx.beginPath();const e=dir>0?y+len:y-len;ctx.moveTo(x,y);ctx.lineTo(x+w,y);ctx.lineTo(x+w,e-dir*22);ctx.lineTo(x+w*.72,e-dir*6);ctx.lineTo(x+w*.48,e+dir*20);ctx.lineTo(x+w*.24,e-dir*8);ctx.lineTo(x,e-dir*18);ctx.closePath();
+    const g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,'#3a4670');g.addColorStop(.5,'#26304f');g.addColorStop(1,'#161c33');ctx.fillStyle=g;ctx.fill();ctx.strokeStyle='rgba(140,170,255,.25)';ctx.lineWidth=1.5;ctx.stroke();
+}
+function mountains(off,base,amp,col,sp){ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(0,H);for(let x=0;x<=W+20;x+=20){const xx=x+off*sp;ctx.lineTo(x,base-Math.abs(Math.sin(xx*.011)*amp+Math.sin(xx*.027)*amp*.45))}ctx.lineTo(W,H);ctx.closePath();ctx.fill()}
+
+function drawCrow(){
+    const sk=getSkin();
+    ctx.save();ctx.translate(crow.x,crow.y);ctx.rotate(crow.rot);
+    if(hasShield){ctx.strokeStyle='rgba(56,189,248,.75)';ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(0,0,26,0,6.28);ctx.stroke()}
+    ctx.fillStyle=sk.wing;ctx.beginPath();ctx.moveTo(-12,0);ctx.lineTo(-30,-5);ctx.lineTo(-28,6);ctx.closePath();ctx.fill();
+    ctx.fillStyle=sk.body;ctx.beginPath();ctx.ellipse(0,0,18,12,0,0,6.28);ctx.fill();
+    const w=Math.sin(t*.5+(crow.wing>0?1:0))*(state==='playing'?1:.2)*(.5+crow.wing);
+    ctx.fillStyle=sk.wing;ctx.beginPath();ctx.moveTo(-4,-2);ctx.lineTo(-22,-4-w*20);ctx.lineTo(-6,8-w*6);ctx.closePath();ctx.fill();
+    ctx.strokeStyle=sk.glow;ctx.lineWidth=1.2;ctx.stroke();
+    ctx.fillStyle=sk.body;ctx.beginPath();ctx.arc(13,-5,8.5,0,6.28);ctx.fill();
+    ctx.fillStyle=sk.beak;ctx.beginPath();ctx.moveTo(20,-8);ctx.lineTo(32,-4);ctx.lineTo(20,-1);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(15,-7,3,0,6.28);ctx.fill();ctx.fillStyle='#05070f';ctx.beginPath();ctx.arc(16,-7,1.5,0,6.28);ctx.fill();
+    ctx.strokeStyle=sk.glow;ctx.lineWidth=1.3;ctx.beginPath();ctx.ellipse(0,0,18,12,0,3.6,5.6);ctx.stroke();
+    ctx.restore();
+}
+function drawFeatherItem(x,y){
+    ctx.save();ctx.translate(x,y);
+    const g=ctx.createRadialGradient(0,0,2,0,0,24);g.addColorStop(0,'rgba(181,123,255,.55)');g.addColorStop(1,'rgba(181,123,255,0)');
+    ctx.fillStyle=g;ctx.fillRect(-24,-24,48,48);
+    ctx.fillStyle='#8b4dff';ctx.beginPath();ctx.moveTo(0,-15);ctx.lineTo(7,0);ctx.lineTo(0,15);ctx.lineTo(-7,0);ctx.closePath();ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.65)';ctx.beginPath();ctx.moveTo(0,-15);ctx.lineTo(3,-2);ctx.lineTo(-1,0);ctx.closePath();ctx.fill();
+    ctx.restore();
+}
+function text(s,x,y,size,col,al){ctx.font='800 '+size+'px Inter,system-ui,sans-serif';ctx.textAlign=al||'center';ctx.lineWidth=Math.max(4,size/6);ctx.strokeStyle='rgba(4,6,14,.9)';ctx.strokeText(s,x,y);ctx.fillStyle=col||'#fff';ctx.fillText(s,x,y)}
+
+function draw(){
+    ctx.save();if(shake>0)ctx.translate((Math.random()-.5)*shake,(Math.random()-.5)*shake);
+    const bg=ctx.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#05081a');bg.addColorStop(.7,'#16224a');bg.addColorStop(1,'#243566');ctx.fillStyle=bg;ctx.fillRect(-20,-20,W+40,H+40);
+    for(const s of stars){ctx.globalAlpha=.4+.6*Math.abs(Math.sin(t*.03+s.p));ctx.fillStyle='#cfe0ff';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.28);ctx.fill()}ctx.globalAlpha=1;
+    const mg=ctx.createRadialGradient(360,130,10,360,130,150);mg.addColorStop(0,'rgba(190,215,255,.35)');mg.addColorStop(1,'rgba(190,215,255,0)');ctx.fillStyle=mg;ctx.fillRect(200,0,280,300);ctx.fillStyle='#d6e4ff';ctx.beginPath();ctx.arc(360,130,34,0,6.28);ctx.fill();
+
+    const off=activeGame==='flappy'?-t*speed:0;
+    if(activeGame!=='climb'){
+        mountains(off,GROUND-30,70,'#1a2650',.12);mountains(off,GROUND,55,'#121b3b',.28);
+    }
+
+    if(activeGame==='flappy'){
+        for(const p of pillars){rockPoly(p.x,0,p.w,1,p.gy-p.gap/2);rockPoly(p.x,H,p.w,-1,H-(p.gy+p.gap/2))}
+    }
+    if(activeGame==='climb'){
+        for(const p of platforms){
+            ctx.fillStyle=p.vx?'#38bdf8':'#334155';
+            ctx.beginPath();ctx.roundRect(p.x,p.y,p.w,14,7);ctx.fill();
+            ctx.strokeStyle='rgba(148,163,184,.4)';ctx.lineWidth=1.5;ctx.stroke();
+        }
+    }
+    for(const it of items){
+        const y=activeGame==='flappy'?it.y+Math.sin(t*.08+it.ph)*8:it.y;
+        drawFeatherItem(it.x,y);
+    }
+    for(const m of meteors){
+        if(m.delay>0){const ax=Math.max(20,Math.min(W-20,m.x));ctx.globalAlpha=.4+.6*Math.abs(Math.sin(t*.4));ctx.fillStyle='#ff4d4d';ctx.beginPath();ctx.moveTo(ax,6);ctx.lineTo(ax-12,26);ctx.lineTo(ax+12,26);ctx.closePath();ctx.fill();text('!',ax,24,16,'#fff');ctx.globalAlpha=1;continue}
+        const g=ctx.createLinearGradient(m.x,m.y,m.x-m.vx*14,m.y-m.vy*14);g.addColorStop(0,'rgba(255,170,70,.95)');g.addColorStop(1,'rgba(255,90,40,0)');ctx.strokeStyle=g;ctx.lineWidth=9;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(m.x,m.y);ctx.lineTo(m.x-m.vx*14,m.y-m.vy*14);ctx.stroke();ctx.fillStyle='#ffe2b0';ctx.beginPath();ctx.arc(m.x,m.y,9,0,6.28);ctx.fill();
+    }
+
+    if(activeGame!=='climb'){
+        ctx.fillStyle='#0b1128';ctx.fillRect(-20,GROUND+10,W+40,H);ctx.fillStyle='#161f40';
+        for(let x=-((activeGame==='flappy'?t*speed:0)%40);x<W+40;x+=40){ctx.beginPath();ctx.moveTo(x,GROUND+10);ctx.lineTo(x+20,GROUND-6);ctx.lineTo(x+40,GROUND+10);ctx.closePath();ctx.fill()}
+    }
+
+    drawCrow();
+    for(const p of parts){ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.c;ctx.fillRect(p.x,p.y,p.s,p.s)}ctx.globalAlpha=1;ctx.restore();
+
+    if(state==='playing'||state==='paused'){
+        text(String(total()),W/2,84,60);
+        drawFeatherItem(28,40);
+        text('+'+feathersRun,48,48,22,'#d9c2ff','left');
+    }
+    if(state==='ready'){
+        const names={flappy:'LE VOL DU CORBEAU',catch:'CHASSE AUX PLUMES',climb:'L’ASCENSION DU NID'};
+        const subs={flappy:'Touchez ou appuyez sur Espace',catch:'Glissez ou utilisez ← →',climb:'Glissez ou utilisez ← →'};
+        text(names[activeGame],W/2,250,32);
+        text(subs[activeGame],W/2,520,21,'#cfe0ff');
+        text('Touchez pour commencer',W/2,555,20,'#7dd3fc');
+    }
+    if(state==='paused'){ctx.fillStyle='rgba(5,8,20,.6)';ctx.fillRect(0,0,W,H);text('PAUSE',W/2,H/2,52)}
+    if(state==='over'){
+        ctx.fillStyle='rgba(5,8,20,.68)';ctx.fillRect(0,0,W,H);
+        text('PERDU !',W/2,220,54,'#ff6b6b');
+        text(total()+' point(s)',W/2,295,42);
+        text(rankTitle(total()),W/2,345,24,'#ffd36b');
+        text('Record : '+save.bests[activeGame],W/2,390,22,'#cfe0ff');
+        text('Plumes gagnées : +'+feathersRun*(save.upgrades.doubleFeather?2:1),W/2,425,20,'#d9c2ff');
+        if(t-overAt>25)text('Touchez pour rejouer',W/2,520,24,'#7dd3fc');
+    }
+}
+
+let last=0;
+function loop(ts){const k=Math.min(2.5,(ts-last)/16.667||1);last=ts;if(state!=='paused')update(k);draw();requestAnimationFrame(loop)}
+
+// ---- COMMANDES ----
+function press(clientX){
+    if(state==='ready'){start();return}
+    if(state==='over'&&t-overAt>25){start();return}
+    if(state==='paused'){state='playing';return}
+    if(state==='playing'){
+        if(activeGame==='flappy')flap();
+        else if(clientX!==undefined){const rect=cv.getBoundingClientRect();pointerTargetX=(clientX-rect.left)*(W/rect.width)}
+    }
+}
+cv.addEventListener('pointerdown',e=>{e.preventDefault();cv.focus({preventScroll:true});press(e.clientX)});
+cv.addEventListener('pointermove',e=>{if(state==='playing'&&(activeGame==='catch'||activeGame==='climb')&&e.buttons>0){const rect=cv.getBoundingClientRect();pointerTargetX=(e.clientX-rect.left)*(W/rect.width)}});
+cv.addEventListener('pointerup',()=>{pointerTargetX=null});
+
+window.addEventListener('keydown',e=>{
+    if(e.code==='ArrowLeft'||e.code==='KeyA')keys.left=true;
+    if(e.code==='ArrowRight'||e.code==='KeyD')keys.right=true;
+    if(e.code==='Space'||e.code==='ArrowUp'||e.code==='KeyW'){
+        if($('view-play').style.display==='block'&&(document.activeElement===cv||document.activeElement===document.body)){e.preventDefault();press()}
+    }
+    if(e.code==='KeyP'&&$('view-play').style.display==='block')state=state==='playing'?'paused':(state==='paused'?'playing':state);
+});
+window.addEventListener('keyup',e=>{
+    if(e.code==='ArrowLeft'||e.code==='KeyA')keys.left=false;
+    if(e.code==='ArrowRight'||e.code==='KeyD')keys.right=false;
+});
+
+$('btn-play').addEventListener('click',()=>{start();cv.focus({preventScroll:true})});
+$('btn-sound').addEventListener('click',()=>{muted=!muted;$('btn-sound').textContent='Son : '+(muted?'coupé':'activé')});
+$('btn-share').addEventListener('click',()=>{
+    const msg=`J’ai fait ${total()} point(s) sur L'Arcade de crowMaster ! https://flexarion-jeu.fr/jouer-en-ligne/`;
+    if(navigator.share)navigator.share({title:'L\'Arcade de crowMaster',text:msg}).catch(()=>{});
+    else if(navigator.clipboard)navigator.clipboard.writeText(msg).then(()=>{$('btn-share').textContent='Copié !';setTimeout(()=>{$('btn-share').textContent='Partager mon score'},1800)}).catch(()=>{});
+});
+
+refreshUI();
+requestAnimationFrame(loop);
+})();
+</script>
 </body>
 </html>
