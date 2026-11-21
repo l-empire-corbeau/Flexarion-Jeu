@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-jeux gratuits en ligne : L'Arcade de crowMaster – Flexarion</title>
+    <meta name="description" content="Jouez gratuitement aux 3 mini-jeux de l'univers crowMaster : Le Vol du Corbeau, Le Nid d'Obsidienne (jeu Idle optimisé avec prestige) et L'Ascension du Nid. Gacha exclusif de skins et accessoires !">
+    <link rel="canonical" href="https://flexarion-jeu.fr/jouer-en-ligne/">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Flexarion">
+    <meta name="theme-color" content="#090d16">
+    <meta name="keywords" content="mini-jeu crowMaster, jeu idle gratuit, jeu de corbeau, jouer en ligne, Flexarion, crowMaster, gacha skins, accessoires">
+    <meta property="og:site_name" content="Flexarion">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="L'Arcade de crowMaster – 3 mini-jeux gratuits">
+    <meta property="og:description" content="Jeu Idle optimisé avec prestige, quêtes, gacha exclusif de skins et accessoires dans l'univers de crowMaster !">
+    <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
+    <meta property="og:url" content="https://flexarion-jeu.fr/jouer-en-ligne/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="/assets/style/style.css">
+    <script src="/assets/js/main.js" defer></script>
+    <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
+    <style>
+        .arcade-wrap{max-width:780px;margin:0 auto}
+        .wallet-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;background:rgba(15,23,42,.85);border:1px solid rgba(139,77,255,.35);border-radius:16px;padding:.8rem 1.2rem;margin-bottom:1.2rem}
+        .wallet-feathers{display:flex;align-items:center;gap:.6rem;font-weight:700;color:#d9c2ff;font-size:1.05rem}
+        .tabs{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.2rem}
+        .tab-btn{background:rgba(15,23,42,.6);border:1px solid var(--line);color:var(--txt);padding:.6rem 1.1rem;border-radius:12px;cursor:pointer;font-weight:600;transition:.2s}
+        .tab-btn.active,.tab-btn:hover{background:rgba(56,189,248,.18);border-color:#38bdf8;color:#fff}
+        
+        /* Menu Jeux */
+        .games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem}
+        .game-card{background:rgba(11,16,32,.85);border:1px solid var(--line);border-radius:18px;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;transition:.25s;text-align:left}
+        .game-card:hover{transform:translateY(-3px);border-color:#38bdf8}
+        .game-card .badge{display:inline-block;font-size:.75rem;padding:.2rem .6rem;border-radius:99px;background:rgba(139,77,255,.2);color:#d9c2ff;margin-bottom:.6rem;width:fit-content}
+        .game-card h3{margin:0 0 .4rem;font-size:1.15rem}
+        .game-card p{font-size:.88rem;color:var(--mut);margin:0 0 1rem;line-height:1.4}
+        .game-card .rec{font-size:.82rem;color:#ffd36b;margin-bottom:.8rem;font-weight:600}
+
+        /* Zone Canvas */
+        #view-play{display:none}
+        .play-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;gap:.5rem}
+        .game-canvas-box{max-width:480px;margin:0 auto}
+        #c{display:block;width:100%;aspect-ratio:2/3;border-radius:20px;border:1px solid var(--line);background:#0b1020;touch-action:none;cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;user-select:none}
+        #c:focus-visible{box-shadow:0 0 0 3px rgba(56,189,248,.5)}
+
+        /* Interface Interactive Spécifique au Jeu Idle */
+        #idle-ui-panel{display:none;margin-top:1rem;background:rgba(11,16,32,.9);border:1px solid var(--line);border-radius:20px;padding:1rem}
+        .idle-tabs{display:flex;gap:.4rem;border-bottom:1px solid var(--line);padding-bottom:.7rem;margin-bottom:.9rem;flex-wrap:wrap}
+        .idle-tab-btn{flex:1;min-width:95px;background:rgba(15,23,42,.8);border:1px solid var(--line);color:var(--mut);padding:.5rem .6rem;border-radius:10px;cursor:pointer;font-size:.82rem;font-weight:700;transition:.2s}
+        .idle-tab-btn.active{background:rgba(56,189,248,.2);border-color:#38bdf8;color:#fff}
+        .idle-list{display:flex;flex-direction:column;gap:.6rem;max-height:340px;overflow-y:auto;padding-right:4px}
+        .idle-row{display:flex;justify-content:space-between;align-items:center;gap:.8rem;background:rgba(19,28,46,.85);border:1px solid var(--line);border-radius:14px;padding:.75rem 1rem}
+        .idle-row-info h4{margin:0 0 .2rem;font-size:.95rem;color:#fff}
+        .idle-row-info p{margin:0;font-size:.8rem;color:var(--mut)}
+        .idle-buy-btn{background:var(--p);color:#090d16;border:none;border-radius:10px;padding:.55rem .9rem;font-weight:800;font-size:.82rem;cursor:pointer;min-width:105px;transition:.2s}
+        .idle-buy-btn:disabled{background:#1e293b;color:#64748b;cursor:not-allowed}
+        .idle-buy-btn:not(:disabled):hover{background:#7dd3fc;transform:translateY(-2px)}
+        .idle-mult-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem;font-size:.82rem;color:var(--mut)}
+        .mult-pills{display:flex;gap:.3rem}
+        .mult-pill{background:rgba(15,23,42,.9);border:1px solid var(--line);color:var(--txt);padding:.25rem .6rem;border-radius:8px;cursor:pointer;font-weight:700;font-size:.78rem}
+        .mult-pill.active{border-color:#38bdf8;background:rgba(56,189,248,.2);color:#7dd3fc}
+
+        .game-bar{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-top:1rem}
+        .game-bar .btn{font-size:.88rem;padding:.6rem 1rem}
+        .game-stat{text-align:center;color:var(--mut);font-size:.9rem;margin-top:.7rem}
+        .game-stat strong{color:var(--txt)}
+        #cta{display:none;margin-top:1.1rem;text-align:center;border:1px solid rgba(56,189,248,.35);background:rgba(56,189,248,.08);border-radius:18px;padding:1.1rem}
+        #cta p{margin-bottom:.7rem}
+
+        /* Marché, Accessoires & Gacha */
+        #view-shop{display:none}
+        .shop-section-title{font-size:1.05rem;margin:1.4rem 0 .7rem;color:#7dd3fc;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+        .shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:.9rem}
+        .shop-item{background:rgba(11,16,32,.85);border:1px solid var(--line);border-radius:16px;padding:1rem;display:flex;flex-direction:column;justify-content:space-between}
+        .shop-item.equipped{border-color:#38bdf8;background:rgba(56,189,248,.08)}
+        .shop-item.locked{opacity:.68}
+        .shop-item h4{margin:.2rem 0 .3rem;font-size:.98rem}
+        .shop-item p{font-size:.8rem;color:var(--mut);margin:0 0 .8rem;line-height:1.35}
+        .shop-price{font-weight:700;color:#d9c2ff;font-size:.85rem;margin-bottom:.6rem}
+
+        /* Boîte Gacha */
+        .gacha-container{background:linear-gradient(135deg,rgba(139,77,255,.18),rgba(56,189,248,.12));border:1px solid rgba(139,77,255,.45);border-radius:20px;padding:1.4rem;text-align:center;margin-bottom:1.2rem}
+        .gacha-container h3{color:#d9c2ff;margin-top:0;margin-bottom:.4rem}
+        .gacha-rates{font-size:.78rem;color:var(--mut);margin-bottom:.9rem}
+        .gacha-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+        .gacha-result-modal{background:rgba(9,13,22,.96);border:2px solid #8b4dff;border-radius:18px;padding:1.1rem;margin-top:1rem;display:none;text-align:left}
+        .rarity-common{color:#94a3b8}
+        .rarity-rare{color:#38bdf8}
+        .rarity-epic{color:#c084fc}
+        .rarity-legendary{color:#facc15}
+
+        /* Classement */
+        #view-rank{display:none}
+        .rank-controls{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+        .pseudo-box{display:flex;gap:.5rem;justify-content:center;margin-bottom:1.2rem;flex-wrap:wrap}
+        .pseudo-box input{background:rgba(9,13,22,.8);border:1px solid var(--line);color:#fff;padding:.55rem .9rem;border-radius:10px;font-size:.9rem}
+        .rank-table{width:100%;border-collapse:collapse;background:rgba(11,16,32,.7);border-radius:14px;overflow:hidden}
+        .rank-table th,.rank-table td{padding:.75rem 1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,.06);font-size:.92rem}
+        .rank-table th{color:var(--mut);font-weight:600;background:rgba(255,255,255,.03)}
+        .rank-me{background:rgba(56,189,248,.12);font-weight:700;color:#7dd3fc}
+    </style>
+</head>
+<body>
+    <header class="site-header"><div class="bar">
+        <a class="brand" href="/" aria-label="Flexarion, retour à l'accueil">
+            <img src="/assets/images/logo.png" alt="Logo du studio Flexarion" width="44" height="44">FLEXAR<span>ION</span>
+        </a>
+        <nav class="nav" aria-label="Navigation principale">
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/about/">À propos</a></li>
+                <li><a href="/crowMaster/">crowMaster <i class="dot"></i></a></li>
+                <li><a href="/jouer-en-ligne/" class="active" aria-current="page">Jouer en ligne</a></li>
+                <li><a href="/devLog/">DevLog</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="/betaSignup.html" class="btn btn-primary">Rejoindre la Bêta</a>
+    </div></header>
+
+    <main>
+        <section class="hero small"><i class="orb a"></i><i class="orb b"></i>
+            <span class="pill">L'Arcade de crowMaster</span>
+            <h1>Mini-jeux <span class="grad">en ligne</span></h1>
+            <p class="lead">Développez votre Nid d'Obsidienne, gérez vos Renaissances stratégiques et invoquez des skins et accessoires au Gacha.</p>
+        </section>
+
+        <div class="wrap">
+            <section class="card reveal">
+                <div class="arcade-wrap">
+                    <!-- Barre de bourse commune -->
+                    <div class="wallet-bar">
+                        <div class="wallet-feathers">
+                            <span>🪶 Bourse : <strong id="wallet-count">0</strong> plume(s) d'obsidienne</span>
+                        </div>
+                        <div style="font-size:.88rem;color:var(--mut)">
+                            Joueur : <strong id="display-pseudo" style="color:#fff">Corbeau Anonyme</strong>
+                        </div>
+                    </div>
+
+                    <!-- Onglets principaux -->
+                    <div class="tabs" id="main-tabs">
+                        <button type="button" class="tab-btn active" data-tab="menu">🎮 Choisir un jeu</button>
+                        <button type="button" class="tab-btn" data-tab="shop">🔮 Gacha & Collection</button>
+                        <button type="button" class="tab-btn" data-tab="rank">🏆 Classement</button>
+                    </div>
+
+                    <!-- VUE 1 : MENU DE SÉLECTION DES 3 JEUX -->
+                    <div id="view-menu">
+                        <div class="games-grid">
+                            <div class="game-card">
+                                <div>
+                                    <span class="badge">Jeu 1 · Classique</span>
+                                    <h3>Le Vol du Corbeau</h3>
+                                    <p>Volez entre les rochers escarpés, attrapez des plumes et esquivez les météores.</p>
+                                </div>
+                                <div>
+                                    <div class="rec">Record : <span id="rec-flappy">0</span> pts</div>
+                                    <button type="button" class="btn btn-primary" style="width:100%" data-launch="flappy">Jouer</button>
+                                </div>
+                            </div>
+
+                            <div class="game-card" style="border-color:rgba(139,77,255,.5)">
+                                <div>
+                                    <span class="badge">Jeu 2 · Idle Équilibré</span>
+                                    <h3>Le Nid d'Obsidienne</h3>
+                                    <p>Bâtiments, recherches, sorts, quêtes et renaissances pour farmer des plumes.</p>
+                                </div>
+                                <div>
+                                    <div class="rec">Record : <span id="rec-idle">0</span> pts</div>
+                                    <button type="button" class="btn btn-primary" style="width:100%" data-launch="idle">Gérer mon Nid</button>
+                                </div>
+                            </div>
+
+                            <div class="game-card">
+                                <div>
+                                    <span class="badge">Jeu 3 · Ascension</span>
+                                    <h3>L'Ascension du Nid</h3>
+                                    <p>Bondissez de branche en branche vers la cime de l'Arbre-Monde sans tomber dans le vide.</p>
+                                </div>
+                                <div>
+                                    <div class="rec">Record : <span id="rec-climb">0</span> pts</div>
+                                    <button type="button" class="btn btn-primary" style="width:100%" data-launch="climb">Jouer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VUE 2 : ZONE DE JEU -->
+                    <div id="view-play">
+                        <div class="play-header">
+                            <button type="button" class="btn btn-secondary" id="btn-back-menu" style="padding:.45rem .9rem;font-size:.85rem">← Menu des jeux</button>
+                            <strong id="current-game-title" style="color:#7dd3fc">Le Vol du Corbeau</strong>
+                        </div>
+                        <div class="game-canvas-box">
+                            <canvas id="c" width="480" height="720" tabindex="0" role="img" aria-label="Zone de mini-jeu crowMaster"></canvas>
+                            <div class="game-stat" id="game-controls-hint">Record : <strong id="best">0</strong> pts · <strong>Espace</strong> / <strong>Clic</strong></div>
+
+                            <!-- MENU INTERACTIF SPÉCIFIQUE AU JEU IDLE -->
+                            <div id="idle-ui-panel">
+                                <div class="idle-tabs">
+                                    <button type="button" class="idle-tab-btn active" data-idle-tab="buildings">🏛️ Bâtiments</button>
+                                    <button type="button" class="idle-tab-btn" data-idle-tab="skills">⚡ Sorts & Tech</button>
+                                    <button type="button" class="idle-tab-btn" data-idle-tab="quests">📜 Quêtes</button>
+                                    <button type="button" class="idle-tab-btn" data-idle-tab="prestige">🌌 Prestige</button>
+                                </div>
+
+                                <div id="idle-tab-buildings">
+                                    <div class="idle-mult-bar">
+                                        <span>Quantité d'achat :</span>
+                                        <div class="mult-pills">
+                                            <button type="button" class="mult-pill active" data-buy-mult="1">x1</button>
+                                            <button type="button" class="mult-pill" data-buy-mult="10">x10</button>
+                                            <button type="button" class="mult-pill" data-buy-mult="max">Max</button>
+                                        </div>
+                                    </div>
+                                    <div class="idle-list" id="idle-buildings-list"></div>
+                                </div>
+
+                                <div id="idle-tab-skills" style="display:none">
+                                    <div class="idle-list" id="idle-skills-list"></div>
+                                </div>
+
+                                <div id="idle-tab-quests" style="display:none">
+                                    <div class="idle-list" id="idle-quests-list"></div>
+                                </div>
+
+                                <div id="idle-tab-prestige" style="display:none">
+                                    <div style="text-align:center;padding:.8rem">
+                                        <h4 style="color:#d9c2ff;margin-bottom:.4rem">🌌 Renaissance d'Obsidienne</h4>
+                                        <p style="font-size:.85rem;color:var(--mut);margin-bottom:.8rem">Réinitialise votre Essence et vos Bâtiments pour obtenir des <strong>Éclats d'Éternité</strong> (+15% de production globale par éclat).</p>
+                                        <p style="font-size:.95rem;margin-bottom:.8rem">Éclats actuels : <strong id="prestige-current" style="color:#38bdf8">0</strong> (+<span id="prestige-bonus">0</span>%)</p>
+                                        <p style="font-size:.9rem;margin-bottom:1rem">Éclats à gagner maintenant : <strong id="prestige-gain" style="color:#4ade80">0</strong> (Nécessite 5 000 Essence cumulée)</p>
+                                        <button type="button" class="btn btn-primary" id="btn-do-prestige" style="width:100%">Effectuer la Renaissance</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="game-bar">
+                                <button class="btn btn-primary" id="btn-play" type="button">Jouer</button>
+                                <button class="btn btn-secondary" id="btn-sound" type="button">Son : activé</button>
+                                <button class="btn btn-secondary" id="btn-share" type="button">Partager mon score</button>
+                            </div>
+                            <div id="cta">
+                                <p><strong>Envie du vrai jeu ?</strong> crowMaster, avec ses boss divins, ses guildes et son nid, est en développement.</p>
+                                <a href="/betaSignup.html" class="btn btn-primary">Rejoindre la bêta de crowMaster</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VUE 3 : GACHA EXCLUSIF & COLLECTION -->
+                    <div id="view-shop">
+                        <div class="gacha-container">
+                            <h3>🔮 Portail Gacha d'Obsidienne</h3>
+                            <p style="font-size:0.88rem;color:var(--mut);margin-bottom:0.4rem">Tous les <strong>Skins</strong> et <strong>Accessoires</strong> s'obtiennent uniquement par invocation dans ce portail !</p>
+                            <div class="gacha-rates">Taux : Commun 55% · Rare 30% · Épique 12% · Légendaire 3%</div>
+                            <div class="gacha-btns">
+                                <button type="button" class="btn btn-primary" onclick="window.__pullGacha(1)">🎟️ 1 Ticket (50 plumes)</button>
+                                <button type="button" class="btn btn-primary" onclick="window.__pullGacha(10)">✨ 10 Tickets (500 plumes)</button>
+                            </div>
+                            <div id="gacha-modal" class="gacha-result-modal">
+                                <h4 id="gacha-result-title" style="margin:0 0 .5rem;color:#7dd3fc">Résultat de l'invocation</h4>
+                                <div id="gacha-result-content" style="font-size:0.86rem;max-height:220px;overflow-y:auto"></div>
+                            </div>
+                        </div>
+
+                        <h3 class="shop-section-title">
+                            <span>👑 Garde-robe : Accessoires (Gacha uniquement)</span>
+                            <span id="acc-progress" style="font-size:.82rem;color:var(--mut)"></span>
+                        </h3>
+                        <div class="shop-grid" id="shop-accessories"></div>
+
+                        <h3 class="shop-section-title">
+                            <span>🦅 Garde-robe : Apparences / Skins (Gacha uniquement)</span>
+                            <span id="skin-progress" style="font-size:.82rem;color:var(--mut)"></span>
+                        </h3>
+                        <div class="shop-grid" id="shop-skins"></div>
+
+                        <h3 class="shop-section-title">⚡ Améliorations permanentes</h3>
+                        <div class="shop-grid" id="shop-upgrades"></div>
+                    </div>
+
+                    <!-- VUE 4 : CLASSEMENT -->
+                    <div id="view-rank">
+                        <div class="pseudo-box">
+                            <input type="text" id="input-pseudo" maxlength="18" placeholder="Votre pseudo de joueur...">
+                            <button type="button" class="btn btn-primary" id="btn-save-pseudo" style="padding:.55rem 1rem;font-size:.88rem">Enregistrer</button>
+                        </div>
+                        <div class="rank-controls">
+                            <button type="button" class="tab-btn active" data-rank-game="flappy">Le Vol du Corbeau</button>
+                            <button type="button" class="tab-btn" data-rank-game="idle">Le Nid d'Obsidienne</button>
+                            <button type="button" class="tab-btn" data-rank-game="climb">L'Ascension du Nid</button>
+                        </div>
+                        <table class="rank-table">
+                            <thead>
+                                <tr><th>#</th><th>Joueur</th><th>Score</th><th>Rang</th></tr>
+                            </thead>
+                            <tbody id="rank-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h3>Flexarion</h3><p>Studio indépendant créateur de <strong>crowMaster</strong>.</p></div>
+            <div class="footer-section"><h4>Informations légales</h4><p><span class="footer-note">Hébergé par GitHub Pages • Domaine IONOS</span></p></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 Flexarion. Tous droits réservés.</p></div>
+    </footer>
+
+<script>
+(()=>{
+"use strict";
+const W=480,H=720,GROUND=H-56;
+const MAX_PARTICLES=120; // Limite stricte anti-lag / anti-crash CPU
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+const $=id=>document.getElementById(id);
+function fit(){const r=Math.min(window.devicePixelRatio||1,2);cv.width=W*r;cv.height=H*r;ctx.setTransform(r,0,0,r,0,0)}
+fit();window.addEventListener('resize',fit);
+
+const SKINS=[
+    {id:'classic',name:'Corbeau d\'Obsidienne',desc:'Le plumage nocturne originel.',rarity:'common',body:'#1b2440',wing:'#0f1528',glow:'rgba(120,170,255,.45)',beak:'#f2b240'},
+    {id:'ash',name:'Corbeau des Cendres',desc:'Plumes gris ardoise des terres brûlées.',rarity:'common',body:'#334155',wing:'#1e293b',glow:'rgba(148,163,184,.5)',beak:'#cbd5e1'},
+    {id:'moss',name:'Gardien Sylvestre',desc:'Camouflage de mousse et d\'émeraude.',rarity:'common',body:'#14532d',wing:'#052e16',glow:'rgba(52,211,153,.55)',beak:'#a7f3d0'},
+    {id:'spectral',name:'Spectre Éthéré',desc:'Corbeau fantomatique aux reflets cyan.',rarity:'rare',body:'#164e63',wing:'#083344',glow:'rgba(56,189,248,.85)',beak:'#7dd3fc'},
+    {id:'amethyst',name:'Oracle d\'Améthyste',desc:'Imprégné de magie cristalline violette.',rarity:'rare',body:'#581c87',wing:'#3b0764',glow:'rgba(192,132,252,.85)',beak:'#f0abfc'},
+    {id:'sakura',name:'Corbeau Printanier',desc:'Plumage rosé des cerisiers sacrés.',rarity:'rare',body:'#831843',wing:'#500724',glow:'rgba(244,114,182,.85)',beak:'#fbcfe8'},
+    {id:'royal',name:'Corbeau Solaire',desc:'Plumage doré des anciens gardiens divins.',rarity:'epic',body:'#78350f',wing:'#451a03',glow:'rgba(251,191,36,.9)',beak:'#fef08a'},
+    {id:'crimson',name:'Phénix d\'Obsidienne',desc:'Forgé dans la braise des météores.',rarity:'epic',body:'#7f1d1d',wing:'#450a0a',glow:'rgba(248,113,113,.9)',beak:'#fdba74'},
+    {id:'cyber',name:'Corbeau Néon 2099',desc:'Armure cybernétique à circuit lumineux.',rarity:'epic',body:'#0f172a',wing:'#020617',glow:'rgba(34,211,238,.95)',beak:'#22d3ee'},
+    {id:'shadow_lord',name:'Seigneur du Néant',desc:'Absorbe la lumière stellaire.',rarity:'legendary',body:'#1e1b4b',wing:'#090d16',glow:'rgba(168,85,247,1)',beak:'#e879f9'},
+    {id:'frost_crow',name:'Souverain Glaciaire',desc:'Né au sommet de l’Arbre-Monde.',rarity:'legendary',body:'#0369a1',wing:'#0c4a6e',glow:'rgba(125,211,252,1)',beak:'#ffffff'},
+    {id:'celestial',name:'Avatar Cosmique',desc:'Composé de poussière d\'étoiles.',rarity:'legendary',body:'#312e81',wing:'#1e1b4b',glow:'rgba(250,204,21,1)',beak:'#fde047'}
+];
+
+const ACCESSORIES=[
+    {id:'none',name:'Aucun accessoire',desc:'Tête nue et aérodynamique.',rarity:'common'},
+    {id:'scarf',name:'Écharpe du Voyageur',desc:'Une écharpe rouge flottant au vent.',rarity:'common'},
+    {id:'monocle',name:'Monocle d\'Alchimiste',desc:'Un monocle doré pour scruter l\'essence.',rarity:'rare'},
+    {id:'wizard_hat',name:'Chapeau d\'Archimage',desc:'Chapeau pointu étoilé des mages corbeaux.',rarity:'rare'},
+    {id:'crown',name:'Couronne d\'Or',desc:'La couronne des rois du Nid d\'Obsidienne.',rarity:'epic'},
+    {id:'halo',name:'Auréole Céleste',desc:'Un anneau de lumière divine flottant.',rarity:'epic'},
+    {id:'devil_horns',name:'Cornes d\'Obsidienne',desc:'Cornes enflammées des profondeurs.',rarity:'legendary'},
+    {id:'spirit_orb',name:'Esprit Gardien',desc:'Un feu follet bleu qui orbite autour de vous.',rarity:'legendary'}
+];
+
+const UPGRADES=[
+    {id:'magnet',name:'Aimant à Plumes',desc:'Attire les plumes en vol et offre +25% de production dans le jeu Idle.',price:30},
+    {id:'shield',name:'Bouclier Astral',desc:'Protège d\'un impact en vol et double la puissance de clic dans le jeu Idle.',price:50},
+    {id:'doubleFeather',name:'Alchimie d\'Obsidienne',desc:'Double toutes les plumes gagnées dans votre bourse.',price:75}
+];
+
+const DEFAULT_SAVE={
+    feathers:100,
+    pseudo:'Corbeau Anonyme',
+    equippedSkin:'classic',
+    unlockedSkins:['classic'],
+    equippedAcc:'none',
+    unlockedAcc:['none'],
+    upgrades:{magnet:false,shield:false,doubleFeather:false},
+    bests:{flappy:0,idle:0,climb:0},
+    idleState:{
+        essence:0,
+        totalEssence:0,
+        runEssence:0,
+        totalClicks:0,
+        prestigeShards:0,
+        buildings:[0,0,0,0,0,0],
+        techs:[0,0,0],
+        claimedQuests:[]
+    },
+    leaderboards:{
+        flappy:[{name:'Gardien d\'Obsidienne',score:45},{name:'Ombre du Nid',score:28},{name:'Plume Noire',score:15}],
+        idle:[{name:'Seigneur du Nid',score:500},{name:'Alchimiste Astral',score:220},{name:'Bâtisseur',score:90}],
+        climb:[{name:'Seigneur de la Cime',score:85},{name:'Veilleur des Branches',score:50},{name:'Grimpeur',score:25}]
+    }
+};
+let save=JSON.parse(JSON.stringify(DEFAULT_SAVE));
+try{
+    const raw=localStorage.getItem('crowmaster_arcade_v7');
+    if(raw){
+        const p=JSON.parse(raw);
+        save={
+            ...save,...p,
+            bests:{...save.bests,...(p.bests||{})},
+            upgrades:{...save.upgrades,...(p.upgrades||{})},
+            idleState:{...save.idleState,...(p.idleState||{})},
+            leaderboards:{...save.leaderboards,...(p.leaderboards||{})}
+        };
+    }
+}catch(e){}
+function persist(){try{localStorage.setItem('crowmaster_arcade_v7',JSON.stringify(save))}catch(e){}}
+
+const getSkin=()=>SKINS.find(s=>s.id===save.equippedSkin)||SKINS[0];
+const getAcc=()=>save.equippedAcc||'none';
+
+let activeGame='flappy',currentRankGame='flappy',currentIdleTab='buildings',buyMultiplier=1;
+
+function switchTab(tab){
+    if(activeGame==='idle')persist();
+    document.querySelectorAll('#main-tabs .tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+    $('view-menu').style.display=tab==='menu'?'block':'none';
+    $('view-shop').style.display=tab==='shop'?'block':'none';
+    $('view-rank').style.display=tab==='rank'?'block':'none';
+    $('view-play').style.display='none';
+    if(state==='playing'&&activeGame!=='idle')state='paused';
+    refreshUI();
+}
+document.querySelectorAll('#main-tabs .tab-btn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+
+function refreshUI(){
+    $('wallet-count').textContent=save.feathers;
+    $('display-pseudo').textContent=save.pseudo;
+    $('input-pseudo').value=save.pseudo==='Corbeau Anonyme'?'':save.pseudo;
+    $('rec-flappy').textContent=save.bests.flappy;
+    $('rec-idle').textContent=save.bests.idle;
+    $('rec-climb').textContent=save.bests.climb;
+    renderShop();
+    renderRank();
+    if(activeGame==='idle')renderIdlePanel();
+}
+
+function renderShop(){
+    $('acc-progress').textContent=`${save.unlockedAcc.length} / ${ACCESSORIES.length} débloqués`;
+    $('skin-progress').textContent=`${save.unlockedSkins.length} / ${SKINS.length} débloqués`;
+
+    $('shop-accessories').innerHTML=ACCESSORIES.map(ac=>{
+        const owned=save.unlockedAcc.includes(ac.id);
+        const eq=save.equippedAcc===ac.id;
+        return `<div class="shop-item ${eq?'equipped':''} ${!owned?'locked':''}">
+            <div>
+                <span class="rarity-${ac.rarity}" style="font-size:0.72rem;font-weight:800;text-transform:uppercase">${ac.rarity}</span>
+                <h4>${ac.name}</h4>
+                <p>${ac.desc}</p>
+            </div>
+            <div>
+                <div class="shop-price">${owned?(eq?'✔ Équipé':'✔ Débloqué'):'🔒 Gacha uniquement'}</div>
+                <button type="button" class="btn ${eq?'btn-secondary':'btn-primary'}" style="width:100%;padding:.45rem;font-size:.82rem" ${eq||!owned?'disabled':''} onclick="window.__equipAcc('${ac.id}')">
+                    ${eq?'Équipé':(owned?'Équiper':'Verrouillé')}
+                </button>
+            </div>
+        </div>`;
+    }).join('');
+
+    $('shop-skins').innerHTML=SKINS.map(sk=>{
+        const owned=save.unlockedSkins.includes(sk.id);
+        const eq=save.equippedSkin===sk.id;
+        return `<div class="shop-item ${eq?'equipped':''} ${!owned?'locked':''}">
+            <div>
+                <span class="rarity-${sk.rarity}" style="font-size:0.72rem;font-weight:800;text-transform:uppercase">${sk.rarity}</span>
+                <h4>${sk.name}</h4>
+                <p>${sk.desc}</p>
+            </div>
+            <div>
+                <div class="shop-price">${owned?(eq?'✔ Équipé':'✔ Débloqué'):'🔒 Gacha uniquement'}</div>
+                <button type="button" class="btn ${eq?'btn-secondary':'btn-primary'}" style="width:100%;padding:.45rem;font-size:.82rem" ${eq||!owned?'disabled':''} onclick="window.__equipSkin('${sk.id}')">
+                    ${eq?'Équipé':(owned?'Équiper':'Verrouillé')}
+                </button>
+            </div>
+        </div>`;
+    }).join('');
+
+    $('shop-upgrades').innerHTML=UPGRADES.map(up=>{
+        const owned=save.upgrades[up.id];
+        return `<div class="shop-item ${owned?'equipped':''}">
+            <div><h4>${up.name}</h4><p>${up.desc}</p></div>
+            <div>
+                <div class="shop-price">${owned?'✔ Actif':'🪶 '+up.price+' plumes'}</div>
+                <button type="button" class="btn ${owned?'btn-secondary':'btn-primary'}" style="width:100%;padding:.45rem;font-size:.82rem" ${owned?'disabled':''} onclick="window.__buyUpgrade('${up.id}')">
+                    ${owned?'Débloqué':'Acheter'}
+                </button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+window.__equipSkin=id=>{if(save.unlockedSkins.includes(id)){save.equippedSkin=id;persist();refreshUI();beep(700,.08,'sine',.06)}};
+window.__equipAcc=id=>{if(save.unlockedAcc.includes(id)){save.equippedAcc=id;persist();refreshUI();beep(750,.08,'sine',.06)}};
+window.__buyUpgrade=id=>{
+    const up=UPGRADES.find(u=>u.id===id);if(!up||save.upgrades[id])return;
+    if(save.feathers>=up.price){save.feathers-=up.price;save.upgrades[id]=true;persist();refreshUI();beep(950,.15,'sine',.08)}
+    else alert("Pas assez de plumes d'obsidienne !");
+};
+
+window.__pullGacha=count=>{
+    const cost=count===1?50:500;
+    if(save.feathers<cost){alert("Pas assez de plumes d'obsidienne !");return}
+    save.feathers-=cost;
+    const allPool=[
+        ...SKINS.filter(s=>s.id!=='classic').map(s=>({...s,kind:'Skin'})),
+        ...ACCESSORIES.filter(a=>a.id!=='none').map(a=>({...a,kind:'Accessoire'}))
+    ];
+    let results=[];
+    for(let i=0;i<count;i++){
+        const r=Math.random()*100;
+        let rarity=r<3?'legendary':(r<15?'epic':(r<45?'rare':'common'));
+        const candidates=allPool.filter(x=>x.rarity===rarity);
+        const drop=candidates[Math.floor(Math.random()*candidates.length)];
+        let isNew=false;
+        if(drop.kind==='Skin'){if(!save.unlockedSkins.includes(drop.id)){save.unlockedSkins.push(drop.id);isNew=true}}
+        else{if(!save.unlockedAcc.includes(drop.id)){save.unlockedAcc.push(drop.id);isNew=true}}
+        if(!isNew){
+            const refund=rarity==='legendary'?40:(rarity==='epic'?20:(rarity==='rare'?10:5));
+            save.feathers+=refund;
+            results.push({drop,isNew:false,refund});
+        }else{results.push({drop,isNew:true,refund:0})}
+    }
+    persist();refreshUI();
+    $('gacha-modal').style.display='block';
+    $('gacha-result-title').textContent=`✨ Résultat du Tirage (${count} ticket${count>1?'s':''})`;
+    $('gacha-result-content').innerHTML=results.map(res=>`
+        <div style="margin:.35rem 0;padding:.45rem .6rem;border-radius:10px;background:rgba(255,255,255,.04);display:flex;justify-content:space-between;align-items:center">
+            <span><strong class="rarity-${res.drop.rarity}">[${res.drop.rarity.toUpperCase()}]</strong> ${res.drop.kind} : <strong>${res.drop.name}</strong></span>
+            <span>${res.isNew?'<span style="color:#4ade80;font-weight:700">NOUVEAU !</span>':`<span style="color:#d9c2ff">Doublon (+${res.refund} 🪶)</span>`}</span>
+        </div>`).join('');
+    beep(1080,.22,'triangle',.1);
+};
+
+function recordScoreToLeaderboard(game,pts){
+    if(pts<=0)return;
+    const list=save.leaderboards[game];
+    const existing=list.find(e=>e.name===save.pseudo&&e.isPlayer);
+    if(existing){if(pts>existing.score)existing.score=pts}
+    else list.push({name:save.pseudo,score:pts,isPlayer:true});
+    list.sort((a,b)=>b.score-a.score);
+    save.leaderboards[game]=list.slice(0,6);
+}
+function renderRank(){
+    const list=save.leaderboards[currentRankGame]||[];
+    $('rank-tbody').innerHTML=list.map((row,i)=>`
+        <tr class="${row.isPlayer?'rank-me':''}">
+            <td><strong>#${i+1}</strong></td>
+            <td>${row.name} ${row.isPlayer?'(Vous)':''}</td>
+            <td><strong>${row.score} pts</strong></td>
+            <td>${rankTitle(row.score)}</td>
+        </tr>`).join('');
+}
+document.querySelectorAll('[data-rank-game]').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-rank-game]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');currentRankGame=b.dataset.rankGame;renderRank();
+}));
+$('btn-save-pseudo').addEventListener('click',()=>{
+    const val=$('input-pseudo').value.trim();
+    if(val){
+        const old=save.pseudo;save.pseudo=val;
+        ['flappy','idle','climb'].forEach(g=>save.leaderboards[g].forEach(r=>{if(r.isPlayer||r.name===old)r.name=val}));
+        persist();refreshUI();
+    }
+});
+
+let muted=false,AC=null;
+function beep(f,d,type,vol,slide){if(muted)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=type||'triangle';o.frequency.setValueAtTime(f,AC.currentTime);if(slide)o.frequency.exponentialRampToValueAtTime(Math.max(30,slide),AC.currentTime+d);g.gain.setValueAtTime(vol||.07,AC.currentTime);g.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+d);o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}}
+
+const IDLE_BUILDINGS=[
+    {name:'Corbeau Éclaireur',desc:'+2 Essence / clic',baseCost:15,mult:1.38,clickBonus:2,cpsBonus:0,icon:'🦅'},
+    {name:'Oisillon Collecteur',desc:'+3 Essence / sec',baseCost:25,mult:1.35,clickBonus:0,cpsBonus:3,icon:'🪶'},
+    {name:'Totem de Lune',desc:'+18 Essence / sec',baseCost:160,mult:1.38,clickBonus:0,cpsBonus:18,icon:'🌙'},
+    {name:'Autel Runique',desc:'+95 Essence / sec',baseCost:950,mult:1.4,clickBonus:0,cpsBonus:95,icon:'🔮'},
+    {name:'Forge Astrale',desc:'+480 Essence / sec',baseCost:5200,mult:1.42,clickBonus:0,cpsBonus:480,icon:'⚒️'},
+    {name:'Titan d\'Obsidienne',desc:'+2 400 Essence / sec',baseCost:28000,mult:1.45,clickBonus:0,cpsBonus:2400,icon:'🐉'}
+];
+
+const IDLE_TECHS=[
+    {name:'Griffes Acérées',desc:'Multiplie la puissance des clics par x1.5 par niveau.',baseCost:120,mult:2.6,icon:'⚔️'},
+    {name:'Résonance du Nid',desc:'Augmente la production automatique de +25% par niveau.',baseCost:250,mult:2.8,icon:'✨'},
+    {name:'Alchimie des Plumes',desc:'Réduit de 5% l\'essence requise pour gagner une plume.',baseCost:600,mult:3.2,icon:'🧪'}
+];
+
+const IDLE_QUESTS=[
+    {id:'q_click50',title:'Premier Envol',desc:'Cliquer 50 fois sur le corbeau',reward:15,check:()=>save.idleState.totalClicks>=50},
+    {id:'q_ess1000',title:'Récolteur d\'Ombre',desc:'Cumuler 1 000 Essences d\'Obsidienne',reward:25,check:()=>save.idleState.totalEssence>=1000},
+    {id:'q_bld15',title:'Architecte du Nid',desc:'Posséder 15 bâtiments au total',reward:40,check:()=>save.idleState.buildings.reduce((a,b)=>a+b,0)>=15},
+    {id:'q_ess25k',title:'Maître Alchimiste',desc:'Cumuler 25 000 Essences d\'Obsidienne',reward:75,check:()=>save.idleState.totalEssence>=25000},
+    {id:'q_prestige1',title:'Renaissance Éternelle',desc:'Effectuer au moins 1 Prestige',reward:120,check:()=>save.idleState.prestigeShards>=1}
+];
+
+let frenzyTimer=0,frenzyCooldown=0,rainCooldown=0,goldenOrb=null,orbSpawnTimer=400;
+
+function getBuildingCost(idx,qty=1){
+    const b=IDLE_BUILDINGS[idx];
+    const lvl=save.idleState.buildings[idx]||0;
+    let sum=0;
+    for(let i=0;i<qty;i++)sum+=Math.floor(b.baseCost*Math.pow(b.mult,lvl+i));
+    return sum;
+}
+function getMaxAffordable(idx){
+    let q=0,cost=0;
+    while(q<100){
+        const next=getBuildingCost(idx,q+1);
+        if(next<=save.idleState.essence){q++;cost=next}else break;
+    }
+    return {qty:Math.max(1,q),cost:q>0?cost:getBuildingCost(idx,1)};
+}
+function getGlobalMultiplier(){
+    const prestigeMult=1+(save.idleState.prestigeShards||0)*0.15;
+    const techMult=Math.pow(1.25,save.idleState.techs[1]||0);
+    const magnetMult=save.upgrades.magnet?1.25:1;
+    const frenzyMult=frenzyTimer>0?3:1;
+    return prestigeMult*techMult*magnetMult*frenzyMult;
+}
+function getIdleClickPower(){
+    const base=1+(save.idleState.buildings[0]||0)*IDLE_BUILDINGS[0].clickBonus;
+    const techClick=Math.pow(1.5,save.idleState.techs[0]||0);
+    const shieldMult=save.upgrades.shield?2:1;
+    const frenzyMult=frenzyTimer>0?3:1;
+    return Math.round(base*techClick*shieldMult*frenzyMult*10)/10;
+}
+function getIdleCPS(){
+    let raw=0;
+    for(let i=1;i<IDLE_BUILDINGS.length;i++)raw+=(save.idleState.buildings[i]||0)*IDLE_BUILDINGS[i].cpsBonus;
+    return Math.round(raw*getGlobalMultiplier()*10)/10;
+}
+function getEssencePerFeather(){
+    const reduction=Math.min(0.5,(save.idleState.techs[2]||0)*0.05);
+    const baseReq=150*(1-reduction);
+    // Courbe d'équilibrage exponentielle : chaque plume demande de plus en plus d'essence
+    return Math.floor(baseReq*Math.pow(1.08,feathersRun));
+}
+
+document.querySelectorAll('.idle-tab-btn').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('.idle-tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentIdleTab=btn.dataset.idleTab;
+    ['buildings','skills','quests','prestige'].forEach(t=>$('idle-tab-'+t).style.display=t===currentIdleTab?'block':'none');
+    renderIdlePanel();
+}));
+document.querySelectorAll('.mult-pill').forEach(p=>p.addEventListener('click',()=>{
+    document.querySelectorAll('.mult-pill').forEach(x=>x.classList.remove('active'));
+    p.classList.add('active');
+    buyMultiplier=p.dataset.buyMult==='max'?'max':Number(p.dataset.buyMult);
+    renderIdlePanel();
+}));
+
+function renderIdlePanel(){
+    if(currentIdleTab==='buildings'){
+        $('idle-buildings-list').innerHTML=IDLE_BUILDINGS.map((b,idx)=>{
+            const lvl=save.idleState.buildings[idx]||0;
+            let qty=1,cost=getBuildingCost(idx,1);
+            if(buyMultiplier==='max'){const m=getMaxAffordable(idx);qty=m.qty;cost=m.cost}
+            else{qty=buyMultiplier;cost=getBuildingCost(idx,qty)}
+            const can=save.idleState.essence>=cost;
+            return `<div class="idle-row">
+                <div class="idle-row-info">
+                    <h4>${b.icon} ${b.name} <span style="color:#38bdf8;font-size:.82rem">(Niv. ${lvl})</span></h4>
+                    <p>${b.desc}</p>
+                </div>
+                <button type="button" class="idle-buy-btn" ${can?'':'disabled'} onclick="window.__buyIdleBld(${idx},${qty})">
+                    +${qty} (${fmtNum(cost)} ✨)
+                </button>
+            </div>`;
+        }).join('');
+    }else if(currentIdleTab==='skills'){
+        const frenzyReady=frenzyCooldown<=0&&frenzyTimer<=0;
+        const rainReady=rainCooldown<=0;
+        $('idle-skills-list').innerHTML=`
+            <div class="idle-row" style="border-color:rgba(139,77,255,.4)">
+                <div class="idle-row-info">
+                    <h4>🔥 Sort : Frénésie du Nid</h4>
+                    <p>Triple (x3) toute la production et les clics pendant 15 secondes.</p>
+                </div>
+                <button type="button" class="idle-buy-btn" ${frenzyReady?'':'disabled'} onclick="window.__castSkill('frenzy')">
+                    ${frenzyTimer>0?`Actif (${Math.ceil(frenzyTimer)}s)`:(frenzyReady?'Lancer':`${Math.ceil(frenzyCooldown)}s`)}
+                </button>
+            </div>
+            <div class="idle-row" style="border-color:rgba(139,77,255,.4)">
+                <div class="idle-row-info">
+                    <h4>🌠 Sort : Pluie d'Essence</h4>
+                    <p>Génère instantanément 30 secondes de votre production passive.</p>
+                </div>
+                <button type="button" class="idle-buy-btn" ${rainReady?'':'disabled'} onclick="window.__castSkill('rain')">
+                    ${rainReady?'Lancer':`${Math.ceil(rainCooldown)}s`}
+                </button>
+            </div>
+            ${IDLE_TECHS.map((tc,idx)=>{
+                const lvl=save.idleState.techs[idx]||0;
+                const cost=Math.floor(tc.baseCost*Math.pow(tc.mult,lvl));
+                const can=save.idleState.essence>=cost;
+                return `<div class="idle-row">
+                    <div class="idle-row-info">
+                        <h4>${tc.icon} ${tc.name} <span style="color:#d9c2ff">(Niv. ${lvl})</span></h4>
+                        <p>${tc.desc}</p>
+                    </div>
+                    <button type="button" class="idle-buy-btn" ${can?'':'disabled'} onclick="window.__buyIdleTech(${idx})">
+                        Améliorer (${fmtNum(cost)} ✨)
+                    </button>
+                </div>`;
+            }).join('')}
+        `;
+    }else if(currentIdleTab==='quests'){
+        $('idle-quests-list').innerHTML=IDLE_QUESTS.map(q=>{
+            const claimed=save.idleState.claimedQuests.includes(q.id);
+            const done=q.check();
+            return `<div class="idle-row">
+                <div class="idle-row-info">
+                    <h4>${q.title} ${claimed?'✅':''}</h4>
+                    <p>${q.desc} · Récompense : <strong style="color:#d9c2ff">+${q.reward} 🪶</strong></p>
+                </div>
+                <button type="button" class="idle-buy-btn" ${(!claimed&&done)?'':'disabled'} onclick="window.__claimQuest('${q.id}')">
+                    ${claimed?'Réclamé':(done?'Réclamer':'En cours')}
+                </button>
+            </div>`;
+        }).join('');
+    }else if(currentIdleTab==='prestige'){
+        const shards=save.idleState.prestigeShards||0;
+        const gain=Math.floor(save.idleState.runEssence/5000);
+        $('prestige-current').textContent=shards;
+        $('prestige-bonus').textContent=shards*15;
+        $('prestige-gain').textContent=gain;
+        $('btn-do-prestige').disabled=gain<=0;
+    }
+}
+
+window.__buyIdleBld=(idx,qty)=>{
+    const cost=getBuildingCost(idx,qty);
+    if(save.idleState.essence>=cost){
+        save.idleState.essence-=cost;
+        save.idleState.buildings[idx]=(save.idleState.buildings[idx]||0)+qty;
+        beep(760,.09,'sine',.07,1040);
+        burst(W/2,250,'#38bdf8',14,4);
+        persist();renderIdlePanel();
+    }
+};
+window.__buyIdleTech=idx=>{
+    const tc=IDLE_TECHS[idx];
+    const lvl=save.idleState.techs[idx]||0;
+    const cost=Math.floor(tc.baseCost*Math.pow(tc.mult,lvl));
+    if(save.idleState.essence>=cost){
+        save.idleState.essence-=cost;
+        save.idleState.techs[idx]=lvl+1;
+        beep(860,.12,'sine',.08,1180);
+        burst(W/2,250,'#c084fc',18,4.5);
+        persist();renderIdlePanel();
+    }
+};
+window.__castSkill=type=>{
+    if(type==='frenzy'&&frenzyCooldown<=0&&frenzyTimer<=0){
+        frenzyTimer=15;frenzyCooldown=45;
+        beep(600,.2,'triangle',.09,1200);
+        burst(W/2,250,'#facc15',25,5);
+    }else if(type==='rain'&&rainCooldown<=0){
+        const bonus=Math.max(50,getIdleCPS()*30);
+        gainIdleEssence(bonus,true,W/2,200);
+        rainCooldown=40;
+        beep(820,.2,'sine',.09,1300);
+        burst(W/2,200,'#38bdf8',25,5);
+    }
+    renderIdlePanel();
+};
+window.__claimQuest=id=>{
+    const q=IDLE_QUESTS.find(x=>x.id===id);
+    if(!q||save.idleState.claimedQuests.includes(id)||!q.check())return;
+    save.idleState.claimedQuests.push(id);
+    collectFeather(W/2,220,q.reward);
+    persist();renderIdlePanel();
+};
+$('btn-do-prestige').addEventListener('click',()=>{
+    const gain=Math.floor(save.idleState.runEssence/5000);
+    if(gain<=0)return;
+    if(confirm(`Effectuer la Renaissance pour gagner +${gain} Éclat(s) d'Éternité (+${gain*15}% de production permanente) ?`)){
+        save.idleState.prestigeShards=(save.idleState.prestigeShards||0)+gain;
+        save.idleState.essence=0;
+        save.idleState.runEssence=0;
+        save.idleState.buildings=[0,0,0,0,0,0];
+        idleFeatherProgress=0;
+        beep(950,.25,'sine',.1,1400);
+        burst(W/2,250,'#d9c2ff',35,6);
+        persist();renderIdlePanel();
+    }
+});
+
+function fmtNum(n){
+    if(n>=1e6)return (n/1e6).toFixed(2)+'M';
+    if(n>=1e3)return (n/1e3).toFixed(1)+'k';
+    return Math.floor(n);
+}
+
+let state='ready',score=0,feathersRun=0,t=0,shake=0,overAt=0,hasShield=false;
+const crow={x:118,y:H/2,vx:0,vy:0,rot:0,wing:0};
+let parts=[],floatTexts=[];
+const stars=Array.from({length:70},()=>({x:Math.random()*W,y:Math.random()*(GROUND-120),r:Math.random()*1.4+.3,p:Math.random()*6.28}));
+const keys={left:false,right:false};
+let pointerTargetX=null;
+
+let speed=2.6,nextMeteor=240,pillars=[],items=[],meteors=[];
+let platforms=[],camY=0;
+let idlePulse=0,idleSaveTimer=0,idleFeatherProgress=0,idleUiTick=0;
+
+const total=()=>activeGame==='idle'?Math.floor(save.idleState.totalEssence/50):score+feathersRun*3;
+function rankTitle(s){return s<15?'Corbeau novice':s<35?'Plume aguerrie':s<65?'Maître des ciels':'Légende de crowMaster'}
+function burst(x,y,col,n,sp){
+    for(let i=0;i<n;i++){
+        if(parts.length>=MAX_PARTICLES) parts.shift(); // Évite l'accumulation excessive et le crash CPU
+        const a=Math.random()*6.28,s=(Math.random()*.7+.3)*sp;
+        parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-1,life:1,c:col,s:Math.random()*3+1.5});
+    }
+}
+function addFloatText(txt,x,y,col){
+    if(floatTexts.length>20) floatTexts.shift();
+    floatTexts.push({txt,x,y,vy:-1.4,life:1,col});
+}
+function circleRect(cx,cy,r,rx,ry,rw,rh){const nx=Math.max(rx,Math.min(cx,rx+rw)),ny=Math.max(ry,Math.min(cy,ry+rh));return (cx-nx)**2+(cy-ny)**2<r*r}
+
+function collectFeather(x,y,bonusCount=1){
+    feathersRun+=bonusCount;
+    const mult=save.upgrades.doubleFeather?2:1;
+    save.feathers+=bonusCount*mult;
+    $('wallet-count').textContent=save.feathers;
+    beep(880,.09,'sine',.07);setTimeout(()=>beep(1320,.12,'sine',.06),70);
+    burst(x,y,'#b57bff',10,4);
+}
+
+function triggerHit(){
+    if(hasShield){hasShield=false;shake=10;beep(300,.2,'sine',.1,600);burst(crow.x,crow.y,'#38bdf8',15,5);return false}
+    return true;
+}
+
+function die(){
+    if(state!=='playing')return;
+    state='over';overAt=t;shake=14;
+    beep(120,.35,'sawtooth',.1,40);
+    burst(W/2,H/2,getSkin().body,20,6);
+    const s=total();
+    if(s>save.bests[activeGame])save.bests[activeGame]=s;
+    recordScoreToLeaderboard(activeGame,s);
+    persist();
+    $('best').textContent=save.bests[activeGame];
+    $('cta').style.display='block';
+}
+
+function launchGame(gameId){
+    activeGame=gameId;
+    $('view-menu').style.display='none';
+    $('view-shop').style.display='none';
+    $('view-rank').style.display='none';
+    $('view-play').style.display='block';
+    $('idle-ui-panel').style.display=gameId==='idle'?'block':'none';
+
+    const titles={flappy:'Le Vol du Corbeau',idle:'Le Nid d\'Obsidienne',climb:'L\'Ascension du Nid'};
+    const hints={
+        flappy:'Record : <strong id="best">0</strong> pts · <strong>Espace</strong> ou <strong>Clic</strong> pour voler',
+        idle:'Score du Nid : <strong id="best">0</strong> pts · <strong>Cliquez sur le corbeau ou les orbes</strong>',
+        climb:'Record : <strong id="best">0</strong> pts · <strong>Flèches ← →</strong> ou <strong>Glisser</strong> pour diriger'
+    };
+    $('current-game-title').textContent=titles[gameId];
+    $('game-controls-hint').innerHTML=hints[gameId];
+    $('best').textContent=save.bests[gameId];
+
+    if(gameId==='idle'){
+        resetGame();
+        state='playing';
+        $('btn-play').style.display='none';
+        renderIdlePanel();
+    }else{
+        $('btn-play').style.display='inline-flex';
+        state='ready';
+        resetGame();
+    }
+    cv.focus({preventScroll:true});
+}
+document.querySelectorAll('[data-launch]').forEach(b=>b.addEventListener('click',()=>launchGame(b.dataset.launch)));
+$('btn-back-menu').addEventListener('click',()=>switchTab('menu'));
+
+function resetGame(){
+    score=0;feathersRun=0;parts=[];floatTexts=[];shake=0;hasShield=save.upgrades.shield;pointerTargetX=null;
+    $('cta').style.display='none';
+    if(activeGame==='flappy'){
+        $('btn-play').textContent='Jouer';
+        crow.x=118;crow.y=H/2;crow.vx=0;crow.vy=0;crow.rot=0;
+        pillars=[];items=[];meteors=[];speed=2.6;nextMeteor=260;
+        spawnPillar(W+80);
+    }else if(activeGame==='idle'){
+        crow.x=W/2;crow.y=360;crow.vx=0;crow.vy=0;crow.rot=0;
+    }else if(activeGame==='climb'){
+        $('btn-play').textContent='Jouer';
+        crow.x=W/2;crow.y=GROUND-40;crow.vx=0;crow.vy=-11;crow.rot=0;
+        platforms=[];items=[];camY=0;
+        platforms.push({x:W/2-55,y:GROUND-10,w:110});
+        for(let i=1;i<11;i++)spawnPlatform(GROUND-10-i*68);
+    }
+}
+function start(){
+    if(activeGame==='idle')return;
+    resetGame();state='playing';$('btn-play').textContent='Rejouer';if(activeGame==='flappy')flap();
+}
+function flap(){crow.vy=-7.3;crow.wing=1;beep(520,.07,'triangle',.05,760)}
+
+function gainIdleEssence(amount,showFloating,fx,fy){
+    save.idleState.essence+=amount;
+    save.idleState.totalEssence+=amount;
+    save.idleState.runEssence=(save.idleState.runEssence||0)+amount;
+    idleFeatherProgress+=amount;
+    const req=getEssencePerFeather();
+    while(idleFeatherProgress>=req){
+        idleFeatherProgress-=req;
+        collectFeather(W/2,310,1);
+    }
+    const pts=total();
+    if(pts>save.bests.idle){
+        save.bests.idle=pts;
+        $('best').textContent=pts;
+        recordScoreToLeaderboard('idle',pts);
+    }
+    if(showFloating)addFloatText(`+${fmtNum(amount)}`,fx,fy,'#7dd3fc');
+}
+
+function clickIdleCrow(pt){
+    const power=getIdleClickPower();
+    save.idleState.totalClicks=(save.idleState.totalClicks||0)+1;
+    crow.wing=1;idlePulse=1;
+    beep(580,.06,'triangle',.05,820);
+    const fx=pt?pt.x:W/2+(Math.random()-.5)*40;
+    const fy=pt?pt.y:340;
+    burst(fx,fy,getSkin().beak,6,3);
+    gainIdleEssence(power,true,fx,fy-15);
+}
+
+function spawnPillar(x){const gap=Math.max(142,208-score*1.6),gy=gap/2+95+Math.random()*(GROUND-gap-190);pillars.push({x,w:66,gy,gap,passed:false});if(Math.random()<.55)items.push({x:x+33,y:gy,ph:Math.random()*6,got:false})}
+function spawnPlatform(y){
+    const w=86,x=20+Math.random()*(W-w-40);
+    const moving=score>12&&Math.random()<.35;
+    platforms.push({x,y,w,vx:moving?(Math.random()<.5?2:-2):0});
+    if(Math.random()<.28)items.push({x:x+w/2,y:y-24,ph:Math.random()*6,got:false});
+}
+
+function update(k){
+    t+=k;
+    if(shake>0)shake=Math.max(0,shake-.6*k);
+    if(idlePulse>0)idlePulse=Math.max(0,idlePulse-.08*k);
+    
+    for(const p of parts){p.x+=p.vx*k;p.y+=p.vy*k;p.vy+=.12*k;p.life-=.03*k}
+    parts=parts.filter(p=>p.life>0);
+    for(const f of floatTexts){f.y+=f.vy*k;f.life-=.03*k}
+    floatTexts=floatTexts.filter(f=>f.life>0);
+    if(crow.wing>0)crow.wing=Math.max(0,crow.wing-.06*k);
+
+    if(state==='ready'){
+        crow.y=(activeGame==='flappy'?H/2:GROUND-40)+Math.sin(t*.06)*8;
+        crow.rot=Math.sin(t*.06)*.08;
+        return;
+    }
+    if(state==='over'){
+        if(activeGame==='flappy'){crow.vy+=0.42*k;crow.y=Math.min(GROUND-10,crow.y+crow.vy*k)}
+        return;
+    }
+
+    if(activeGame==='flappy'){
+        crow.vy=Math.min(10,crow.vy+0.42*k);crow.y+=crow.vy*k;crow.rot=Math.max(-.5,Math.min(.9,crow.vy*.07));
+        if(crow.y<12){crow.y=12;crow.vy=0}
+        if(crow.y>GROUND-12){die();return}
+        for(const p of pillars){
+            p.x-=speed*k;
+            if(!p.hit&&(circleRect(crow.x,crow.y,12,p.x,0,p.w,p.gy-p.gap/2)||circleRect(crow.x,crow.y,12,p.x,p.gy+p.gap/2,p.w,H))){
+                p.hit=true;if(triggerHit()){die();return}
+            }
+            if(!p.passed&&p.x+p.w<crow.x){p.passed=true;score++;speed=Math.min(5.2,2.6+score*.055);beep(660,.08,'square',.04)}
+        }
+        pillars=pillars.filter(p=>p.x>-90);
+        const last=pillars[pillars.length-1];if(!last||last.x<W-250)spawnPillar(W+70);
+        for(const it of items){
+            it.x-=speed*k;
+            if(save.upgrades.magnet&&Math.hypot(it.x-crow.x,it.y-crow.y)<130){it.x+=(crow.x-it.x)*.12*k;it.y+=(crow.y-it.y)*.12*k}
+            const y=it.y+Math.sin(t*.08+it.ph)*8;
+            if(!it.got&&(it.x-crow.x)**2+(y-crow.y)**2<30*30){it.got=true;collectFeather(it.x,y,1)}
+        }
+        items=items.filter(i=>i.x>-40&&!i.got);
+        if(score>=6){nextMeteor-=k;if(nextMeteor<=0){nextMeteor=140+Math.random()*180;meteors.push({x:W*.45+Math.random()*W*.6,y:-30,vx:-(2.6+Math.random()*1.8),vy:4.2+Math.random()*1.8,delay:42})}}
+        for(const m of meteors){
+            if(m.delay>0){m.delay-=k;continue}
+            m.x+=m.vx*k;m.y+=m.vy*k;
+            if(!m.hit&&(m.x-crow.x)**2+(m.y-crow.y)**2<(10+12)**2){m.hit=true;if(triggerHit()){die();return}}
+        }
+        meteors=meteors.filter(m=>m.y<H+40&&m.x>-60);
+    }
+    else if(activeGame==='idle'){
+        const dtSec=(k*16.667)/1000;
+        if(frenzyTimer>0)frenzyTimer=Math.max(0,frenzyTimer-dtSec);
+        if(frenzyCooldown>0)frenzyCooldown=Math.max(0,frenzyCooldown-dtSec);
+        if(rainCooldown>0)rainCooldown=Math.max(0,rainCooldown-dtSec);
+
+        crow.y=360+Math.sin(t*.05)*8;
+        crow.rot=Math.sin(t*.04)*.05;
+        const cps=getIdleCPS();
+        if(cps>0)gainIdleEssence(cps*dtSec,false,0,0);
+
+        if(!goldenOrb){
+            orbSpawnTimer-=k;
+            if(orbSpawnTimer<=0){
+                orbSpawnTimer=550+Math.random()*400;
+                goldenOrb={x:90+Math.random()*(W-180),y:230+Math.random()*220,life:360};
+            }
+        }else{
+            goldenOrb.life-=k;
+            if(goldenOrb.life<=0)goldenOrb=null;
+        }
+
+        idleUiTick+=k;
+        if(idleUiTick>=20){idleUiTick=0;renderIdlePanel()}
+        idleSaveTimer+=k;
+        if(idleSaveTimer>=180){idleSaveTimer=0;persist()}
+    }
+    else if(activeGame==='climb'){
+        let move=0;
+        if(keys.left)move=-1;if(keys.right)move=1;
+        if(pointerTargetX!==null){const diff=pointerTargetX-crow.x;if(Math.abs(diff)>8)move=Math.sign(diff)}
+        crow.vx=move*5.8;crow.x+=crow.vx*k;
+        if(crow.x<-15)crow.x=W+15;if(crow.x>W+15)crow.x=-15;
+        crow.vy+=0.36*k;crow.y+=crow.vy*k;crow.rot=crow.vx*.04;
+
+        for(const p of platforms){
+            if(p.vx){p.x+=p.vx*k;if(p.x<10||p.x+p.w>W-10)p.vx*=-1}
+            if(crow.vy>0&&crow.x+12>p.x&&crow.x-12<p.x+p.w&&crow.y+12>=p.y&&crow.y+12<=p.y+18){
+                crow.vy=-10.8;crow.wing=1;beep(460,.07,'triangle',.05,680);
+                burst(crow.x,p.y,'#7dd3fc',5,2);
+            }
+        }
+        if(crow.y<H*0.42){
+            const diff=H*0.42-crow.y;
+            crow.y=H*0.42;camY+=diff;
+            const newScore=Math.floor(camY/35);
+            if(newScore>score)score=newScore;
+            for(const p of platforms)p.y+=diff;
+            for(const it of items)it.y+=diff;
+        }
+        while(platforms.length&&platforms[0].y>H+30){
+            platforms.shift();
+            spawnPlatform(platforms[platforms.length-1].y-68);
+        }
+        for(const it of items){
+            if(save.upgrades.magnet&&Math.hypot(it.x-crow.x,it.y-crow.y)<130){it.x+=(crow.x-it.x)*.12*k;it.y+=(crow.y-it.y)*.12*k}
+            if(!it.got&&(it.x-crow.x)**2+(it.y-crow.y)**2<30*30){it.got=true;collectFeather(it.x,it.y,1)}
+        }
+        items=items.filter(i=>!i.got&&i.y<H+30);
+        if(crow.y>H+25){die();return}
+    }
+}
+
+function drawAccessory(acc){
+    if(acc==='scarf'){
+        ctx.fillStyle='#ef4444';ctx.beginPath();ctx.roundRect(2,4,14,6,3);ctx.fill();
+        ctx.beginPath();ctx.moveTo(4,8);ctx.lineTo(-14-Math.sin(t*.2)*4,14);ctx.lineTo(-10,18);ctx.lineTo(8,9);ctx.closePath();ctx.fill();
+    }else if(acc==='monocle'){
+        ctx.strokeStyle='#facc15';ctx.lineWidth=1.8;ctx.beginPath();ctx.arc(15,-7,4.8,0,6.28);ctx.stroke();
+        ctx.beginPath();ctx.moveTo(15,-2);ctx.lineTo(12,6);ctx.stroke();
+    }else if(acc==='wizard_hat'){
+        ctx.fillStyle='#4f46e5';ctx.beginPath();ctx.moveTo(3,-11);ctx.lineTo(23,-11);ctx.lineTo(13,-14);ctx.closePath();ctx.fill();
+        ctx.beginPath();ctx.moveTo(6,-11);ctx.lineTo(20,-11);ctx.lineTo(11,-30);ctx.closePath();ctx.fill();
+        ctx.fillStyle='#facc15';ctx.beginPath();ctx.arc(13,-20,1.8,0,6.28);ctx.fill();
+    }else if(acc==='crown'){
+        ctx.fillStyle='#facc15';ctx.beginPath();ctx.moveTo(7,-12);ctx.lineTo(7,-20);ctx.lineTo(10,-16);ctx.lineTo(13,-21);ctx.lineTo(16,-16);ctx.lineTo(19,-20);ctx.lineTo(19,-12);ctx.closePath();ctx.fill();
+    }else if(acc==='halo'){
+        ctx.strokeStyle='#fef08a';ctx.lineWidth=2.4;ctx.beginPath();ctx.ellipse(13,-20,9,3,0,0,6.28);ctx.stroke();
+    }else if(acc==='devil_horns'){
+        ctx.fillStyle='#dc2626';ctx.beginPath();ctx.moveTo(9,-12);ctx.quadraticCurveTo(4,-22,11,-24);ctx.quadraticCurveTo(10,-17,12,-12);ctx.fill();
+        ctx.beginPath();ctx.moveTo(15,-12);ctx.quadraticCurveTo(18,-22,22,-23);ctx.quadraticCurveTo(19,-16,17,-12);ctx.fill();
+    }else if(acc==='spirit_orb'){
+        const ox=Math.cos(t*.08)*26,oy=Math.sin(t*.08)*18;
+        ctx.fillStyle='#38bdf8';ctx.beginPath();ctx.arc(ox,oy,4.5,0,6.28);ctx.fill();
+        ctx.strokeStyle='rgba(56,189,248,.6)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(ox,oy,8,0,6.28);ctx.stroke();
+    }
+}
+
+function drawCrow(scale=1){
+    const sk=getSkin();
+    ctx.save();ctx.translate(crow.x,crow.y);ctx.scale(scale,scale);ctx.rotate(crow.rot);
+    if(hasShield&&activeGame!=='idle'){ctx.strokeStyle='rgba(56,189,248,.75)';ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(0,0,26,0,6.28);ctx.stroke()}
+    ctx.fillStyle=sk.wing;ctx.beginPath();ctx.moveTo(-12,0);ctx.lineTo(-30,-5);ctx.lineTo(-28,6);ctx.closePath();ctx.fill();
+    ctx.fillStyle=sk.body;ctx.beginPath();ctx.ellipse(0,0,18,12,0,0,6.28);ctx.fill();
+    const w=Math.sin(t*.5+(crow.wing>0?1:0))*(state==='playing'?1:.2)*(.5+crow.wing);
+    ctx.fillStyle=sk.wing;ctx.beginPath();ctx.moveTo(-4,-2);ctx.lineTo(-22,-4-w*20);ctx.lineTo(-6,8-w*6);ctx.closePath();ctx.fill();
+    ctx.strokeStyle=sk.glow;ctx.lineWidth=1.2;ctx.stroke();
+    ctx.fillStyle=sk.body;ctx.beginPath();ctx.arc(13,-5,8.5,0,6.28);ctx.fill();
+    ctx.fillStyle=sk.beak;ctx.beginPath();ctx.moveTo(20,-8);ctx.lineTo(32,-4);ctx.lineTo(20,-1);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(15,-7,3,0,6.28);ctx.fill();ctx.fillStyle='#05070f';ctx.beginPath();ctx.arc(16,-7,1.5,0,6.28);ctx.fill();
+    ctx.strokeStyle=sk.glow;ctx.lineWidth=1.3;ctx.beginPath();ctx.ellipse(0,0,18,12,0,3.6,5.6);ctx.stroke();
+    drawAccessory(getAcc());
+    ctx.restore();
+}
+
+function rockPoly(x,y,w,dir,len){
+    ctx.beginPath();const e=dir>0?y+len:y-len;ctx.moveTo(x,y);ctx.lineTo(x+w,y);ctx.lineTo(x+w,e-dir*22);ctx.lineTo(x+w*.72,e-dir*6);ctx.lineTo(x+w*.48,e+dir*20);ctx.lineTo(x+w*.24,e-dir*8);ctx.lineTo(x,e-dir*18);ctx.closePath();
+    const g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,'#3a4670');g.addColorStop(.5,'#26304f');g.addColorStop(1,'#161c33');ctx.fillStyle=g;ctx.fill();ctx.strokeStyle='rgba(140,170,255,.25)';ctx.lineWidth=1.5;ctx.stroke();
+}
+function mountains(off,base,amp,col,sp){ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(0,H);for(let x=0;x<=W+20;x+=20){const xx=x+off*sp;ctx.lineTo(x,base-Math.abs(Math.sin(xx*.011)*amp+Math.sin(xx*.027)*amp*.45))}ctx.lineTo(W,H);ctx.closePath();ctx.fill()}
+function drawFeatherItem(x,y){
+    ctx.save();ctx.translate(x,y);
+    const g=ctx.createRadialGradient(0,0,2,0,0,24);g.addColorStop(0,'rgba(181,123,255,.55)');g.addColorStop(1,'rgba(181,123,255,0)');
+    ctx.fillStyle=g;ctx.fillRect(-24,-24,48,48);
+    ctx.fillStyle='#8b4dff';ctx.beginPath();ctx.moveTo(0,-15);ctx.lineTo(7,0);ctx.lineTo(0,15);ctx.lineTo(-7,0);ctx.closePath();ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.65)';ctx.beginPath();ctx.moveTo(0,-15);ctx.lineTo(3,-2);ctx.lineTo(-1,0);ctx.closePath();ctx.fill();
+    ctx.restore();
+}
+function text(s,x,y,size,col,al){ctx.font='800 '+size+'px Inter,system-ui,sans-serif';ctx.textAlign=al||'center';ctx.lineWidth=Math.max(4,size/6);ctx.strokeStyle='rgba(4,6,14,.9)';ctx.strokeText(s,x,y);ctx.fillStyle=col||'#fff';ctx.fillText(s,x,y)}
+
+function drawIdleArena(){
+    const sk=getSkin();
+    const auraR=105+idlePulse*24+Math.sin(t*.05)*6;
+    const g=ctx.createRadialGradient(W/2,360,15,W/2,360,auraR);
+    g.addColorStop(0,frenzyTimer>0?'rgba(250,204,21,.65)':sk.glow);
+    g.addColorStop(1,'rgba(15,23,42,0)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(W/2,360,auraR,0,6.28);ctx.fill();
+
+    ctx.fillStyle='#1e293b';ctx.beginPath();ctx.ellipse(W/2,415,105,28,0,0,6.28);ctx.fill();
+    ctx.strokeStyle=frenzyTimer>0?'#facc15':'#8b4dff';ctx.lineWidth=3;ctx.stroke();
+
+    drawCrow(2.9+idlePulse*.3);
+
+    if(goldenOrb){
+        const pulse=1+Math.sin(t*.2)*.15;
+        ctx.save();ctx.translate(goldenOrb.x,goldenOrb.y);ctx.scale(pulse,pulse);
+        const og=ctx.createRadialGradient(0,0,2,0,0,26);og.addColorStop(0,'#fef08a');og.addColorStop(.5,'rgba(250,204,21,.7)');og.addColorStop(1,'rgba(250,204,21,0)');
+        ctx.fillStyle=og;ctx.beginPath();ctx.arc(0,0,26,0,6.28);ctx.fill();
+        ctx.fillStyle='#facc15';ctx.beginPath();ctx.arc(0,0,12,0,6.28);ctx.fill();
+        text('✨',0,6,16);
+        ctx.restore();
+    }
+
+    text(`${fmtNum(save.idleState.essence)} Essence`,W/2,145,36,'#7dd3fc');
+    text(`+${fmtNum(getIdleCPS())} / sec · +${fmtNum(getIdleClickPower())} / clic`,W/2,178,17,'#cbd5e1');
+    if(frenzyTimer>0)text(`🔥 FRÉNÉSIE x3 (${Math.ceil(frenzyTimer)}s) 🔥`,W/2,208,18,'#facc15');
+
+    const req=getEssencePerFeather();
+    const pct=Math.min(100,(idleFeatherProgress/req)*100);
+    const barW=310,barH=14,bx=W/2-barW/2,by=500;
+    ctx.fillStyle='rgba(15,23,42,.9)';ctx.beginPath();ctx.roundRect(bx,by,barW,barH,7);ctx.fill();
+    ctx.fillStyle='#8b4dff';ctx.beginPath();ctx.roundRect(bx,by,barW*(pct/100),barH,7);ctx.fill();
+    text(`Prochaine plume (${fmtNum(req)} ess.) : ${Math.floor(pct)}%`,W/2,536,15,'#d9c2ff');
+    text(`Cliquez sur le corbeau ou utilisez les onglets ci-dessous !`,W/2,645,14,'#94a3b8');
+}
+
+function draw(){
+    ctx.save();if(shake>0)ctx.translate((Math.random()-.5)*shake,(Math.random()-.5)*shake);
+    const bg=ctx.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#05081a');bg.addColorStop(.7,'#16224a');bg.addColorStop(1,'#243566');ctx.fillStyle=bg;ctx.fillRect(-20,-20,W+40,H+40);
+    for(const s of stars){ctx.globalAlpha=.4+.6*Math.abs(Math.sin(t*.03+s.p));ctx.fillStyle='#cfe0ff';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.28);ctx.fill()}ctx.globalAlpha=1;
+    const mg=ctx.createRadialGradient(360,130,10,360,130,150);mg.addColorStop(0,'rgba(190,215,255,.35)');mg.addColorStop(1,'rgba(190,215,255,0)');ctx.fillStyle=mg;ctx.fillRect(200,0,280,300);ctx.fillStyle='#d6e4ff';ctx.beginPath();ctx.arc(360,130,34,0,6.28);ctx.fill();
+
+    if(activeGame==='flappy'){
+        const off=-t*speed;
+        mountains(off,GROUND-30,70,'#1a2650',.12);mountains(off,GROUND,55,'#121b3b',.28);
+        for(const p of pillars){rockPoly(p.x,0,p.w,1,p.gy-p.gap/2);rockPoly(p.x,H,p.w,-1,H-(p.gy+p.gap/2))}
+        for(const it of items)drawFeatherItem(it.x,it.y+Math.sin(t*.08+it.ph)*8);
+        for(const m of meteors){
+            if(m.delay>0){const ax=Math.max(20,Math.min(W-20,m.x));ctx.globalAlpha=.4+.6*Math.abs(Math.sin(t*.4));ctx.fillStyle='#ff4d4d';ctx.beginPath();ctx.moveTo(ax,6);ctx.lineTo(ax-12,26);ctx.lineTo(ax+12,26);ctx.closePath();ctx.fill();text('!',ax,24,16,'#fff');ctx.globalAlpha=1;continue}
+            const g=ctx.createLinearGradient(m.x,m.y,m.x-m.vx*14,m.y-m.vy*14);g.addColorStop(0,'rgba(255,170,70,.95)');g.addColorStop(1,'rgba(255,90,40,0)');ctx.strokeStyle=g;ctx.lineWidth=9;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(m.x,m.y);ctx.lineTo(m.x-m.vx*14,m.y-m.vy*14);ctx.stroke();ctx.fillStyle='#ffe2b0';ctx.beginPath();ctx.arc(m.x,m.y,9,0,6.28);ctx.fill();
+        }
+        ctx.fillStyle='#0b1128';ctx.fillRect(-20,GROUND+10,W+40,H);ctx.fillStyle='#161f40';
+        for(let x=-((t*speed)%40);x<W+40;x+=40){ctx.beginPath();ctx.moveTo(x,GROUND+10);ctx.lineTo(x+20,GROUND-6);ctx.lineTo(x+40,GROUND+10);ctx.closePath();ctx.fill()}
+        drawCrow();
+    }else if(activeGame==='idle'){
+        drawIdleArena();
+    }else if(activeGame==='climb'){
+        for(const p of platforms){
+            ctx.fillStyle=p.vx?'#38bdf8':'#334155';
+            ctx.beginPath();ctx.roundRect(p.x,p.y,p.w,14,7);ctx.fill();
+            ctx.strokeStyle='rgba(148,163,184,.4)';ctx.lineWidth=1.5;ctx.stroke();
+        }
+        for(const it of items)drawFeatherItem(it.x,it.y);
+        drawCrow();
+    }
+
+    for(const p of parts){ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.c;ctx.fillRect(p.x,p.y,p.s,p.s)}ctx.globalAlpha=1;
+    for(const f of floatTexts){ctx.globalAlpha=Math.max(0,f.life);text(f.txt,f.x,f.y,20,f.col)}ctx.globalAlpha=1;
+    ctx.restore();
+
+    if(state==='playing'||state==='paused'){
+        text(String(total()),W/2,78,56);
+        drawFeatherItem(28,40);
+        text('+'+feathersRun,48,48,22,'#d9c2ff','left');
+    }
+    if(state==='ready'){
+        const names={flappy:'LE VOL DU CORBEAU',idle:'LE NID D’OBSIDIENNE',climb:'L’ASCENSION DU NID'};
+        text(names[activeGame],W/2,240,32);
+        text('Touchez pour commencer',W/2,530,20,'#7dd3fc');
+    }
+    if(state==='paused'){ctx.fillStyle='rgba(5,8,20,.65)';ctx.fillRect(0,0,W,H);text('PAUSE',W/2,H/2,52)}
+    if(state==='over'){
+        ctx.fillStyle='rgba(5,8,20,.72)';ctx.fillRect(0,0,W,H);
+        text('PERDU !',W/2,220,54,'#ff6b6b');
+        text(total()+' point(s)',W/2,295,42);
+        text(rankTitle(total()),W/2,345,24,'#ffd36b');
+        text('Record : '+save.bests[activeGame],W/2,390,22,'#cfe0ff');
+        text('Plumes gagnées : +'+feathersRun*(save.upgrades.doubleFeather?2:1),W/2,425,20,'#d9c2ff');
+        if(t-overAt>25)text('Touchez pour rejouer',W/2,520,24,'#7dd3fc');
+    }
+}
+
+let last=0;
+function loop(ts){const k=Math.min(2.5,(ts-last)/16.667||1);last=ts;if(state!=='paused')update(k);draw();requestAnimationFrame(loop)}
+
+function getCanvasCoords(e){
+    const rect=cv.getBoundingClientRect();
+    return {x:(e.clientX-rect.left)*(W/rect.width),y:(e.clientY-rect.top)*(H/rect.height)};
+}
+
+function press(pt){
+    if(state==='ready'){start();return}
+    if(state==='over'&&t-overAt>25){start();return}
+    if(state==='paused'){state='playing';return}
+    if(state==='playing'){
+        if(activeGame==='flappy')flap();
+        else if(activeGame==='idle'){
+            if(pt&&goldenOrb&&Math.hypot(pt.x-goldenOrb.x,pt.y-goldenOrb.y)<34){
+                const bonus=Math.max(40,getIdleCPS()*15+getIdleClickPower()*12);
+                gainIdleEssence(bonus,true,goldenOrb.x,goldenOrb.y);
+                collectFeather(goldenOrb.x,goldenOrb.y,2);
+                goldenOrb=null;
+                return;
+            }
+            clickIdleCrow(pt);
+        }
+        else if(activeGame==='climb'&&pt)pointerTargetX=pt.x;
+    }
+}
+
+cv.addEventListener('pointerdown',e=>{e.preventDefault();cv.focus({preventScroll:true});press(getCanvasCoords(e))});
+cv.addEventListener('pointermove',e=>{
+    const pt=getCanvasCoords(e);
+    if(state==='playing'&&activeGame==='climb'&&e.buttons>0)pointerTargetX=pt.x;
+});
+cv.addEventListener('pointerup',()=>{pointerTargetX=null});
+
+window.addEventListener('keydown',e=>{
+    if(e.code==='ArrowLeft'||e.code==='KeyA')keys.left=true;
+    if(e.code==='ArrowRight'||e.code==='KeyD')keys.right=true;
+    if(e.code==='Space'||e.code==='ArrowUp'||e.code==='KeyW'){
+        if($('view-play').style.display==='block'&&(document.activeElement===cv||document.activeElement===document.body)){e.preventDefault();press()}
+    }
+    if(e.code==='KeyP'&&$('view-play').style.display==='block'&&activeGame!=='idle')state=state==='playing'?'paused':(state==='paused'?'playing':state);
+});
+window.addEventListener('keyup',e=>{
+    if(e.code==='ArrowLeft'||e.code==='KeyA')keys.left=false;
+    if(e.code==='ArrowRight'||e.code==='KeyD')keys.right=false;
+});
+
+$('btn-play').addEventListener('click',()=>{start();cv.focus({preventScroll:true})});
+$('btn-sound').addEventListener('click',()=>{muted=!muted;$('btn-sound').textContent='Son : '+(muted?'coupé':'activé')});
+$('btn-share').addEventListener('click',()=>{
+    const msg=`J’ai fait ${total()} point(s) sur L'Arcade de crowMaster ! https://flexarion-jeu.fr/jouer-en-ligne/`;
+    if(navigator.share)navigator.share({title:'L\'Arcade de crowMaster',text:msg}).catch(()=>{});
+    else if(navigator.clipboard)navigator.clipboard.writeText(msg).then(()=>{$('btn-share').textContent='Copié !';setTimeout(()=>{$('btn-share').textContent='Partager mon score'},1800)}).catch(()=>{});
+});
+
+refreshUI();
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

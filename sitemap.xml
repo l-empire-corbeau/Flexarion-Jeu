@@ -26,6 +26,16 @@
     </image:image>
   </url>
   <url>
+    <loc>https://flexarion-jeu.fr/jouer-en-ligne/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png</image:loc>
+      <image:title>L'Arcade de crowMaster – 3 mini-jeux gratuits en ligne avec classement et marché</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://flexarion-jeu.fr/about/</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
@@ -33,7 +43,7 @@
   </url>
   <url>
     <loc>https://flexarion-jeu.fr/devLog/</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -63,7 +73,31 @@
   </url>
   <url>
     <loc>https://flexarion-jeu.fr/devLog/nid-corbeau/</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://flexarion-jeu.fr/devLog/exploration/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://flexarion-jeu.fr/devLog/artisanat/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://flexarion-jeu.fr/devLog/monde-corrompu/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://flexarion-jeu.fr/devLog/pvp-guildes/</loc>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
