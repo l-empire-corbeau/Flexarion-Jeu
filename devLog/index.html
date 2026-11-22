@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevLog Flexarion – Actualités du développement de crowMaster</title>
-    <meta name="description" content="Suivez le développement de crowMaster par le studio Flexarion : exploration, artisanat, multijoueur, PvP, boss divins, créatures mythiques et construction du nid.">
+    <title>DevLog Flexarion – 10 actualités du développement de crowMaster</title>
+    <meta name="description" content="Suivez les 10 devlogs de crowMaster par le studio Flexarion à Aix-en-Provence : bugfix, nouveaux matériaux, exploration, artisanat, multijoueur, PvP, boss divins, créatures mythiques et nid du corbeau.">
     <link rel="canonical" href="https://flexarion-jeu.fr/devLog/">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Flexarion">
@@ -14,19 +14,24 @@
     <meta property="og:site_name" content="Flexarion">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="DevLog Flexarion – Actualités du développement de crowMaster">
-    <meta property="og:description" content="Coulisses techniques et artistiques de crowMaster : exploration, artisanat, multijoueur, PvP, boss divins, créatures mythiques et nid du corbeau.">
+    <meta property="og:title" content="DevLog Flexarion – 10 actualités du développement de crowMaster">
+    <meta property="og:description" content="Coulisses techniques et artistiques de crowMaster : bugfix, nouveaux matériaux, exploration, artisanat, multijoueur, PvP, boss divins, créatures mythiques et nid du corbeau.">
     <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="450">
+    <meta property="og:image:alt" content="Bannière officielle du DevLog Flexarion et du jeu crowMaster">
     <meta property="og:url" content="https://flexarion-jeu.fr/devLog/">
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DevLog Flexarion – Journal de bord de crowMaster">
-    <meta name="twitter:description" content="Toutes les mises à jour de développement du jeu crowMaster par le studio Flexarion.">
+    <meta name="twitter:description" content="Les 10 mises à jour de développement du jeu crowMaster par le studio Flexarion : bugfix, nouveaux matériaux et fonctionnalités.">
     <meta name="twitter:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
+    <meta name="twitter:image:alt" content="Bannière officielle du DevLog Flexarion et du jeu crowMaster">
 
+    <link rel="preload" as="image" href="/assets/images/Flexarion-jeu.fr.png" fetchpriority="high">
     <link rel="stylesheet" href="/assets/style/style.css">
-    <script src="/main.js" defer></script>
+    <script src="/assets/js/main.js" defer></script>
     <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
 
     <script type="application/ld+json">
@@ -38,10 +43,20 @@
           "@id": "https://flexarion-jeu.fr/devLog/#blog",
           "url": "https://flexarion-jeu.fr/devLog/",
           "name": "DevLog Flexarion – crowMaster",
-          "description": "Journal de développement officiel du jeu vidéo indépendant crowMaster par le studio Flexarion.",
+          "description": "Journal de développement officiel du jeu vidéo indépendant crowMaster par le studio Flexarion à Aix-en-Provence.",
           "publisher": { "@id": "https://flexarion-jeu.fr/#organisation" },
           "inLanguage": "fr-FR",
           "blogPost": [
+            {
+              "@type": "BlogPosting",
+              "headline": "BugFix : corrections de bugs et stabilité dans crowMaster",
+              "url": "https://flexarion-jeu.fr/devLog/bugfix/"
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Nouveaux matériaux : ressources inédites pour l'artisanat et le nid",
+              "url": "https://flexarion-jeu.fr/devLog/nouveaux-materiaux/"
+            },
             {
               "@type": "BlogPosting",
               "headline": "Ajout du multijoueur dans crowMaster",
@@ -110,7 +125,7 @@
     <header class="site-header">
         <div class="bar">
             <a class="brand" href="/" aria-label="Flexarion, retour à l'accueil">
-                <img src="/assets/images/logo.png" alt="Logo du studio Flexarion" width="44" height="44">FLEXAR<span>ION</span>
+                <img src="/assets/images/logo.png" alt="Logo officiel du studio de jeux vidéo Flexarion" width="44" height="44">FLEXAR<span>ION</span>
             </a>
             <nav class="nav" aria-label="Navigation principale">
                 <ul>
@@ -127,78 +142,101 @@
     </header>
     <main id="contenu">
         <section class="hero">
-            <span class="pill">Journal de développement</span>
-            <h1>Les DevLogs de crowMaster</h1>
-            <p class="lead">Découvrez les coulisses de notre studio indépendant à Aix-en-Provence : choix techniques, nouveautés multijoueur et conception des boss.</p>
+            <span class="pill">Journal de développement · 10 articles</span>
+            <h1>Les DevLogs de crowMaster par Flexarion</h1>
+            <p class="lead">Découvrez les coulisses de notre studio indépendant à Aix-en-Provence : <strong>bugfix</strong>, <strong>nouveaux matériaux</strong>, choix techniques, <strong>multijoueur</strong>, <strong>boss divins</strong>, <strong>créatures mythiques</strong> et <strong>nid du corbeau</strong>.</p>
+            <div class="btn-group center">
+                <a href="/crowMaster/" class="btn btn-primary">Découvrir crowMaster →</a>
+                <a href="/jouer-en-ligne/" class="btn btn-secondary">Jouer en ligne</a>
+            </div>
         </section>
         <div class="wrap" style="padding: 2rem 0;">
             <div class="bento">
                 <article class="card">
-                    <div class="cardtop"><span class="pill new">Nouveau</span><span>Multijoueur</span></div>
+                    <div class="cardtop"><span class="pill new">BugFix</span><span>Correction de bugs</span></div>
+                    <h2><a href="/devLog/bugfix/">BugFix : corrections de bugs et stabilité dans crowMaster</a></h2>
+                    <p>Retour sur les correctifs techniques, l'optimisation des interactions et la résolution des bugs rencontrés lors des tests pour améliorer la fluidité de <strong>crowMaster</strong>.</p>
+                    <div class="cardfoot"><span>Stabilité &amp; Correctifs</span><a href="/devLog/bugfix/">Lire l'article <i>→</i></a></div>
+                </article>
+                <article class="card">
+                    <div class="cardtop"><span class="pill green">Matériaux</span><span>Ressources</span></div>
+                    <h2><a href="/devLog/nouveaux-materiaux/">Nouveaux matériaux : ressources inédites pour l'artisanat et le nid</a></h2>
+                    <p>Découvrez les nouveaux matériaux ajoutés au jeu pour enrichir la récolte, forger de nouveaux équipements et faire évoluer le nid du corbeau.</p>
+                    <div class="cardfoot"><span>Craft &amp; Ressources</span><a href="/devLog/nouveaux-materiaux/">Lire l'article <i>→</i></a></div>
+                </article>
+            </div>
+            <div class="bento rev" style="margin-top: 2rem;">
+                <article class="card">
+                    <div class="cardtop"><span class="pill new">Multijoueur</span><span>Coop &amp; Guildes</span></div>
                     <h2><a href="/devLog/multijoueur/">Ajout du multijoueur : coop et sessions partagées</a></h2>
-                    <p>Comment nous avons implémenté le mode multijoueur pour permettre aux joueurs d'explorer le monde de crowMaster ensemble et de fonder des guildes.</p>
+                    <p>Comment nous avons conçu le mode multijoueur pour permettre aux joueurs d'explorer <strong>crowMaster</strong> ensemble, de fonder des guildes et de préparer des raids.</p>
                     <div class="cardfoot"><span>Mise à jour majeure</span><a href="/devLog/multijoueur/">Lire l'article <i>→</i></a></div>
                 </article>
                 <article class="card">
                     <div class="cardtop"><span class="pill green">Boss</span><span>Affrontements</span></div>
                     <h2><a href="/devLog/boss-divins/">Les boss divins : concevoir des défis titanesques</a></h2>
-                    <p>Plongez dans la conception des entités divines que les guildes devront terrasser au cœur des terres corrompues.</p>
+                    <p>Plongez dans la conception des boss divins que les joueurs et leurs guildes devront affronter au cœur du royaume.</p>
                     <div class="cardfoot"><span>Design &amp; Gameplay</span><a href="/devLog/boss-divins/">Lire l'article <i>→</i></a></div>
-                </article>
-            </div>
-            <div class="bento rev" style="margin-top: 2rem;">
-                <article class="card">
-                    <div class="cardtop"><span class="pill green">Bestiaire</span><span>Créatures</span></div>
-                    <h2><a href="/devLog/creatures-mythiques/">Créatures mythiques et faune du royaume</a></h2>
-                    <p>Entre science-fiction et heroic fantasy, découvrez les inspirations derrière les monstres et alliés ailés que vous croiserez.</p>
-                    <div class="cardfoot"><span>Lore &amp; Univers</span><a href="/devLog/creatures-mythiques/">Lire l'article <i>→</i></a></div>
-                </article>
-                <article class="card">
-                    <div class="cardtop"><span class="pill">Fonctionnalité</span><span>Abri</span></div>
-                    <h2><a href="/devLog/nid-corbeau/">Le nid du corbeau : votre quartier général</a></h2>
-                    <p>Personnalisation, amélioration de l'artisanat et stockage des ressources récoltées : tout sur la mécanique centrale du nid.</p>
-                    <div class="cardfoot"><span>Mécaniques</span><a href="/devLog/nid-corbeau/">Lire l'article <i>→</i></a></div>
                 </article>
             </div>
             <div class="bento" style="margin-top: 2rem;">
                 <article class="card">
+                    <div class="cardtop"><span class="pill green">Bestiaire</span><span>Créatures</span></div>
+                    <h2><a href="/devLog/creatures-mythiques/">Créatures mythiques et faune du royaume</a></h2>
+                    <p>Entre science-fiction et heroic fantasy, découvrez l'univers et les créatures mythiques croisées au fil de l'aventure.</p>
+                    <div class="cardfoot"><span>Lore &amp; Univers</span><a href="/devLog/creatures-mythiques/">Lire l'article <i>→</i></a></div>
+                </article>
+                <article class="card">
+                    <div class="cardtop"><span class="pill">Fonctionnalité</span><span>Abri</span></div>
+                    <h2><a href="/devLog/nid-corbeau/">Le nid du corbeau : votre base évolutive</a></h2>
+                    <p>Construction, amélioration, artisanat et organisation : tout sur la mécanique du nid au cœur de la progression de <strong>crowMaster</strong>.</p>
+                    <div class="cardfoot"><span>Mécaniques</span><a href="/devLog/nid-corbeau/">Lire l'article <i>→</i></a></div>
+                </article>
+            </div>
+            <div class="bento rev" style="margin-top: 2rem;">
+                <article class="card">
                     <div class="cardtop"><span class="pill">Exploration</span><span>Univers</span></div>
                     <h2><a href="/devLog/exploration/">Explorer le monde de crowMaster</a></h2>
-                    <p>Régions sauvages, itinéraires alternatifs et secrets : découvrez comment l'exploration construit l'aventure.</p>
+                    <p>Régions, déplacements aériens et découvertes : comment l'exploration structure la progression du corbeau.</p>
                     <div class="cardfoot"><span>Level design &amp; Lore</span><a href="/devLog/exploration/">Lire l'article <i>→</i></a></div>
                 </article>
                 <article class="card">
                     <div class="cardtop"><span class="pill green">Artisanat</span><span>Progression</span></div>
                     <h2><a href="/devLog/artisanat/">Fabriquer son équipement dans crowMaster</a></h2>
-                    <p>Ressources, recettes et préparation : les choix qui donnent du sens à l'artisanat du corbeau.</p>
+                    <p>Récolte de ressources, fabrication d'équipement et préparation tactique pour aborder les défis du jeu.</p>
                     <div class="cardfoot"><span>Gameplay</span><a href="/devLog/artisanat/">Lire l'article <i>→</i></a></div>
                 </article>
             </div>
-            <div class="bento rev" style="margin-top: 2rem;">
+            <div class="bento" style="margin-top: 2rem;">
                 <article class="card">
                     <div class="cardtop"><span class="pill">Lore</span><span>Ambiance</span></div>
                     <h2><a href="/devLog/monde-corrompu/">Le monde corrompu de crowMaster</a></h2>
-                    <p>Entre science-fiction et fantasy, découvrez les traces de la corruption qui transforme le royaume.</p>
+                    <p>Entre science-fiction et heroic fantasy, découvrez les traces de la corruption qui transforme le royaume.</p>
                     <div class="cardfoot"><span>Univers &amp; narration</span><a href="/devLog/monde-corrompu/">Lire l'article <i>→</i></a></div>
                 </article>
                 <article class="card">
                     <div class="cardtop"><span class="pill green">PvP</span><span>Guildes</span></div>
                     <h2><a href="/devLog/pvp-guildes/">PvP et guildes : la compétition</a></h2>
-                    <p>Notre vision des affrontements entre joueurs et de la progression collective dans les guildes.</p>
+                    <p>Notre approche des affrontements entre clans, de la coopération en guilde et de la progression collective.</p>
                     <div class="cardfoot"><span>Multijoueur</span><a href="/devLog/pvp-guildes/">Lire l'article <i>→</i></a></div>
                 </article>
             </div>
+
+            <section class="card" style="margin-top: 2rem;">
+                <h2>Suivre l'avancement de Flexarion et tester crowMaster</h2>
+                <p>Tous ces journaux de développement reflètent l'évolution du projet <strong>crowMaster</strong> imaginé par le studio indépendant <strong>Flexarion</strong> à Aix-en-Provence. Pour aller plus loin, découvrez la <a href="/crowMaster/">présentation complète du jeu</a>, testez les mini-jeux sur <a href="/jouer-en-ligne/">Jouer en ligne</a>, inscrivez-vous à la <a href="/betaSignup.html">bêta PC</a> ou rencontrez l'équipe sur <a href="/about/">À propos</a>.</p>
+            </section>
         </div>
     </main>
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Flexarion</h3>
-                <p>Studio de jeux vidéo indépendant créateur de <strong>crowMaster</strong>.</p>
+                <p>Studio de jeux vidéo indépendant créateur de <strong>crowMaster</strong>.<br>Aix-en-Provence, Provence-Alpes-Côte d'Azur, France</p>
             </div>
             <div class="footer-section">
                 <h4>Navigation</h4>
-                <p><a href="/about/">À propos</a> · <a href="/crowMaster/">crowMaster</a> · <a href="/devLog/">DevLog</a> · <a href="/contact/">Contact</a></p>
+                <p><a href="/">Accueil</a> · <a href="/about/">À propos</a> · <a href="/crowMaster/">crowMaster</a> · <a href="/jouer-en-ligne/">Jouer en ligne</a> · <a href="/devLog/">DevLog</a> · <a href="/contact/">Contact</a> · <a href="/betaSignup.html">Rejoindre la bêta</a></p>
             </div>
         </div>
         <div class="footer-bottom"><p>&copy; 2026 Flexarion. Tous droits réservés.</p></div>
