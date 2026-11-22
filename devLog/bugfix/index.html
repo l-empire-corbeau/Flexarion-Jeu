@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BugFix : corrections de bugs et stabilité dans crowMaster – DevLog Flexarion</title>
+    <meta name="description" content="Découvrez les corrections de bugs, l'optimisation et les améliorations de stabilité dans crowMaster, développées par le studio indépendant Flexarion à Aix-en-Provence.">
+    <link rel="canonical" href="https://flexarion-jeu.fr/devLog/bugfix/">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Flexarion">
+    <meta name="theme-color" content="#090d16">
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Flexarion">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="BugFix : corrections de bugs et stabilité dans crowMaster – DevLog Flexarion">
+    <meta property="og:description" content="Correctifs techniques, fluidité et stabilité sur crowMaster par le studio Flexarion à Aix-en-Provence.">
+    <meta property="og:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="450">
+    <meta property="og:image:alt" content="DevLog BugFix de crowMaster par le studio Flexarion">
+    <meta property="og:url" content="https://flexarion-jeu.fr/devLog/bugfix/">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BugFix : corrections de bugs dans crowMaster – DevLog Flexarion">
+    <meta name="twitter:description" content="Corrections de bugs et améliorations de stabilité dans crowMaster par Flexarion.">
+    <meta name="twitter:image" content="https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png">
+    <meta name="twitter:image:alt" content="DevLog BugFix de crowMaster par le studio Flexarion">
+
+    <link rel="preload" as="image" href="/assets/images/Flexarion-jeu.fr.png" fetchpriority="high">
+    <link rel="stylesheet" href="/assets/style/style.css">
+    <script src="/assets/js/main.js" defer></script>
+    <link rel="icon" type="image/png" href="https://flexarion-jeu.fr/assets/images/logo.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BlogPosting",
+          "@id": "https://flexarion-jeu.fr/devLog/bugfix/#article",
+          "mainEntityOfPage": "https://flexarion-jeu.fr/devLog/bugfix/",
+          "headline": "BugFix : corrections de bugs et stabilité dans crowMaster",
+          "description": "Retour sur les corrections de bugs, l'optimisation des interactions et la stabilité de crowMaster par le studio Flexarion à Aix-en-Provence.",
+          "image": "https://flexarion-jeu.fr/assets/images/Flexarion-jeu.fr.png",
+          "author": { "@id": "https://flexarion-jeu.fr/#organisation" },
+          "publisher": { "@id": "https://flexarion-jeu.fr/#organisation" },
+          "inLanguage": "fr-FR"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Accueil",
+              "item": "https://flexarion-jeu.fr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "DevLog",
+              "item": "https://flexarion-jeu.fr/devLog/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "BugFix",
+              "item": "https://flexarion-jeu.fr/devLog/bugfix/"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#contenu" style="position:absolute;left:-9999px">Aller au contenu</a>
+    <header class="site-header">
+        <div class="bar">
+            <a class="brand" href="/" aria-label="Flexarion, retour à l'accueil">
+                <img src="/assets/images/logo.png" alt="Logo officiel du studio de jeux vidéo Flexarion" width="44" height="44">FLEXAR<span>ION</span>
+            </a>
+            <nav class="nav" aria-label="Navigation principale">
+                <ul>
+                    <li><a href="/">Accueil</a></li>
+                    <li><a href="/about/">À propos</a></li>
+                    <li><a href="/crowMaster/">crowMaster</a></li>
+                    <li><a href="/jouer-en-ligne/">Jouer en ligne</a></li>
+                    <li><a href="/devLog/" class="active" aria-current="page">DevLog</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="/betaSignup.html" class="btn btn-primary">Rejoindre la Bêta</a>
+        </div>
+    </header>
+    <main id="contenu">
+        <section class="hero">
+            <span class="pill new">DevLog · BugFix &amp; Stabilité</span>
+            <h1>BugFix : corrections de bugs et stabilité dans crowMaster</h1>
+            <p class="lead">Dans ce journal de développement, l'équipe de <strong>Flexarion</strong> à Aix-en-Provence revient sur les corrections de bugs, l'optimisation des performances et la fiabilisation des mécaniques de <strong>crowMaster</strong>.</p>
+            <div class="btn-group center">
+                <a href="/devLog/" class="btn btn-primary">← Tous les DevLogs</a>
+                <a href="/jouer-en-ligne/" class="btn btn-secondary">Jouer en ligne</a>
+            </div>
+        </section>
+
+        <div class="wrap" style="padding: 2rem 0;">
+            <article class="card reveal">
+                <h2>Pourquoi les passes de BugFix sont essentielles en cours de développement</h2>
+                <p>Sur un jeu d'action-aventure et RPG indépendant mêlant science-fiction et heroic fantasy comme <strong>crowMaster</strong>, chaque nouvelle fonctionnalité (vol et déplacements du corbeau, récolte de ressources, gestion de l'<a href="/devLog/artisanat/">artisanat</a>, interactions avec le <a href="/devLog/nid-corbeau/">nid du corbeau</a> ou sessions en <a href="/devLog/multijoueur/">multijoueur</a>) peut faire apparaître des effets de bord inattendus.</p>
+                <p>Consacrer du temps dédié aux correctifs permet de consolider les fondations techniques avant d'ajouter de nouveaux contenus ou d'ouvrir davantage de sessions de test.</p>
+
+                <div class="grid2" style="margin-top: 1.5rem;">
+                    <div>
+                        <h3 style="margin-top:0">Corrections ciblées sur le gameplay et l'exploration</h3>
+                        <p>Lors des phases d'<a href="/devLog/exploration/">exploration</a> et d'affrontements contre les <a href="/devLog/creatures-mythiques/">créatures mythiques</a> ou les <a href="/devLog/boss-divins/">boss divins</a>, la réactivité des contrôles et la lisibilité des états du personnage sont prioritaires. Les correctifs visent à éliminer les comportements incohérents et les blocages ponctuels.</p>
+                    </div>
+                    <div>
+                        <h3 style="margin-top:0">Fiabilité des systèmes, du nid et du jeu en groupe</h3>
+                        <p>Nous vérifions également la cohérence des inventaires, la fabrication d'objets et la synchronisation des actions liées aux <a href="/devLog/pvp-guildes/">guildes</a> et aux parties partagées afin d'offrir une expérience plus régulière et prévisible.</p>
+                    </div>
+                </div>
+            </article>
+
+            <section class="card reveal" style="margin-top: 2rem;">
+                <h2>Poursuivre l'exploration de crowMaster et du studio Flexarion</h2>
+                <p>Retrouvez l'ensemble des mises à jour sur la <a href="/devLog/">page du DevLog</a>, consultez la <a href="/devLog/nouveaux-materiaux/">nouveauté sur les nouveaux matériaux</a>, testez l'arcade navigateur sur <a href="/jouer-en-ligne/">Jouer en ligne</a> ou inscrivez-vous à la <a href="/betaSignup.html">bêta PC</a>. Vous pouvez aussi découvrir la <a href="/crowMaster/">présentation de crowMaster</a>, rencontrer l'équipe sur <a href="/about/">À propos</a> ou nous écrire via <a href="/contact/">Contact</a>.</p>
+            </section>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Flexarion</h3>
+                <p>Studio de jeux vidéo indépendant créateur de <strong>crowMaster</strong>.<br>Aix-en-Provence, Provence-Alpes-Côte d'Azur, France</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <p><a href="/">Accueil</a> · <a href="/about/">À propos</a> · <a href="/crowMaster/">crowMaster</a> · <a href="/jouer-en-ligne/">Jouer en ligne</a> · <a href="/devLog/">DevLog</a> · <a href="/contact/">Contact</a> · <a href="/betaSignup.html">Rejoindre la bêta</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 Flexarion. Tous droits réservés.</p></div>
+    </footer>
+</body>
+</html>
